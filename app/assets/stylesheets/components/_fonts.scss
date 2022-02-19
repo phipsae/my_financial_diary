@@ -1,0 +1,275 @@
+ html, .root {
+  font-size: 16px;
+  line-height: 21px;
+}
+
+body, .article {
+  font-family: $body-font;
+  font-size: 16px;
+  line-height: 21px;
+  max-width: 560px;
+  margin: auto;
+}
+
+h1, .h1 {
+  font-family: $headers-font;
+  font-weight:600;
+  letter-spacing: 2px;
+  font-size: 68px;
+  line-height: 84px;
+  margin-top: 21px;
+  margin-bottom: 42px;
+}
+
+h2, .h2 {
+  font-family: $headers-font;
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 42px;
+  margin-top: 21px;
+  margin-bottom: 21px;
+}
+
+h3, .h3 {
+  font-family: $headers-font;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 42px;
+  margin-top: 21px;
+  margin-bottom: 0px;
+}
+
+h4, .h4 {
+  font-family: $headers-font;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  margin-top: 21px;
+  margin-bottom: 0px;
+}
+
+h5, .h5 {
+  font-family: $headers-font;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  margin-top: 21px;
+  margin-bottom: 0px;
+}
+
+p, ul, ol, pre, table, blockquote {
+  margin-top: 0px;
+  margin-bottom: 21px;
+}
+
+ul ul, ol ol, ul ol, ol ul {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+hr, .hr {
+  border: 1px solid;
+  margin: -1px 0;
+}
+
+a, b, i, strong, em, small, code {
+  line-height: 0;
+}
+
+sub, sup {
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+@media (min-width: 992px) {
+  html, .root {
+  font-size: 16px;
+  line-height: 21px;
+  }
+
+  body, .article {
+  font-family: $body-font;
+  font-size: 16px;
+  line-height: 21px;
+  max-width: 560px;
+  margin: auto;
+  }
+
+  h1, .h1 {
+  font-family: $headers-font;
+  font-weight:600;
+  letter-spacing: 2px;
+  font-size: 68px;
+  line-height: 84px;
+  margin-top: 21px;
+  margin-bottom: 42px;
+  }
+
+  h2, .h2 {
+  font-family: $headers-font;
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 42px;
+  margin-top: 21px;
+  margin-bottom: 21px;
+  }
+
+  h3, .h3 {
+  font-family: $headers-font;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 42px;
+  margin-top: 21px;
+  margin-bottom: 0px;
+  }
+
+  h4, .h4 {
+  font-family: $headers-font;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  margin-top: 21px;
+  margin-bottom: 0px;
+  }
+
+  h5, .h5 {
+  font-family: $headers-font;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  margin-top: 21px;
+  margin-bottom: 0px;
+  }
+
+  p, ul, ol, pre, table, blockquote {
+  margin-top: 0px;
+  margin-bottom: 21px;
+  }
+
+  ul ul, ol ol, ul ol, ol ul {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  }
+  hr, .hr {
+  border: 1px solid;
+  margin: -1px 0;
+  }
+
+  a, b, i, strong, em, small, code {
+  line-height: 0;
+  }
+
+  sub, sup {
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  }
+
+  sup {
+  top: -0.5em;
+  }
+
+  sub {
+  bottom: -0.25em;
+  }
+@media (min-width: 768px) {
+  html, .root {
+  font-size: 16px;
+  line-height: 21px;
+  }
+
+  body, .article {
+  font-family: $body-font;
+  font-size: 16px;
+  line-height: 21px;
+  max-width: 560px;
+  margin: auto;
+  }
+
+  h1, .h1 {
+  font-family: $headers-font;
+  font-weight:600;
+  letter-spacing: 2px;
+  font-size: 68px;
+  line-height: 84px;
+  margin-top: 21px;
+  margin-bottom: 42px;
+  }
+
+  h2, .h2 {
+  font-family: $headers-font;
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 42px;
+  margin-top: 21px;
+  margin-bottom: 21px;
+  }
+
+  h3, .h3 {
+  font-family: $headers-font;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 42px;
+  margin-top: 21px;
+  margin-bottom: 0px;
+  }
+
+  h4, .h4 {
+  font-family: $headers-font;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  margin-top: 21px;
+  margin-bottom: 0px;
+  }
+
+  h5, .h5 {
+  font-family: $headers-font;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  margin-top: 21px;
+  margin-bottom: 0px;
+  }
+
+  p, ul, ol, pre, table, blockquote {
+  margin-top: 0px;
+  margin-bottom: 21px;
+  }
+
+  ul ul, ol ol, ul ol, ol ul {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  }
+  hr, .hr {
+  border: 1px solid;
+  margin: -1px 0;
+  }
+
+  a, b, i, strong, em, small, code {
+  line-height: 0;
+  }
+
+  sub, sup {
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  }
+
+  sup {
+  top: -0.5em;
+  }
+
+  sub {
+  bottom: -0.25em;
+  }
+}
