@@ -68,7 +68,50 @@ puts "Bonds created #{fonds.id}"
   puts "Real estate created #{real_estate.id}"
 end
 
-#### crypto, cars, raw material, others still missing #####
+# Crypto
+cryptos = ["BTC", "ETH", "ATOM", "DOT", "LUNA", "SOL", "ADA"]
+
+cryptos.length.times do |f|
+  crypto = AssetKind.new(
+    sub_category: cryptos[f],
+    category: 3
+  )
+  crypto.save
+  puts " Crypto created #{crypto.sub_category}"
+end
+
+# Raw materials
+raw_materials = ["Gold", "Bronze", "Silver", "Others"]
+
+raw_materials.length.times do |f|
+  raw_material = AssetKind.new(
+    sub_category: raw_materials[f],
+    category: 4
+  )
+  raw_material.save
+  puts " Raw material created #{raw_material.sub_category}"
+end
+
+# Cars
+cars = ["BMW", "VW", "Porsche", "Others"]
+
+cars.length.times do |f|
+  car = AssetKind.new(
+    sub_category: cars[f],
+    category: 5
+  )
+  car.save
+  puts " Car created #{car.sub_category}"
+end
+# Others
+2.times do
+  other = AssetKind.new(
+    sub_category: "Others",
+    category: 6
+  )
+  other.save
+  puts " Others created #{other.sub_category}"
+end
 
 ## Asset seed
 puts "---------Assets are created"
