@@ -3,6 +3,7 @@
 puts "cleaning up seed"
 User.destroy_all
 AssetKind.destroy_all
+Article.destroy_all
 
 puts "create new seed"
 
@@ -138,6 +139,32 @@ Asset.all.each do |asset|
     price_point.asset = asset
     price_point.save
   end
+end
+
+puts "Price points done"
+
+## Arcticles Seed / Blog
+puts "Artciles are created"
+
+10.times do
+  name = Faker::Lorem.sentence(word_count: 3)
+  meta_title = Faker::Lorem.sentence(word_count: 4)
+  meta_description = Faker::Lorem.sentence(word_count: 10)
+  slug = Faker::Lorem.sentence(word_count: 1)
+  content = Faker::Lorem.paragraph(sentence_count: 20)
+  category = rand(0..6)
+  author = Faker::Name.name_with_middle
+  article = Article.new(
+    name: name,
+    meta_title: meta_title,
+    meta_description: meta_description,
+    slug: slug,
+    content: content,
+    category: category,
+    author: author
+  )
+  article.save
+  puts "article from #{article.author} saved"
 end
 
 puts "Seed done"
