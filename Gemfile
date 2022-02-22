@@ -63,3 +63,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # PUNDIT authorization
 gem 'pundit'
+
+# FAKER
+gem 'faker'
