@@ -11,20 +11,37 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :first_name,
-                required: true,
-                autofocus: true %>
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+    <div class="form-row margin-bottom-spacing-5">
+      <div class="col-12">
+        <%= f.input :user_name,
+                    required: true,
+                    autofocus: true %>
+      </div>
+    </div>
+
+    <div class="form-row margin-bottom-spacing-5">
+    <div class="col-12">
+      <%= f.input :email,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" }%>
+    </div>
+    </div>
+    <div class="form-row margin-bottom-spacing-5">
+      <div class="col-12">
+      <%= f.input :password,
+                    required: true,
+                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    input_html: { autocomplete: "new-password" } %>
+      </div>
+    </div>
+    <div class="form-row margin-bottom-spacing-7">
+      <div class="col-12">
+        <%= f.input :password_confirmation,
+                    required: true,
+                    input_html: { autocomplete: "new-password" } %>
+      </div>
+    </div>
   </div>
 
   <div class="form-actions">
