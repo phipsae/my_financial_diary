@@ -1,35 +1,66 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<section class="margin-y-spacing-7">
+  <div class="container padding-x-spacing-4 padding-lg-x-spacing-6">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        <h2 class="text-center">Welcome back <%= current_user.first_name %></h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+          <div class="form-inputs">
+          <div class="form-row margin-bottom-spacing-5">
+            <div class="col-12 col-lg-6">
+              <%= f.input :first_name, autofocus: true %>
+            </div>
+            <div class="col-12 col-lg-6">
+              <%= f.input :last_name, autofocus: true %>
+            </div>
+          </div>
+          <div class="form-row margin-bottom-spacing-6">
+            <div class="col-12 col-lg-6">
+              <%= f.input :user_name, autofocus: true %>
+            </div>
+            <div class="col-12 col-lg-6">
+              <%= f.input :age, autofocus: true %>
+            </div>
+          </div>
+            <hr>
+            <div class="form-row margin-top-spacing-6 margin-bottom-spacing-5">
+              <div class="col-12">
+                <%= f.input :email, required: true, autofocus: true %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                  <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+                <% end %>
+              </div>
+            </div>
 
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+            <div class="form-row margin-bottom-spacing-7">
+              <div class="col-12 col-lg-6">
+                <%= f.input :password,
+                            hint: "leave it blank if you don't want to change it",
+                            required: false,
+                            input_html: { autocomplete: "new-password" } %>
+              </div>
+              <div class="col-12 col-lg-6">
+                <%= f.input :password_confirmation,
+                            required: false,
+                            input_html: { autocomplete: "new-password" } %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Update" %>
+          </div>
+        <% end %>
+
+        <h3>Cancel my account</h3>
+
+        <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+        <%= link_to "Back", :back %>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</section>
