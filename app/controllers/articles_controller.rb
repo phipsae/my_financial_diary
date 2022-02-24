@@ -6,9 +6,10 @@ skip_before_action :authenticate_user!, only: [:index]
     @articles = Article.all
   end
 
-    #Make the method
-    #Seed file and create two articles
-    #Go to view and make them available
+  def show
+    @articles = Article.find(params[:id])
+  end
+
   # Uncomment when you *really understand* Pundit!
   # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   # def user_not_authorized
