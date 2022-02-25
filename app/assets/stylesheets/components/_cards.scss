@@ -1,0 +1,16 @@
+.asset-card {
+  border-radius: 10px;
+  &-light {
+    background-color: $satin-linen;
+    color: $charade;
+  }
+
+    &-dark {
+    background-color: $charade;
+    color: $satin-linen;
+  }
+
+  &-value {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,8 @@
+.inner-container {
+  border-radius: 10px;
+
+  &-light {
+    background-color: $satin-linen;
+    color: $title-dark;
+  }
+}

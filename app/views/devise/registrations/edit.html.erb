@@ -1,7 +1,7 @@
 <section class="margin-y-spacing-7">
   <div class="container padding-x-spacing-4 padding-lg-x-spacing-6">
     <div class="row justify-content-center">
-      <div class="col-12 col-lg-10">
+      <div class="col-12 col-lg-10 inner-container inner-container-light">
         <h2 class="text-center">Welcome back <%= current_user.first_name %></h2>
 
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -51,7 +51,7 @@
           </div>
 
           <div class="form-actions">
-            <%= f.button :submit, "Update" %>
+            <%= f.button :submit, "Update", class: "cta cta-dark" %>
           </div>
         <% end %>
 
