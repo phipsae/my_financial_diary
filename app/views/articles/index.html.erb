@@ -16,6 +16,7 @@
           <div class="card-trip-infos">
             <div>
               <div>
+                <%= link_to "more", article_path(article.id)%>
                 <h1><%= article.name%></h1>
                 <h2><%= article.author%></h2>
                 <p><%= article.content %></p>
