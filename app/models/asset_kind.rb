@@ -11,5 +11,11 @@ class AssetKind < ApplicationRecord
     others: 6
   }
 
+  enum securities: {
+    bonds: 0,
+    shares: 1,
+    fonds: 2
+  }
+
   validates :category, :sub_category, presence: true
 end

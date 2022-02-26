@@ -1,12 +1,11 @@
 <p> Total value - Euro <%= @total_value %></p>
 
 <% AssetKind.categories.keys.each do |category| %>
-  <p> <%= category.capitalize %>
-  <% if categories_hash[:"#{category}"][:value] != nil %>
-    - EUR: <%= @categories_hash[:"#{category}"][:value] / 100 %>
-    - Date: <%= @categories_hash[:"#{category}"][:date] %>
-  <% else %>
-    - EUR: 0
-    - Date: n/a
-  <% end %>
+  <p> <%= link_to category.capitalize, asset_index_path(query: category) %>
+    <% if @categories_hash[:"#{category}"] != nil %>
+      - EUR: <%= @categories_hash[:"#{category}"] / 100 %>
+    <% else %>
+      - EUR: 0
+    <% end %>
+  </p>
 <% end %>

@@ -1,2 +1,10 @@
-<h1>Asset#index</h1>
-<p>Find me in app/views/asset/index.html.erb</p>
+<h1><%= @category %></h1>
+
+<%= @asset_num %>
+<% @assets.each do |asset| %>
+
+  <p>
+    <%= asset.user.email %>
+    Category: <%= asset.asset_kind.sub_category %>
+  </p>
+<% end %>
