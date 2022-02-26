@@ -1,0 +1,10 @@
+<h1><%= @category %></h1>
+
+<%= @asset_num %>
+<% @assets.each do |asset| %>
+
+  <p>
+    <%= asset.user.email %>
+    Category: <%= asset.asset_kind.sub_category %>
+  </p>
+<% end %>

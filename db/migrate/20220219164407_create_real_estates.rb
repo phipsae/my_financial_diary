@@ -4,7 +4,7 @@ class CreateRealEstates < ActiveRecord::Migration[6.0]
       t.string :address
       t.integer :sqm
       t.integer :price_per_sqm
-      t.integer :mortage
+      t.integer :mortgage
       t.references :asset, null: false, foreign_key: true
 
       t.timestamps

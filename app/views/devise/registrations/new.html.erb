@@ -1,59 +1,58 @@
 <section class="margin-y-spacing-7">
-<div class="container">
-<div class="row">
-<div class="d-none d-lg-block col-lg-5">
-<%= image_tag("skyline.jpg", height: 'auto', width: '100%')%>
-</div>
-<div class="col-12 col-lg-5">
-<h2 class="text-center">Create an account</h2>
+  <div class="container">
+    <div class="row justify-content-center">
+    <div class="d-flex col-12 col-lg-10 padding-lg-left-spacing-0 inner-container-light inner-container">
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+    <div class="d-none d-lg-block image-lg-form-width margin-lg-right-spacing-4">
+    <%= image_tag("skyline.jpg", class:"inner-container-left-border-radius")%>
+    </div>
+    <div class="d-lg-block image-form-width image-lg-form-width margin-y-spacing-7">
+    <h2 class="text-center">Create an account</h2>
 
-  <div class="form-inputs">
-    <div class="form-row margin-bottom-spacing-5">
-      <div class="col-12">
-        <%= f.input :user_name,
-                    required: true,
-                    autofocus: true %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <div class="form-row margin-bottom-spacing-5">
+          <div class="col-12">
+            <%= f.input :user_name,
+                        required: true,
+                        autofocus: true %>
+          </div>
+        </div>
+
+        <div class="form-row margin-bottom-spacing-5">
+          <div class="col-12">
+            <%= f.input :email,
+                        required: true,
+                        autofocus: true,
+                        input_html: { autocomplete: "email" }%>
+          </div>
+        </div>
+        <div class="form-row margin-bottom-spacing-5">
+          <div class="col-12">
+          <%= f.input :password,
+                        required: true,
+                        hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                        input_html: { autocomplete: "new-password" } %>
+          </div>
+        </div>
+        <div class="form-row margin-bottom-spacing-7">
+          <div class="col-12">
+            <%= f.input :password_confirmation,
+                        required: true,
+                        input_html: { autocomplete: "new-password" } %>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="form-row margin-bottom-spacing-5">
-    <div class="col-12">
-      <%= f.input :email,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "email" }%>
-    </div>
-    </div>
-    <div class="form-row margin-bottom-spacing-5">
-      <div class="col-12">
-      <%= f.input :password,
-                    required: true,
-                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                    input_html: { autocomplete: "new-password" } %>
-      </div>
-    </div>
-    <div class="form-row margin-bottom-spacing-7">
-      <div class="col-12">
-        <%= f.input :password_confirmation,
-                    required: true,
-                    input_html: { autocomplete: "new-password" } %>
+          <div class="form-actions margin-bottom-spacing-5 w-100">
+            <%= f.button :submit, "Sign up", class: "cta cta-light-with-border w-100" %>
+          </div>
+        <% end %>
+        <div class="text-center">
+        <%= render "devise/shared/links" %>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
-
-</div>
-</div>
-
-
-
 </section>

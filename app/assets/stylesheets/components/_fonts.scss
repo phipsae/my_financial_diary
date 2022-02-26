@@ -59,7 +59,7 @@ h5, .h5 {
   margin-bottom: 0px;
 }
 
-p, ul, ol, pre, table, blockquote {
+p,  ol, pre, table, blockquote {
   margin-top: 0px;
   margin-bottom: 21px;
 }
@@ -137,7 +137,7 @@ hr, .hr {
   margin-bottom: 0px;
   }
 
-  p, ul, ol, pre, table, blockquote {
+  p, ol, pre, table, blockquote {
   margin-top: 0px;
   margin-bottom: 21px;
   }
@@ -149,6 +149,20 @@ hr, .hr {
   hr, .hr {
   border: 1px solid;
   margin: -1px 0;
+  }
+
+  sub, sup {
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  }
+
+  sup {
+  top: -0.5em;
+  }
+
+  sub {
+  bottom: -0.25em;
   }
 }
 
@@ -214,7 +228,7 @@ hr, .hr {
   margin-bottom: 0px;
   }
 
-  p, ul, ol, pre, table, blockquote {
+  p, ol, pre, table, blockquote {
   margin-top: 0px;
   margin-bottom: 21px;
   }
