@@ -2,7 +2,7 @@
 
 <% @price_points.each do |pp| %>
   <p>
-    Category: <%= pp.asset.asset_kind.category %>
+    Category: <%= pp.asset.category %>
     Date: <%= pp.date %>
     Euro: <%= number_to_currency( (pp.cents / 100), precision: 0, locale: :fr) %>
     Comment: <%= pp.text %>
