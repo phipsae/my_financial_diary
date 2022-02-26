@@ -6,16 +6,16 @@
 // General style
 $font-family-sans-serif:  $body-font;
 $headings-font-family:    $headers-font;
-$body-bg:                 $light-gray;
+$body-bg:                 $charade;
 $font-size-base: 1rem;
 
 // Colors
-$body-color: $gray;
-$primary:    $blue;
-$success:    $green;
-$info:       $yellow;
-$danger:     $red;
-$warning:    $orange;
+$body-color: $satin-linen;
+$primary:    $salt-box;
+$success:    $fruit-salad;
+$info:       $charade;
+$danger:     $pomegranate;
+$warning:    $geebung;
 
 // Buttons & inputs' radius
 $border-radius:    2px;
@@ -23,3 +23,9 @@ $border-radius-lg: 2px;
 $border-radius-sm: 2px;
 
 // Override other variables below!
+//fonts
+$text-dark-primary: $salt-box;
+$text-dark-secondary: #101014;
+$title-dark: $charade;
+$text-light-secondary: #ffffffCC;
+$title-light: #ffffff;
