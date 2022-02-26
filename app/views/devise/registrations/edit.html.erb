@@ -35,7 +35,7 @@
               </div>
             </div>
 
-            <div class="form-row margin-bottom-spacing-7">
+            <div class="form-row margin-bottom-spacing-5">
               <div class="col-12 col-lg-6">
                 <%= f.input :password,
                             hint: "leave it blank if you don't want to change it",
@@ -46,6 +46,14 @@
                 <%= f.input :password_confirmation,
                             required: false,
                             input_html: { autocomplete: "new-password" } %>
+              </div>
+            </div>
+            <div class="form-row margin-bottom-spacing-7">
+              <div class="col-12 col-lg-6">
+                  <%= f.input :current_password,
+                  hint: "we need your current password to confirm your changes",
+                  required: true,
+                  input_html: { autocomplete: "current-password" } %>
               </div>
             </div>
           </div>
