@@ -1,20 +1,49 @@
-<h2>Log in</h2>
+<section class="margin-y-spacing-7">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="d-flex col-12 col-lg-10 padding-lg-left-spacing-0 inner-container-light inner-container">
+        <div class="d-none d-lg-block image-lg-form-width margin-lg-right-spacing-4">
+          <%= image_tag("skyline.jpg", class: "inner-container-left-border-radius")%>
+        </div>
+      <div class="d-lg-block image-form-width image-lg-form-width margin-y-spacing-7">
+        <h2 class="text-center">Login</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="form-inputs">
+          <div class="form-row margin-bottom-spacing-5">
+            <div class="col-12">
+              <%= f.input :email,
+                          required: false,
+                          autofocus: true,
+                          input_html: { autocomplete: "email" } %>
+            </div>
+          </div>
+
+          <div class="form-row margin-bottom-spacing-1">
+            <div class="col-12">
+              <%= f.input :password,
+                          required: false,
+                          input_html: { autocomplete: "current-password" } %>
+            </div>
+          </div>
+
+          <div class="form-row margin-bottom-spacing-5">
+            <div class="col-12">
+                <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+            </div>
+          </div>
+        </div>
+          <div class="form-actions margin-bottom-spacing-5 w-100">
+            <%= f.button :submit, "Log in", class: "cta cta-light-with-border w-100" %>
+          </div>
+        <% end %>
+      <div class="text-center">
+        <%= render "devise/shared/links" %>
+      </div>
+      </div>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+
+</section>

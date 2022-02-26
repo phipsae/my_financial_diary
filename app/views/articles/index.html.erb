@@ -1,0 +1,30 @@
+<div class="card-trip-padding">
+  <div class="card-product">
+    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+    <div class="card-product-infos">
+      <h2>Product name</h2>
+      <p>Product description with <strong>relevant info</strong> only.</p>
+    </div>
+  </div>
+</div>
+
+<div class="card-trip-padding">
+  <div class="cards-articles-grid">
+    <% @articles.each do |article| %>
+        <div class="card-trip">
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+          <div class="card-trip-infos">
+            <div>
+              <div>
+                <%= link_to "more", article_path(article.id)%>
+                <h1><%= article.name%></h1>
+                <h2><%= article.author%></h2>
+                <p><%= article.content %></p>
+              </div>
+            </div>
+            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+input[type=text],
+input[type=date],
+input[type=email],
+input[type=number],
+input[type=password] {
+  height: 56px;
+  padding: 8px 12px;
+  font-size: 16px;
+  color: $satin-linen;
+  border: 2px solid $title-dark;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  border-radius: 10px !important;
+  background-color: $title-dark !important;
+
+  &::placeholder {
+  color: $satin-linen;
+  opacity: 1; /* Firefox */
+  }
+
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: $satin-linen;
+  }
+
+  &::-ms-input-placeholder { /* Microsoft Edge */
+  color: $satin-linen;
+  }
+
+  &:focus {
+    border: 2px solid $title-dark;
+    color: $title-dark;
+    background-color: $satin-linen !important;
+    box-shadow:none;
+  }
+}
+
+
+select {
+  height: 56px !important;
+  border-radius: 10px !important;
+  padding: 8px 12px !important;
+  font-size: 16px !important;
+  background-color: $title-dark !important;
+
+  &::placeholder {
+  color: $satin-linen;
+  opacity: 1; /* Firefox */
+  }
+
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: $satin-linen;
+  }
+
+  &::-ms-input-placeholder { /* Microsoft Edge */
+  color: $satin-linen;
+  }
+}
+
+textarea {
+  padding: 8px 12px !important;
+  font-size: 16px !important;
+  color: $title-dark !important;
+  border: 2px solid $title-dark !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  border-radius: 10px;
+  background-color: $title-dark !important;
+
+  &::placeholder {
+  color: $satin-linen;
+  opacity: 1; /* Firefox */
+  }
+
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: $satin-linen;
+  }
+
+  &::-ms-input-placeholder { /* Microsoft Edge */
+  color: $satin-linen;
+  }
+
+  &:focus {
+    border: 2px solid $title-dark !important;
+    color: $title-dark !important;
+    background-color: $satin-linen !important;
+    box-shadow:none !important;
+  }
+}
+
+.image-form-width {
+    width: 100%;
+    height: 100%
+}
+
+@media (min-width: 992px) {
+  .image-lg-form-width {
+    width: 50%;
+      & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

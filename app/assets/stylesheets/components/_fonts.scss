@@ -1,4 +1,4 @@
- html, .root {
+html, .root {
   font-size: 16px;
   line-height: 21px;
 }
@@ -7,8 +7,10 @@ body, .article {
   font-family: $body-font;
   font-size: 16px;
   line-height: 21px;
-  max-width: 560px;
-  margin: auto;
+}
+
+.article {
+  max-width: 600px;
 }
 
 h1, .h1 {
@@ -57,7 +59,7 @@ h5, .h5 {
   margin-bottom: 0px;
 }
 
-p, ul, ol, pre, table, blockquote {
+p,  ol, pre, table, blockquote {
   margin-top: 0px;
   margin-bottom: 21px;
 }
@@ -72,23 +74,6 @@ hr, .hr {
   margin: -1px 0;
 }
 
-a, b, i, strong, em, small, code {
-  line-height: 0;
-}
-
-sub, sup {
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-sup {
-  top: -0.5em;
-}
-
-sub {
-  bottom: -0.25em;
-}
 
 @media (min-width: 992px) {
   html, .root {
@@ -100,8 +85,10 @@ sub {
   font-family: $body-font;
   font-size: 16px;
   line-height: 21px;
-  max-width: 560px;
-  margin: auto;
+  }
+
+  .article {
+    max-width: 600px;
   }
 
   h1, .h1 {
@@ -150,7 +137,7 @@ sub {
   margin-bottom: 0px;
   }
 
-  p, ul, ol, pre, table, blockquote {
+  p, ol, pre, table, blockquote {
   margin-top: 0px;
   margin-bottom: 21px;
   }
@@ -163,6 +150,8 @@ sub {
   border: 1px solid;
   margin: -1px 0;
   }
+
+
 
   a, b, i, strong, em, small, code {
   line-height: 0;
@@ -181,6 +170,8 @@ sub {
   sub {
   bottom: -0.25em;
   }
+}
+
 @media (min-width: 768px) {
   html, .root {
   font-size: 16px;
@@ -191,8 +182,10 @@ sub {
   font-family: $body-font;
   font-size: 16px;
   line-height: 21px;
-  max-width: 560px;
-  margin: auto;
+  }
+
+  .article {
+    max-width: 600px;
   }
 
   h1, .h1 {
@@ -241,7 +234,7 @@ sub {
   margin-bottom: 0px;
   }
 
-  p, ul, ol, pre, table, blockquote {
+  p, ol, pre, table, blockquote {
   margin-top: 0px;
   margin-bottom: 21px;
   }
@@ -253,24 +246,6 @@ sub {
   hr, .hr {
   border: 1px solid;
   margin: -1px 0;
-  }
-
-  a, b, i, strong, em, small, code {
-  line-height: 0;
-  }
-
-  sub, sup {
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-  }
-
-  sup {
-  top: -0.5em;
-  }
-
-  sub {
-  bottom: -0.25em;
   }
 }
 }

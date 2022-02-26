@@ -1,0 +1,41 @@
+.cta {
+  text-transform: uppercase;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 32px;
+
+  &-light {
+    background-color: $satin-linen;
+    color: $title-dark;
+    border: 2px solid $satin-linen;
+  }
+
+  &-light:hover {
+    background-color: $title-dark;
+    color: $satin-linen;
+  }
+
+  &-light-with-border {
+    background-color: $satin-linen;
+    color: $title-dark;
+    border: 2px solid $title-dark;
+  }
+
+  &-light-with-border:hover {
+    background-color: $title-dark;
+    color: $satin-linen;
+  }
+
+  &-dark {
+    background-color: $title-dark;
+    color: $satin-linen;
+    border: 2px solid $title-dark;
+  }
+
+  &-dark:hover {
+    background-color: $satin-linen;
+    color: $title-dark;
+  }
+
+}
