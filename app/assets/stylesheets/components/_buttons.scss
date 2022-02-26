@@ -16,6 +16,17 @@
     color: $satin-linen;
   }
 
+  &-light-with-border {
+    background-color: $satin-linen;
+    color: $title-dark;
+    border: 2px solid $title-dark;
+  }
+
+  &-light-with-border:hover {
+    background-color: $title-dark;
+    color: $satin-linen;
+  }
+
   &-dark {
     background-color: $title-dark;
     color: $satin-linen;
