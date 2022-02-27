@@ -54,6 +54,10 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  #assets fix because of method not allowed
+  config.assets.prefix = '/assetz'
+
+
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
 

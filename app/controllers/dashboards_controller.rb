@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class DashboardsController < ApplicationController
   def index
     @assets = policy_scope(Asset.all)
     # asset_kind

@@ -1,4 +1,4 @@
-class AssetPolicy < ApplicationPolicy
+class PricePointPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
@@ -6,11 +6,11 @@ class AssetPolicy < ApplicationPolicy
     end
   end
 
-  def index?
+  def create?
     true
   end
 
-  def show?
+  def update?
     true
   end
 end
