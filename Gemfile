@@ -66,3 +66,6 @@ gem 'pundit'
 
 # FAKER
 gem 'faker'
+
+#dotenv
+gem 'dotenv-rails', groups: [:development, :test]
