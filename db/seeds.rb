@@ -20,7 +20,7 @@ puts "---------Users are created"
   puts "User created: #{user.id}"
 end
 
-## Asset seed
+## Asset_kind
 categories = {
   cash: ["cash"],
   securities: ["bonds", "shares", "fonds"],

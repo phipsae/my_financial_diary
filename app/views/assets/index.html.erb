@@ -1,6 +1,6 @@
 <h1><%= @category %></h1>
 
-<%= render "asset/index_all_assets", all_assets_hash: @all_assets_hash %>
+<%= render "assets/index_all_assets", all_assets_hash: @all_assets_hash %>
 
 <h2>Asset specific</h2>
 
@@ -20,4 +20,4 @@
 
 <%# @categories_hash[:"#{asset.category}"][:"#{asset.sub_category}"][:value] %>
 
-<%= render "price_point/index_pp" %>
+<%= render "price_points/index_pp" %>
