@@ -3,6 +3,40 @@
 <h1>Asset#show</h1>
 <p>Find me in app/views/asset/show.html.erb</p>
 
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="inner-container inner-container-light padding-y-spacing-7 padding-x-spacing-4">
+        <div data-controller="coin-list">
+          <%= form_with url: "test", method: :get, html: { class: 'mb-5', data: { coin_list_target: 'form' } } do |f| %>
+            <%= f.text_field :amount,
+                            class: "form-control",
+                            placeholder: 'Type in a crypto amount',
+                            value: params[:amount],
+                            data: {
+                              coin_list_target: 'amount'
+                            } %>
+            <%= f.text_field :symbol,
+                            class: "form-control",
+                            placeholder: 'Select Crypto',
+                            value: params[:symbol],
+                            data: {
+                              coin_list_target: 'symbol'
+                            } %>
+            <%= f.submit data: {
+                              coin_list_target: 'submit',
+                              action: "coin-list#update"
+                            } %>
+          <% end %>
+          <div data-coin-list-target="list">
+            <!-- [...] -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <section class="margin-y-spacing-7">
