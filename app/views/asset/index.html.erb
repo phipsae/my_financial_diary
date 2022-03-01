@@ -1,10 +1,11 @@
 <h1><%= @category %></h1>
 
+
 <%= @asset_num %>
 <% @assets.each do |asset| %>
-
   <p>
     <%= asset.user.email %>
-    Category: <%= asset.asset_kind.sub_category %>
+    Category: <%= asset.sub_category %>
+    Last price point <%= @all_assets_hash["#{@category}".to_sym]["#{asset.sub_category}".to_sym][:value] %>
   </p>
 <% end %>
