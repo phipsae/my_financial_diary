@@ -2,7 +2,7 @@ class AssetController < ApplicationController
   def index
     @assets = policy_scope(Asset)
     # render all assets
-    @all_assets_hash = index_all_assets
+    @all_assets_hash = index_all_assets(current_user)
     @total_value = calculate_total_value(@all_assets_hash)
 
     # render specific comments
@@ -39,9 +39,9 @@ class AssetController < ApplicationController
     @total_value
   end
 
-  def index_all_assets
+  def index_all_assets(user)
     @assets_hash = {}
-    categories_hash = create_categories_hash
+    categories_hash = create_categories_hash(user)
     categories_hash.each do |category, sub|
       asset_value = 0
       sub.each do |_, element|
@@ -52,11 +52,11 @@ class AssetController < ApplicationController
     @assets_hash
   end
 
-  def create_categories_hash
+  def create_categories_hash(user)
     @categories_hash = {}
     Asset.categories.each_key do |category|
       # user_id: current_user, DONT forget to add
-      @assets = Asset.where(category: category)
+      @assets = Asset.where(user_id: user, category: category)
       category_hash = get_category_hash(@assets)
       @categories_hash[:"#{category}"] = category_hash
     end
@@ -73,7 +73,7 @@ class AssetController < ApplicationController
   end
 
   def get_last_price_point(asset)
-    price_points = PricePoint.where(asset: asset) # user_id: current_user, DONT forget to add
+    price_points = PricePoint.where(asset: asset)
     last_pp = price_points.max_by do |element|
       element.date
     end

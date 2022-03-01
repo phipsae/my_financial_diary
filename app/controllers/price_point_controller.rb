@@ -6,4 +6,9 @@ class PricePointController < ApplicationController
       @price_points = PricePoint.all.order(date: :desc) # user_id: current_user, DONT forget to add
     end
   end
+
+  def calculate_real_estate_price
+
+
+  end
 end

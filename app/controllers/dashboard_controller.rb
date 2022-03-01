@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
     @assets = policy_scope(Asset.all)
     # asset_kind
     asset_controller = AssetController.new
-    @all_assets_hash = asset_controller.index_all_assets
+    @all_assets_hash = asset_controller.index_all_assets(current_user)
     @total_value = asset_controller.calculate_total_value(@all_assets_hash)
     # price_points
     price_point_controller = PricePointController.new
