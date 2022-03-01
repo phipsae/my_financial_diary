@@ -1,10 +1,23 @@
 <h1><%= @category %></h1>
 
-<%= @asset_num %>
-<% @assets.each do |asset| %>
+<%= render "asset/index_all_assets", all_assets_hash: @all_assets_hash %>
 
-  <p>
-    <%= asset.user.email %>
-    Category: <%= asset.asset_kind.sub_category %>
-  </p>
+<h2>Asset specific</h2>
+
+<% if @category != "cash" %>
+  <p> CREATE <%= @category.capitalize %> asset ----- add button </p>
 <% end %>
+
+<% @assets.each do |asset| %>
+  <% if asset.category == "cash" %>
+    <p> Previous amount: <%= number_to_currency(@all_assets_hash[:"cash"] / 100, precision: 0, unit: "€") %> </p>
+  <% elsif asset.category == "securities" %>
+    <%= render "shared/cards", asset: asset %>
+  <% else %>
+    <%= render "shared/cards", asset: asset %>
+  <% end %>
+<% end %>
+
+<%# @categories_hash[:"#{asset.category}"][:"#{asset.sub_category}"][:value] %>
+
+<%= render "price_point/index_pp" %>
