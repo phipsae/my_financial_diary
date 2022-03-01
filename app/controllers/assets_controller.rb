@@ -9,12 +9,11 @@ class AssetsController < ApplicationController
 
     # render specific comments
     price_point_controler = PricePointsController.new
-    @price_points = price_point_controler.index_pp(params[:query])
+    @price_points = price_point_controler.index_pp(params[:query], current_user)
 
     # display specific assets
     if params[:query].present?
-      ####### DONT FORGET CURRENT_USER!!!!! #############
-      @assets = Asset.where(category: params[:query]) #, user_id: current_user)
+      @assets = Asset.where(category: params[:query], user_id: current_user) #, user_id: current_user)
       @category = params[:query]
     end
   end

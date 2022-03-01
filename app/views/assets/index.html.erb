@@ -8,7 +8,7 @@
     <div class="col-12 col-lg-8">
       <h2>Asset specific</h2>
       <% if @category != "cash" %>
-        <p> CREATE <%= @category.capitalize %> asset ----- add button </p>
+        <%= render "shared/create_button" %>
       <% end %>
       <% @assets.each do |asset| %>
         <% if asset.category == "cash" %>

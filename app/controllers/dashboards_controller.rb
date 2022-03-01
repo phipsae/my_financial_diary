@@ -7,6 +7,6 @@ class DashboardsController < ApplicationController
     @total_value = assets_controller.calculate_total_value(@all_assets_hash)
     # price_points
     price_point_controller = PricePointsController.new
-    @price_points = price_point_controller.index_pp(params[:query])
+    @price_points = price_point_controller.index_pp(params[:query], current_user)
   end
 end
