@@ -1,4 +1,6 @@
-class AssetController < ApplicationController
+class AssetsController < ApplicationController
+  before_action :set_asset, only: [ :show, :edit, :update ]
+
   def index
     @assets = policy_scope(Asset)
     # render all assets
@@ -6,7 +8,7 @@ class AssetController < ApplicationController
     @total_value = calculate_total_value(@all_assets_hash)
 
     # render specific comments
-    price_point_controler = PricePointController.new
+    price_point_controler = PricePointsController.new
     @price_points = price_point_controler.index_pp(params[:query])
 
     # display specific assets
@@ -18,6 +20,9 @@ class AssetController < ApplicationController
   end
 
   def show
+    authorize @asset
+    @price_point = PricePoint.new(asset: @asset)
+    @latest_price_point = @asset.price_points.order("date desc").first
   end
 
   def update
@@ -26,10 +31,21 @@ class AssetController < ApplicationController
   def destroy
   end
 
-  def create
+  def new
+    @asset = Asset.new
+    authorize @asset
   end
 
-  # methods for other controllers
+  def create
+    @asset = Asset.new(asset_params)
+    @asset.user = current_user
+    authorize @asset
+    if @asset.save
+      redirect_to asset_url(@asset)
+    else
+      render :new
+    end
+  end
 
   def calculate_total_value(assets_hash)
     @total_value = 0
@@ -78,5 +94,15 @@ class AssetController < ApplicationController
       element.date
     end
     last_pp
+  end
+
+  private
+
+  def set_asset
+    @asset = Asset.find(params[:id])
+  end
+
+  def asset_params
+    params.require(:asset).permit(:name, :category, :sub_category)
   end
 end
