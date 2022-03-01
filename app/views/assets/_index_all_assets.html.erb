@@ -14,39 +14,16 @@
           </div>
       </div>
   </div>
-<<<<<<< HEAD:app/views/asset/_index_all_assets.html.erb
 </div>
 <% Asset.categories.keys.each do |category| %>
 
   <div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3">
-    <%= link_to asset_index_path(query: category) do %>
+    <%= link_to assets_path(query: category) do %>
       <div class="asset-card-body asset-card-body-light">
           <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                   <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                      <%= link_to category.capitalize, asset_index_path(query: category) %>
-=======
-  <div class="row">
-    <div class="col-12 col-lg-4">
-      <% Asset.categories.keys.each do |category| %>
-        <div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5">
-            <div class="asset-card-body asset-card-body-light">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            <%= link_to category.capitalize, assets_path(query: category) %>
-                          </div>
-                        <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold">
-                        <% if all_assets_hash[:"#{category}"] != nil %>
-                            <%= number_to_currency(all_assets_hash[:"#{category}"] / 100, precsion: 0, unit: "€") %>
-                            <% else %>
-                              -
-                            <% end %>
-                        </div>
-                      </div>
-                    <div class="col-auto">
-                        <i class="<%=category  %> fa-2x text-primary"></i>
->>>>>>> master:app/views/assets/_index_all_assets.html.erb
+                      <%= category.capitalize %>
                     </div>
                   <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold">
                   <% if all_assets_hash[:"#{category}"] != nil %>
