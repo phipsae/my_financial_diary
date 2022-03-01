@@ -2,15 +2,17 @@ class AssetController < ApplicationController
   def index
     @assets = policy_scope(Asset)
     # render all assets
-    asset_controller = AssetController.new
-    @all_assets_hash = asset_controller.create_categories_hash
+    @all_assets_hash = index_all_assets
+    @total_value = calculate_total_value(@all_assets_hash)
 
     # render specific comments
+    price_point_controler = PricePointController.new
+    @price_points = price_point_controler.index_pp(params[:query])
 
     # display specific assets
     if params[:query].present?
       ####### DONT FORGET CURRENT_USER!!!!! #############
-      @assets = Asset.where(category: params[:query])
+      @assets = Asset.where(category: params[:query], user_id: current_user)
       @category = params[:query]
     end
   end
@@ -54,7 +56,7 @@ class AssetController < ApplicationController
     @categories_hash = {}
     Asset.categories.each_key do |category|
       # user_id: current_user, DONT forget to add
-      @assets = Asset.where(category: category)
+      @assets = Asset.where(category: category, user_id: current_user)
       category_hash = get_category_hash(@assets)
       @categories_hash[:"#{category}"] = category_hash
     end
@@ -63,12 +65,9 @@ class AssetController < ApplicationController
 
   def get_category_hash(assets)
     category_hash = {}
-    sub_category_hash = {}
     assets.each do |asset|
       last_pp = get_last_price_point(asset)
-      sub_category_hash[:value] = last_pp.cents
-      sub_category_hash[:date] = last_pp.date
-      category_hash[:"#{asset.sub_category}"] = sub_category_hash
+      category_hash[:"#{asset.sub_category}"] = { value: last_pp.cents, date: last_pp.date }
     end
     category_hash
   end

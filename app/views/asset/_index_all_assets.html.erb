@@ -1,4 +1,25 @@
-<p> Total value - <%= number_to_currency(@total_value / 100, precision: 0, unit: "€") %> therefore: add it to enum and create symbol</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-4">
+      <div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5">
+          <div class="asset-card-body asset-card-body-light">
+              <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                          Total value </div>
+                      <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold">
+                      <%= number_to_currency(@total_value / 100, precision: 0, unit: "€") %>
+                      </div>
+                  </div>
+                  <div class="col-auto">
+                      <i class="totalValue fa-2x text-primary"></i>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container">
   <div class="row">

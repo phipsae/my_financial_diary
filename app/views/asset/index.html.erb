@@ -1,11 +1,13 @@
 <h1><%= @category %></h1>
 
+<%= render "asset/index_all_assets", all_assets_hash: @all_assets_hash %>
 
 <%= @asset_num %>
 <% @assets.each do |asset| %>
   <p>
     <%= asset.user.email %>
     Category: <%= asset.sub_category %>
-    Last price point <%= @all_assets_hash["#{@category}".to_sym]["#{asset.sub_category}".to_sym][:value] %>
   </p>
 <% end %>
+
+<%= render "price_point/index_pp" %>
