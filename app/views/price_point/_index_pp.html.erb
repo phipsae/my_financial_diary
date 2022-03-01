@@ -1,11 +1,9 @@
-<h1>PricePoint#index</h1>
-
 <div class="container">
   <div class="row">
-    <div class="col-12 col-lg-8">
+    <div class="col-8 col-lg-8">
     <h2>Recent Activities</h2>
     </div>
-    <div class="col-12 col-lg-8 activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-5">
+    <div class="col-8 col-lg-8 activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-5">
       <% @price_points.each do |pp| %>
       <div class="d-flex padding-y-spacing-4">
         <span class="activities-category"><i class="<%=pp.asset.category  %> fa-2x text-primary"></i></span>

@@ -12,7 +12,7 @@ class AssetController < ApplicationController
     # display specific assets
     if params[:query].present?
       ####### DONT FORGET CURRENT_USER!!!!! #############
-      @assets = Asset.where(category: params[:query], user_id: current_user)
+      @assets = Asset.where(category: params[:query]) #, user_id: current_user)
       @category = params[:query]
     end
   end
@@ -42,8 +42,8 @@ class AssetController < ApplicationController
   def index_all_assets
     @assets_hash = {}
     categories_hash = create_categories_hash
-    asset_value = 0
     categories_hash.each do |category, sub|
+      asset_value = 0
       sub.each do |_, element|
         asset_value += element[:value]
       end
@@ -56,7 +56,7 @@ class AssetController < ApplicationController
     @categories_hash = {}
     Asset.categories.each_key do |category|
       # user_id: current_user, DONT forget to add
-      @assets = Asset.where(category: category, user_id: current_user)
+      @assets = Asset.where(category: category)
       category_hash = get_category_hash(@assets)
       @categories_hash[:"#{category}"] = category_hash
     end
