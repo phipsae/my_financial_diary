@@ -33,6 +33,7 @@ class AssetsController < ApplicationController
 
   def new
     @asset = Asset.new
+    @price_point = PricePoint.new
     authorize @asset
   end
 
