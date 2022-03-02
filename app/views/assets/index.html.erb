@@ -1,23 +1,43 @@
-<h1><%= @category %></h1>
+<section class="margin-y-spacing-7">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-12 col-lg-8">
+        <h1><%= @category.humanize %></h1>
+      </div>
+       <% if @category != "cash" %>
+      <div class="col-12 col-lg-4 text-right">
+        <%= link_to "Create new #{@category}", new_asset_path(category: @category), class: "cta cta-light" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</section>
 
-<%= render "assets/index_all_assets", all_assets_hash: @all_assets_hash %>
+<section class="margin-y-spacing-7">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <%= render "assets/index_all_assets", all_assets_hash: @all_assets_hash %>
+      </div>
+      <div class="col-12 col-lg-8">
 
-<h2>Asset specific</h2>
+        <% @assets.each do |asset| %>
+          <% if asset.category == "cash" %>
+            <p> Previous amount: <%= number_to_currency(@all_assets_hash[:"cash"] / 100, precision: 0, unit: "€") %> </p>
+          <% else asset.category == "securities" %>
+            <%=link_to asset_path(asset.id) do %>
+              <%= render "shared/cards", asset: asset %>
+            <% end %>
+          <% end %>
+        <% end %>
 
-<% if @category != "cash" %>
-  <p> CREATE <%= @category.capitalize %> asset ----- add button </p>
-<% end %>
+        <%# @categories_hash[:"#{asset.category}"][:"#{asset.sub_category}"][:value] %>
+        <div class="margin-top-spacing-7">
+            <%= render "price_points/index_pp" %>
+        </div>
 
-<% @assets.each do |asset| %>
-  <% if asset.category == "cash" %>
-    <p> Previous amount: <%= number_to_currency(@all_assets_hash[:"cash"] / 100, precision: 0, unit: "€") %> </p>
-  <% elsif asset.category == "securities" %>
-    <%= render "shared/cards", asset: asset %>
-  <% else %>
-    <%= render "shared/cards", asset: asset %>
-  <% end %>
-<% end %>
+      </div>
+    </div>
+  </div>
 
-<%# @categories_hash[:"#{asset.category}"][:"#{asset.sub_category}"][:value] %>
-
-<%= render "price_points/index_pp" %>
+</section>
