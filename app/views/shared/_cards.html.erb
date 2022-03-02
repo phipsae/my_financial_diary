@@ -1,16 +1,16 @@
-        <div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3">
-            <div class="asset-card-body asset-card-body-light">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            <%= asset.sub_category %></div>
-                        <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold">
-                        <%= number_to_currency( @categories_hash[:"#{asset.category}"][:"#{asset.sub_category}"][:value] / 100, precision: 0, unit: "€") %>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="securities fa-2x text-primary"></i>
-                    </div>
+<div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3">
+    <div class="asset-card-body asset-card-body-light">
+        <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                    <%= asset.sub_category %></div>
+                <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold">
+                <%= number_to_currency( @categories_hash[:"#{asset.category}"][:"#{asset.sub_category}"][:value] / 100, precision: 0, unit: "€") %>
                 </div>
             </div>
+            <div class="col-auto">
+                <i class="<%=asset.category  %> fa-2x text-primary"></i>
+            </div>
         </div>
+    </div>
+</div>

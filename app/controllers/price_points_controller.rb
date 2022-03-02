@@ -1,11 +1,11 @@
 class PricePointsController < ApplicationController
   before_action :set_asset, only: [ :create ]
 
-  def index_pp(params)
+  def index_pp(params, user)
     if params.present?
-      @price_points = PricePoint.where(asset: Asset.where(category: params)) # user_id: current_user, DONT forget to add
+      @price_points = PricePoint.where(asset: Asset.where(category: params, user_id: user)).order(date: :desc) # user_id: current_user, DONT forget to add
     else
-      @price_points = PricePoint.all.order(date: :desc) # user_id: current_user, DONT forget to add
+      @price_points = PricePoint.where(asset: Asset.where(user_id: user)).order(date: :desc) # user_id: current_user, DONT forget to add
     end
   end
 

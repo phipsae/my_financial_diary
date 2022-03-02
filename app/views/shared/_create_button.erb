@@ -1,0 +1,16 @@
+<div class="asset-card asset-card-grey padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3">
+  <%= link_to dashboard_path do %>
+    <div class="asset-card-body asset-card-body-light">
+        <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+                <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold">
+                  Create <%= @category.capitalize %> asset
+                </div>
+            </div>
+            <div class="col-auto">
+                <i class="othersCreate fa-3x text-primary"></i>
+            </div>
+        </div>
+    </div>
+  <% end %>
+</div>
