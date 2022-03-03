@@ -6,7 +6,7 @@ puts "create new seed"
 
 ## User seed
 puts "---------Users are created"
-1.times do
+2.times do
   user = User.new(
     email: Faker::Internet.email,
     first_name: Faker::Name.first_name,
@@ -20,98 +20,7 @@ puts "---------Users are created"
   puts "User created: #{user.id}"
 end
 
-# ## Asset_kind
-# puts "---------Asset_kinds are created"
-# # Cash
-# cash = AssetKind.new(
-#   sub_category: "Cash",
-#   category: 0
-# )
-# cash.save
-# puts "Cash created #{cash.id}"
-
-# # Securities - Bonds
-# bonds = AssetKind.new(
-#   sub_category: "Bonds",
-#   category: 1
-# )
-# bonds.save
-# puts "Bonds created #{bonds.id}"
-
-# # Securities - Shares
-# shares = AssetKind.new(
-#   sub_category: "Shares",
-#   category: 1
-# )
-# shares.save
-# puts "Bonds created #{shares.id}"
-
-# # Securities - Fonds
-# fonds = AssetKind.new(
-#   sub_category: "Fonds",
-#   category: 1
-# )
-# fonds.save
-# puts "Bonds created #{fonds.id}"
-
-# # AssetKind - Real estate
-# 2.times do |f|
-#   real_estate_type = ["flat", "house"]
-#   real_estate = AssetKind.new(
-#     sub_category: real_estate_type[f],
-#     category: 2
-#   )
-#   real_estate.save
-#   puts "Real estate created #{real_estate.id}"
-# end
-
-# # Crypto
-# cryptos = ["BTC", "ETH", "ATOM", "DOT", "LUNA", "SOL", "ADA"]
-
-# cryptos.length.times do |f|
-#   crypto = AssetKind.new(
-#     sub_category: cryptos[f],
-#     category: 3
-#   )
-#   crypto.save
-#   puts " Crypto created #{crypto.sub_category}"
-# end
-
-# # Raw materials
-# raw_materials = ["Gold", "Bronze", "Silver", "Others"]
-
-# raw_materials.length.times do |f|
-#   raw_material = AssetKind.new(
-#     sub_category: raw_materials[f],
-#     category: 4
-#   )
-#   raw_material.save
-#   puts " Raw material created #{raw_material.sub_category}"
-# end
-
-# # Cars
-# cars = ["BMW", "VW", "Porsche", "Others"]
-
-# cars.length.times do |f|
-#   car = AssetKind.new(
-#     sub_category: cars[f],
-#     category: 5
-#   )
-#   car.save
-#   puts " Car created #{car.sub_category}"
-# end
-# # Others
-# 2.times do
-#   other = AssetKind.new(
-#     sub_category: "Others",
-#     category: 6
-#   )
-#   other.save
-#   puts " Others created #{other.sub_category}"
-# end
-
-## Asset seed
-
+## Asset_kind
 categories = {
   cash: ["cash"],
   securities: ["bonds", "shares", "fonds"],
@@ -185,6 +94,7 @@ Asset.all.each do |asset|
     price_point = PricePoint.new(cents: cents, date: date, text: text)
     price_point.asset = asset
     price_point.save
+    puts price_point
   end
 end
 

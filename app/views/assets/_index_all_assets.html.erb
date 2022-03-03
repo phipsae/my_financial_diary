@@ -1,0 +1,43 @@
+
+<div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3">
+  <div class="asset-card-body asset-card-body-light">
+      <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                  Total value
+              </div>
+              <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold">
+                <%= number_to_currency(@total_value / 100, precision: 0, unit: "€") %>
+              </div>
+          </div>
+          <div class="col-auto">
+              <i class="totalValue"></i>
+          </div>
+      </div>
+  </div>
+</div>
+<% Asset.categories.keys.each do |category| %>
+  <div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3">
+      <%= link_to assets_path(query: category) do %>
+        <div class="asset-card-body asset-card-body-light">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        <%= category.capitalize %>
+                      </div>
+                    <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold">
+                    <% if all_assets_hash[:"#{category}"] != nil %>
+                        <%= number_to_currency(all_assets_hash[:"#{category}"] / 100, precsion: 0, unit: "€") %>
+                        <% else %>
+                          -
+                        <% end %>
+                    </div>
+                  </div>
+                <div class="col-auto">
+                    <i class="<%= category  %> fa-2x text-primary"></i>
+                </div>
+            </div>
+        </div>
+    <% end %>
+  </div>
+<% end %>

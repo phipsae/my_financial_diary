@@ -2,7 +2,7 @@ input[type=text],
 input[type=date],
 input[type=email],
 input[type=number],
-input[type=password] {
+input[type=password], .input-styling {
   height: 56px;
   padding: 8px 12px;
   font-size: 16px;
@@ -41,6 +41,7 @@ select {
   padding: 8px 12px !important;
   font-size: 16px !important;
   background-color: $title-dark !important;
+  color: $satin-linen !important;
 
   &::placeholder {
   color: $satin-linen;
@@ -63,7 +64,7 @@ textarea {
   border: 2px solid $title-dark !important;
   margin-left: 0px !important;
   margin-right: 0px !important;
-  border-radius: 10px;
+  border-radius: 10px !important;
   background-color: $title-dark !important;
 
   &::placeholder {

@@ -1,3 +1,10 @@
+.totalValue::before{
+  font-family: "Font Awesome 5 Brands";
+	font-weight: 400;
+  font-style: normal;
+  content: "\f15a";
+}
+
 .crypto::before{
   font-family: "Font Awesome 5 Brands";
 	font-weight: 400;
@@ -44,5 +51,13 @@
   font-family: "Font Awesome 5 Free";
 	font-weight: 900;
   font-style: normal;
+  content: "\2b";
+}
+
+.othersCreate::before{
+  font-family: "Font Awesome 5 Free";
+	font-weight: 400;
+  font-style: normal;
+  color: black;
   content: "\2b";
 }
