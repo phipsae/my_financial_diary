@@ -1,11 +1,14 @@
 <h2>Recent Activities</h2>
-<div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-5">
-  <% @price_points.each do |pp| %>
-  <div class="d-flex padding-y-spacing-4">
-    <span class="activities-category"><i class="<%=pp.asset.category  %> fa-2x text-primary"></i></span>
-    <span class="activities-value"><%= number_to_currency( (pp.cents / 100), precision: 0, unit: "€") %></span>
-    <span class="activities-date"><%= pp.date %></span>
-    <span class="activities-comment"><%= pp.text %></span>
-  </div>
+<div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-3">
+  <% @price_points.each_with_index do |pp, index| %>
+    <div class="d-flex align-items-center padding-y-spacing-4">
+      <span class="activities-category"><i class="<%= pp.asset.category  %> fa-2x text-primary"></i></span>
+      <span class="activities-value"><%= number_to_currency( (pp.cents / 100), precision: 0, unit: "€") %></span>
+      <span class="activities-date"><%= pp.date %></span>
+      <span class="activities-comment"><%= pp.text %></span>
+    </div>
+    <% unless index == @price_points.size - 1 %>
+      <div class="d-flex activities-row margin-x-spacing-negative-5 margin-lg-x-spacing-negative-6"></div>
+    <% end %>
   <% end %>
 </div>

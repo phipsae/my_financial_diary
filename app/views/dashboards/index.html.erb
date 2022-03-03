@@ -1,11 +1,22 @@
-<h1>Dashboard#index</h1>
-<div class="container">
-  <div class="row">
-    <div class="col-12 col-lg-4">
-      <%= render "assets/index_all_assets", all_assets_hash: @all_assets_hash %>
-    </div>
-    <div class="col-12 col-lg-8">
-      <%= render "price_points/index_pp" %>
+<section class="margin-y-spacing-7">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>Your personal dashboard <%= @current_user.first_name %></h1>
+      </div>
     </div>
   </div>
-</div>
+</section>
+
+<section class="margin-y-spacing-7">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <%= render "assets/index_all_assets", all_assets_hash: @all_assets_hash %>
+      </div>
+      <div class="col-12 col-lg-8">
+        <%= render "price_points/index_pp" %>
+      </div>
+    </div>
+  </div>
+</section>

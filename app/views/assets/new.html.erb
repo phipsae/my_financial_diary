@@ -12,16 +12,16 @@
           </div>
           <div class="form-row margin-bottom-spacing-5">
             <div class="col-12">
-              <%= f.input :category, collection: [["CASH", "cash"], ["CRYPTO", "crypto"]], label: "What Category is your asset in?" %>
+              <%= f.input :category, collection: (Asset.categories.map {|k, v| [k.humanize.capitalize, k]}), label: "What Category is your asset in?" %>
             </div>
           </div>
           <div class="form-row margin-bottom-spacing-5">
             <div class="col-12">
-              <%= f.input :sub_category, collection: [["CASH", "cash"], ["BTC", "btc"]], label: "What Category is your asset in?" %>
+              <%= f.input :sub_category, collection: [["Cash", "cash"],["Shares", "shares"],["Fonds", "fonds"],["Bonds", "bonds"],["Flat", "flat"],["House", "house"],["Gold", "gold"],["Silver", "silver"],["BTC", "btc"],["ETH", "eth"],["DOT", "dot"],["Car", "car"],["Others", "others"]], label: "What Sub Category is your asset in?" %>
             </div>
           </div>
         </div>
-        <%= f.submit "Add price point", class: "cta cta-dark" %>
+          <%= f.submit "Add Asset", class: "cta cta-dark" %>
         <% end %>
       </div>
     </div>

@@ -31,7 +31,11 @@ class AssetsController < ApplicationController
   end
 
   def new
-    @asset = Asset.new
+    if (category = params['category']).present?
+      @asset = Asset.new(category: category)
+    else
+      @asset = Asset.new
+    end
     authorize @asset
   end
 
