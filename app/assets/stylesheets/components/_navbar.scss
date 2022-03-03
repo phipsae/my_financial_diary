@@ -1,3 +1,6 @@
+.avatar {
+  border-radius: 50% !important;
+}
 .navbar-lewagon {
   justify-content: space-between;
   background: $satin-linen;
@@ -14,7 +17,7 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  width: 60px;
 }
 
 .dropdown-menu {
