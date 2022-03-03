@@ -1,0 +1,29 @@
+<section class="margin-y-spacing-7">
+  <div class="container padding-x-spacing-4 padding-lg-x-spacing-6">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10 inner-container inner-container-light padding-y-spacing-7">
+        <h2 class="text-center">Create a new asset</h2>
+        <%= simple_form_for @asset do |f| %>
+        <div class="form-inputs">
+          <div class="form-row margin-bottom-spacing-5">
+            <div class="col-12">
+              <%= f.input :name, label: "Give your asset a name" %>
+            </div>
+          </div>
+          <div class="form-row margin-bottom-spacing-5">
+            <div class="col-12">
+              <%= f.input :category, collection: (Asset.categories.map {|k, v| [k.humanize.capitalize, k]}), label: "What Category is your asset in?" %>
+            </div>
+          </div>
+          <div class="form-row margin-bottom-spacing-5">
+            <div class="col-12">
+              <%= f.input :sub_category, collection: [["Cash", "cash"],["Shares", "shares"],["Fonds", "fonds"],["Bonds", "bonds"],["Flat", "flat"],["House", "house"],["Gold", "gold"],["Silver", "silver"],["BTC", "btc"],["ETH", "eth"],["DOT", "dot"],["Car", "car"],["Others", "others"]], label: "What Sub Category is your asset in?" %>
+            </div>
+          </div>
+        </div>
+          <%= f.submit "Add Asset", class: "cta cta-dark" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

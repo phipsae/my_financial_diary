@@ -5,6 +5,13 @@
 $body-font: "Roboto", "Helvetica", "sans-serif";
 $headers-font: "Lato", "Helvetica", "sans-serif";
 
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none !important;
+  }
+}
+
 // To use a font file (.woff) uncomment following lines
 // @font-face {
 //   font-family: "Font Name";

@@ -6,7 +6,7 @@ puts "create new seed"
 
 ## User seed
 puts "---------Users are created"
-1.times do
+2.times do
   user = User.new(
     email: Faker::Internet.email,
     first_name: Faker::Name.first_name,
@@ -20,7 +20,7 @@ puts "---------Users are created"
   puts "User created: #{user.id}"
 end
 
-## Asset seed
+## Asset_kind
 categories = {
   cash: ["cash"],
   securities: ["bonds", "shares", "fonds"],
@@ -94,6 +94,7 @@ Asset.all.each do |asset|
     price_point = PricePoint.new(cents: cents, date: date, text: text)
     price_point.asset = asset
     price_point.save
+    puts price_point
   end
 end
 

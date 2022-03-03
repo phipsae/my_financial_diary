@@ -1,23 +1,27 @@
-class AssetController < ApplicationController
+class AssetsController < ApplicationController
+  before_action :set_asset, only: [ :show, :edit, :update ]
+
   def index
     @assets = policy_scope(Asset)
     # render all assets
-    @all_assets_hash = index_all_assets
+    @all_assets_hash = index_all_assets(current_user)
     @total_value = calculate_total_value(@all_assets_hash)
 
     # render specific comments
-    price_point_controler = PricePointController.new
-    @price_points = price_point_controler.index_pp(params[:query])
+    price_point_controler = PricePointsController.new
+    @price_points = price_point_controler.index_pp(params[:query], current_user)
 
     # display specific assets
     if params[:query].present?
-      ####### DONT FORGET CURRENT_USER!!!!! #############
-      @assets = Asset.where(category: params[:query]) #, user_id: current_user)
+      @assets = Asset.where(category: params[:query], user_id: current_user) #, user_id: current_user)
       @category = params[:query]
     end
   end
 
   def show
+    authorize @asset
+    @price_point = PricePoint.new(asset: @asset)
+    @latest_price_point = @asset.price_points.order("date desc").first
   end
 
   def update
@@ -26,10 +30,25 @@ class AssetController < ApplicationController
   def destroy
   end
 
-  def create
+  def new
+    if (category = params['category']).present?
+      @asset = Asset.new(category: category)
+    else
+      @asset = Asset.new
+    end
+    authorize @asset
   end
 
-  # methods for other controllers
+  def create
+    @asset = Asset.new(asset_params)
+    @asset.user = current_user
+    authorize @asset
+    if @asset.save
+      redirect_to asset_url(@asset)
+    else
+      render :new
+    end
+  end
 
   def calculate_total_value(assets_hash)
     @total_value = 0
@@ -39,9 +58,9 @@ class AssetController < ApplicationController
     @total_value
   end
 
-  def index_all_assets
+  def index_all_assets(user)
     @assets_hash = {}
-    categories_hash = create_categories_hash
+    categories_hash = create_categories_hash(user)
     categories_hash.each do |category, sub|
       asset_value = 0
       sub.each do |_, element|
@@ -52,11 +71,11 @@ class AssetController < ApplicationController
     @assets_hash
   end
 
-  def create_categories_hash
+  def create_categories_hash(user)
     @categories_hash = {}
     Asset.categories.each_key do |category|
       # user_id: current_user, DONT forget to add
-      @assets = Asset.where(category: category)
+      @assets = Asset.where(user_id: user, category: category)
       category_hash = get_category_hash(@assets)
       @categories_hash[:"#{category}"] = category_hash
     end
@@ -73,10 +92,20 @@ class AssetController < ApplicationController
   end
 
   def get_last_price_point(asset)
-    price_points = PricePoint.where(asset: asset) # user_id: current_user, DONT forget to add
+    price_points = PricePoint.where(asset: asset)
     last_pp = price_points.max_by do |element|
       element.date
     end
     last_pp
+  end
+
+  private
+
+  def set_asset
+    @asset = Asset.find(params[:id])
+  end
+
+  def asset_params
+    params.require(:asset).permit(:name, :category, :sub_category)
   end
 end
