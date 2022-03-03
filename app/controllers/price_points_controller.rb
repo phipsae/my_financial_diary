@@ -28,6 +28,10 @@ class PricePointsController < ApplicationController
     end
   end
 
+  def calculate_real_estate_price(sqm, price_per_sqm, mortgage)
+    (sqm * price_per_sqm) - mortgage
+  end
+
   private
 
   def set_price_point
