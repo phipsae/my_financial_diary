@@ -3,9 +3,18 @@
   &-light {
     background-color: $satin-linen;
     color: $charade;
+    border: solid 4px $satin-linen;
+    &:hover {
+      background-color: $charade;
+      color: $satin-linen !important;
+      border: solid 4px $satin-linen;
+    }
+    &:hover.asset-card-value {
+      color: $satin-linen;
+    }
   }
 
-    &-dark {
+  &-dark {
     background-color: $charade;
     color: $satin-linen;
   }
@@ -17,6 +26,29 @@
 
   &-value {
     font-size: 2rem;
+    &:hover {
+      color: $satin-linen;
+    }
   }
 
+  .asset-card-light:hover{
+    &-value {
+      color: $satin-linen !important;
+    }
+  }
+
+  &-value-active {
+    font-size: 2rem;
+    color: $satin-linen;
+  }
+}
+
+.active-card {
+  background-color: $charade;
+  color: $satin-linen;
+  border: solid 4px $satin-linen;
+}
+
+.active-font {
+  color: $satin-linen !important;
 }
