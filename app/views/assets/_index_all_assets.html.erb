@@ -17,15 +17,15 @@
   </div>
 </div>
 <% Asset.categories.keys.each do |category| %>
-  <div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3">
+  <div id="<%= params[:query] %>"class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3<% if category == params[:query]%> active-card<% end %>">
       <%= link_to assets_path(query: category) do %>
         <div class="asset-card-body asset-card-body-light">
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1<% if category == params[:query]%> active-font<% end %>">
                         <%= category.capitalize %>
                       </div>
-                    <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold">
+                    <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value<% if category == params[:query]%>-active<% end %> font-weight-bold">
                     <% if all_assets_hash[:"#{category}"] != nil %>
                         <%= number_to_currency(all_assets_hash[:"#{category}"] / 100, precsion: 0, unit: "€") %>
                         <% else %>
@@ -34,7 +34,7 @@
                     </div>
                   </div>
                 <div class="col-auto">
-                    <i class="<%= category  %> fa-2x text-primary"></i>
+                    <i class="<%= category  %> fa-2x text-primary <% if category == params[:query]%> active-font<% end %>"></i>
                 </div>
             </div>
         </div>

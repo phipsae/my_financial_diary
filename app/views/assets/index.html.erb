@@ -6,7 +6,7 @@
       </div>
        <% if @category != "cash" %>
       <div class="col-12 col-lg-4 text-right">
-        <%= link_to "Create new #{@category}", new_asset_path(category: @category), class: "cta cta-light" %>
+        <%= link_to "Create new #{@category.humanize}", new_asset_path(category: @category), class: "cta cta-light" %>
       </div>
       <% end %>
     </div>
