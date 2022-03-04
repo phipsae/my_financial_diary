@@ -17,10 +17,9 @@
   <div class="container">
     <div class="row">
       <div class="col-12 col-lg-4">
-        <%= render "assets/index_all_assets", all_assets_hash: @all_assets_hash %>
+        <%= render "index_all_assets", all_assets_hash: @all_assets_hash %>
       </div>
       <div class="col-12 col-lg-8">
-
         <% @assets.each do |asset| %>
           <% if asset.category == "cash" %>
             <p> Previous amount: <%= number_to_currency(@all_assets_hash[:"cash"] / 100, precision: 0, unit: "€") %> </p>
@@ -30,14 +29,10 @@
             <% end %>
           <% end %>
         <% end %>
-
-        <%# @categories_hash[:"#{asset.category}"][:"#{asset.sub_category}"][:value] %>
         <div class="margin-top-spacing-7">
             <%= render "price_points/index_pp" %>
         </div>
-
       </div>
     </div>
   </div>
-
 </section>

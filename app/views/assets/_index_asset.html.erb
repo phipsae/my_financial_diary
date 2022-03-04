@@ -1,0 +1,45 @@
+<%= link_to assets_path(query: @category) do %>
+  <div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3 <% if "dashboards" == params["controller"]%> active-card<% end %>">
+    <div class="asset-card-body asset-card-body-light">
+        <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 <% if "dashboards" == params["controller"]%> active-font<% end %>">
+                    Total value
+                </div>
+                <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold <% if "dashboards" == params["controller"]%>-active<% end %>">
+                  <%= number_to_currency(@all_assets_hash[:"#{@category}"] / 100, precision: 0, unit: "€") %>
+                </div>
+            </div>
+            <div class="col-auto">
+                <i class="totalValue"></i>
+            </div>
+        </div>
+    </div>
+  </div>
+<% end %>
+
+<% @categories_hash[:"#{@asset.category}"].each do |asset| %>
+  <%=link_to asset_path(Asset.where(user: current_user, sub_category: asset[0]).take.id) do %>
+    <div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3 <% if asset[0].to_s == @asset.sub_category%> active-card<% end %>">
+      <div class="asset-card-body asset-card-body-light">
+          <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 <% if asset[0].to_s == @asset.sub_category%> active-font<% end %>">
+                      <%= asset[0].capitalize %>
+                    </div>
+                  <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold <% if asset[0].to_s == @asset.sub_category%> -active<% end %>">
+                    <% if @latest_price_point != nil %>
+                        <%= number_to_currency(asset[1][:value] / 100, precsion: 0, unit: "€") %>
+                    <% else %>
+                      -
+                    <% end %>
+                  </div>
+                </div>
+              <div class="col-auto">
+                  <i class="<%= @category  %> fa-2x text-primary"></i>
+              </div>
+          </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

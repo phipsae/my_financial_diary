@@ -12,38 +12,19 @@
   <div class="container">
     <div class="row">
       <div class="col-12 col-lg-4">
-
+        <%= render "index_asset" %>
       </div>
       <div class="col-12 col-lg-8">
         <div class="inner-container inner-container-light padding-y-spacing-7 padding-x-spacing-4">
-        <label>Previous Amount</label>
+          <label>Previous Amount</label>
           <div class="d-flex form-control input-styling align-items-center margin-bottom-spacing-5">
-          <% if @latest_price_point.nil? %>
-            <span>0€</span>
-          <% else %>
-            <span><%= number_with_delimiter((@latest_price_point.cents / 100.00), options = {}) %> €</span>
-          <% end %>
+            <% if @latest_price_point.nil? %>
+              <span>0€</span>
+            <% else %>
+              <span><%= number_with_delimiter((@latest_price_point.cents / 100.00), options = {}) %> €</span>
+            <% end %>
           </div>
-        <%= simple_form_for [ @asset, @price_point ] do |f| %>
-          <div class="form-inputs">
-            <div class="form-row margin-bottom-spacing-5">
-              <div class="col-12">
-                <%= f.input :cents, label: "Value" %>
-              </div>
-            </div>
-            <div class="form-row margin-bottom-spacing-5">
-              <div class="col-12">
-                <%= f.input :date, as: :date, label: "Date, which the value applies to", html5: true, input_html: {value: Date.today}%>
-              </div>
-            </div>
-            <div class="form-row margin-bottom-spacing-5">
-              <div class="col-12">
-                <%= f.input :text, label: "Add your comment", input_html: {rows: 4} %>
-              </div>
-            </div>
-          </div>
-          <%= f.submit "Add price point", class: "cta cta-dark" %>
-        <% end %>
+          <%= render "shared/form_price_point_general", asset: @asset, price_point: @price_point %>
 
         </div>
         <% unless @asset.price_points.size == 0 %>
