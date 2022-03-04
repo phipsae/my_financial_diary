@@ -21,7 +21,9 @@ class AssetsController < ApplicationController
   def show
     authorize @asset
     @price_point = PricePoint.new(asset: @asset)
-    @latest_price_point = @asset.price_points.order("date desc").first
+    @category = set_asset.category
+    @latest_price_point = get_last_price_point(@asset)
+    @categories_hash = create_categories_hash(current_user)
   end
 
   def update
