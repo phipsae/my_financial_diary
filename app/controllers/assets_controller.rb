@@ -13,7 +13,7 @@ class AssetsController < ApplicationController
 
     # display specific assets
     if params[:query].present?
-      @assets = Asset.where(category: params[:query], user_id: current_user) #, user_id: current_user)
+      @assets = Asset.where(category: params[:query], user_id: current_user)
       @category = params[:query]
     end
   end
@@ -24,6 +24,7 @@ class AssetsController < ApplicationController
     @category = set_asset.category
     @latest_price_point = get_last_price_point(@asset)
     @categories_hash = create_categories_hash(current_user)
+    @all_assets_hash = index_all_assets(current_user)
   end
 
   def update
@@ -51,6 +52,15 @@ class AssetsController < ApplicationController
       render :new
     end
   end
+
+   def calculate_total_value_asset(categories_hash)
+    @total_value = 0
+    categories_hash.each do |_, value|
+      @total_value += value unless value.nil?
+    end
+    @total_value
+  end
+
 
   def calculate_total_value(assets_hash)
     @total_value = 0
