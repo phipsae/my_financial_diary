@@ -1,8 +1,12 @@
 <label>Previous Amount</label>
 <div class="d-flex form-control input-styling align-items-center margin-bottom-spacing-5">
-  <span><%= number_with_delimiter((@latest_price_point.cents / 100), options = {}) %> €</span>
+  <% if @latest_price_point.present? %>
+    <span><%= number_with_delimiter((@latest_price_point.cents / 100), options = {}) %> €</span>
+  <% else %>
+    <span>0 €</span>
+  <% end %>
 </div>
-<%= simple_form_for [ @asset, @price_point ] do |f| %>
+<%= simple_form_for([ asset, price_point ], remote: true) do |f| %>
   <div class="form-inputs">
     <div class="form-row margin-bottom-spacing-5">
       <div class="col-12">

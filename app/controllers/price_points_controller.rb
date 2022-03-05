@@ -22,7 +22,7 @@ class PricePointsController < ApplicationController
     @price_point.asset = @asset
     authorize @price_point
     if @price_point.save
-      redirect_to asset_path(@asset)
+      redirect_to asset_path(@asset, anchor: "price-point-#{@price_point.id}")
     else
       render :new
     end
@@ -43,6 +43,6 @@ class PricePointsController < ApplicationController
   end
 
   def price_point_params
-    params.require(:price_point).permit(:cents, :date, :text)
+    params.require(:price_point).permit(:cents, :date, :text, :crypto_amount)
   end
 end
