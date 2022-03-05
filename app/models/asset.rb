@@ -1,12 +1,12 @@
 class Asset < ApplicationRecord
   belongs_to :user
   has_many :price_points, dependent: :destroy
-  has_many :real_estates, dependent: :destroy
+  has_one :real_estate, dependent: :destroy
 
   accepts_nested_attributes_for :price_points
 
   # for create form real estate
-  accepts_nested_attributes_for :real_estates
+  accepts_nested_attributes_for :real_estate
 
   enum category: {
     cash: 0,

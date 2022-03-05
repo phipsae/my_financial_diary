@@ -2,9 +2,9 @@
   <div class="form-inputs">
 
     <%= simple_fields_for :real_estates do |p| %>
-      <%= p.input :sqm, label: "Square meters of the real estate" %>
-      <%= p.input :price_per_sqm %>
-      <%= p.input :mortgage %>
+      <%= p.input :sqm, label: "Square meters of the real estate", input_html: {value: @asset.real_estate.sqm }  %>
+      <%= p.input :price_per_sqm, input_html: {value: @asset.real_estate.price_per_sqm }  %>
+      <%= p.input :mortgage, input_html: {value: @asset.real_estate.mortgage }  %>
     <% end %>
 
     <%= f.input :cents, :as => :hidden %>

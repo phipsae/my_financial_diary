@@ -50,6 +50,7 @@ class AssetsController < ApplicationController
     @asset.user = current_user
     @asset.category = params[:category] if params[:category].present?
     authorize @asset
+
     if @asset.category == "real_estate"
       @real_estate = RealEstate.new(real_estates_params)
       @asset.sub_category = "flat"
@@ -66,7 +67,6 @@ class AssetsController < ApplicationController
         @price_point.asset = @asset
         if @real_estate.save
           if @price_point.save
-            # redirect_to dashboard_path
             redirect_to "/assets?query=real_estate"
           end
         end
@@ -76,19 +76,6 @@ class AssetsController < ApplicationController
         render :new
       end
     end
-
-    # if @asset.save # && @real_estate.save && price_point.save
-    #   @real_estate.asset = @asset
-    #   @price_point.asset = @asset
-    #   if @real_estate.save
-    #     if @price_point.save
-    #       redirect_to asset_url(@asset) if @asset.category != "real_estate"
-    #       redirect_to dashboard_path if @asset.category == "real_estate"
-    #     end
-    #   end
-    # else
-    #   render :new
-    # end
   end
 
   def calculate_total_value_asset(categories_hash)
