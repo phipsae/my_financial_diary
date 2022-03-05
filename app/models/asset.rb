@@ -3,7 +3,10 @@ class Asset < ApplicationRecord
   has_many :price_points, dependent: :destroy
   has_many :real_estates, dependent: :destroy
 
-   accepts_nested_attributes_for :price_points
+  accepts_nested_attributes_for :price_points
+
+  # for create form real estate
+  accepts_nested_attributes_for :real_estates
 
   enum category: {
     cash: 0,
