@@ -45,4 +45,12 @@ class PricePointsController < ApplicationController
   def price_point_params
     params.require(:price_point).permit(:cents, :date, :text)
   end
+
+  # get_all_price_points_by_month
+
+  # get_all_price_points_by_asset_and_month
+
+  # get_all_inital_price_points
+
+
 end

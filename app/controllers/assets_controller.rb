@@ -53,14 +53,13 @@ class AssetsController < ApplicationController
     end
   end
 
-   def calculate_total_value_asset(categories_hash)
+  def calculate_total_value_asset(categories_hash)
     @total_value = 0
     categories_hash.each do |_, value|
       @total_value += value unless value.nil?
     end
     @total_value
   end
-
 
   def calculate_total_value(assets_hash)
     @total_value = 0
