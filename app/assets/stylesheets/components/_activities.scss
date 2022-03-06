@@ -11,8 +11,17 @@
     width: 15%;
   }
   &-comment {
-    width: 60%;
+    width: 50%;
   }
+
+  &-edit {
+    width: 5%;
+  }
+
+  &-delete {
+    width: 5%;
+  }
+
   &-row {
     border-bottom: 2px solid $salt-box;
   }

@@ -1,6 +1,6 @@
 <div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3">
     <div class="asset-card-body asset-card-body-light">
-        <div class="row no-gutters align-items-center">
+        <div class="row no-gutters align-items-center justify-content-between">
             <div class="col mr-2">
                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                     <%= asset.sub_category %></div>
@@ -10,6 +10,9 @@
             </div>
             <div class="col-auto">
                 <i class="<%=asset.category  %> fa-2x text-primary"></i>
+                <%= link_to asset_path(asset), method: :delete do %>
+                  <%= icon('fas', 'trash', "FA ruby rotz") %>
+                <% end %>
             </div>
         </div>
     </div>

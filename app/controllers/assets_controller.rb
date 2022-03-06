@@ -25,12 +25,17 @@ class AssetsController < ApplicationController
     @latest_price_point = get_last_price_point(@asset)
     @categories_hash = create_categories_hash(current_user)
     @all_assets_hash = index_all_assets(current_user)
+    @price_points = @asset.price_points
   end
 
-  def update
-  end
+  # def update
+  # end
 
   def destroy
+    @asset = Asset.find(params[:id])
+    authorize @asset
+    @asset.destroy
+    redirect_to assets_path(query: @asset.category)
   end
 
   def new

@@ -7,6 +7,6 @@ Rails.application.routes.draw do
     resources :price_points, only: [ :create ]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :articles, only: [:index, :show]
-  resources :price_points, only: [:index]
+  resources :articles, only: [ :index, :show ]
+  resources :price_points, only: [ :index, :update, :destroy, :show, :edit]
 end
