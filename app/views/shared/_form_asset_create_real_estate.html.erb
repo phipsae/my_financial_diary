@@ -1,0 +1,24 @@
+<%= simple_form_for asset do |f| %>
+  <div class="form-inputs">
+    <div class="form-row ">
+      <div class="col-12">
+        <%= f.input :name, label: "Give your asset a name" %>
+      </div>
+    </div>
+
+    <%= f.input :category, :as => :hidden %>
+    <%= f.input :sub_category, :as => :hidden %>
+
+    <%= simple_fields_for :real_estates do |p| %>
+      <%= p.input :sqm, label: "Square meters of the real estate" %>
+      <%= p.input :price_per_sqm %>
+      <%= p.input :mortgage %>
+    <% end %>
+
+    <%= simple_fields_for :price_points do |p| %>
+      <%= p.input :date, as: :date, label: "Date, which the value applies to", html5: true, input_html: {value: Date.today} %>
+      <%= p.input :text %>
+    <% end %>
+  </div>
+    <%= f.submit "Add Asset", class: "cta cta-dark" %>
+<% end %>

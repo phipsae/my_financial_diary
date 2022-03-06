@@ -36,6 +36,8 @@ class AssetsController < ApplicationController
   def new
     if (category = params['category']).present?
       @asset = Asset.new(category: category)
+      # @asset.real_estates.build if category == "real_estate"
+      # @asset.price_points.build if category == "real_estate"
     else
       @asset = Asset.new
     end
@@ -43,24 +45,46 @@ class AssetsController < ApplicationController
   end
 
   def create
-    @asset = Asset.new(asset_params)
+    price_point_controller = PricePointsController.new
+    @asset = Asset.new(asset_real_estate_params)
     @asset.user = current_user
+    @asset.category = params[:category] if params[:category].present?
     authorize @asset
-    if @asset.save
-      redirect_to asset_url(@asset)
-    else
-      render :new
+
+    if @asset.category == "real_estate"
+      @real_estate = RealEstate.new(real_estates_params)
+      @asset.sub_category = "flat"
+      @price_point = PricePoint.new(price_points_params)
+      @price_point.cents = price_point_controller.calculate_real_estate_price(
+        @real_estate.sqm,
+        @real_estate.price_per_sqm,
+        @real_estate.mortgage
+      )
+      authorize @real_estate
+      authorize @price_point
+      if @asset.save # && @real_estate.save && price_point.save
+        @real_estate.asset = @asset
+        @price_point.asset = @asset
+        if @real_estate.save
+          if @price_point.save
+            redirect_to "/assets?query=real_estate"
+          end
+        end
+      elsif @asset.category != "real_estate"
+        redirect_to asset_url(@asset) if @asset.save
+      else
+        render :new
+      end
     end
   end
 
-   def calculate_total_value_asset(categories_hash)
+  def calculate_total_value_asset(categories_hash)
     @total_value = 0
     categories_hash.each do |_, value|
       @total_value += value unless value.nil?
     end
     @total_value
   end
-
 
   def calculate_total_value(assets_hash)
     @total_value = 0
@@ -98,7 +122,14 @@ class AssetsController < ApplicationController
     category_hash = {}
     assets.each do |asset|
       last_pp = get_last_price_point(asset)
-      category_hash[:"#{asset.sub_category}"] = { value: last_pp.cents, date: last_pp.date }
+      if last_pp.present?
+        cents = last_pp.cents
+        date = last_pp.date
+      else
+        cents = 0
+        date = "2022-03-03"
+      end
+      category_hash[:"#{asset.sub_category}"] = { value: cents, date: date }
     end
     category_hash
   end
@@ -120,4 +151,23 @@ class AssetsController < ApplicationController
   def asset_params
     params.require(:asset).permit(:name, :category, :sub_category)
   end
+
+  def asset_real_estate_params
+    params.require(:asset).permit(:name, :category, :sub_category) # real_estates_attributes: [ :sqm, :price_per_sqm, :mortgage ], price_points_attributes: [ :cents, :text, :date ]
+  end
+
+  def real_estates_params
+    params.require(:real_estates).permit(:sqm, :price_per_sqm, :mortgage)
+  end
+
+  def price_points_params
+    params.require(:price_points).permit(:cents, :text, :date)
+  end
 end
+
+
+# {"authenticity_token"=>"ikCVmdx+FdHlTdtlrVDV+5D9qUKslseG6ZSQO2PcAPQPG9G50g+8aJNmruaJBHiv9/KbQ1+tEXHQLH54Dq6TXw==",
+#  "asset"=>{"name"=>"asdds", "category"=>"real_estate", "sub_category"=>"flat"},
+#  "real_estates"=>{"sqm"=>"123", "price_per_sqm"=>"123", "mortgage"=>"123"},
+#  "price_points"=>{"date"=>"2022-03-05", "text"=>"asdsa"},
+#  "commit"=>"Add Asset"}

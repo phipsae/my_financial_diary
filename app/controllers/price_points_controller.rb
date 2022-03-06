@@ -3,9 +3,9 @@ class PricePointsController < ApplicationController
 
   def index_pp(params, user)
     if params.present?
-      @price_points = PricePoint.where(asset: Asset.where(category: params, user_id: user)).order(date: :desc) # user_id: current_user, DONT forget to add
+      @price_points = PricePoint.where(asset: Asset.where(category: params, user_id: user)).order(date: :desc, id: :desc) # user_id: current_user, DONT forget to add
     else
-      @price_points = PricePoint.where(asset: Asset.where(user_id: user)).order(date: :desc) # user_id: current_user, DONT forget to add
+      @price_points = PricePoint.where(asset: Asset.where(user_id: user)).order(date: :desc, id: :desc) # user_id: current_user, DONT forget to add
     end
   end
 
@@ -21,7 +21,20 @@ class PricePointsController < ApplicationController
     @price_point = PricePoint.new(price_point_params)
     @price_point.asset = @asset
     authorize @price_point
-    if @price_point.save
+    if @asset.category == "real_estate"
+      @real_estate = Asset.find(params[:asset_id]).real_estate
+      @real_estate.update(real_estate_params)
+      @price_point.cents = calculate_real_estate_price(
+        @real_estate.sqm,
+        @real_estate.price_per_sqm,
+        @real_estate.mortgage
+      )
+      if @price_point.save
+        if @real_estate.save
+          redirect_to asset_path(@asset)
+        end
+      end
+    elsif @price_point.save
       redirect_to asset_path(@asset)
     else
       render :new
@@ -29,7 +42,7 @@ class PricePointsController < ApplicationController
   end
 
   def calculate_real_estate_price(sqm, price_per_sqm, mortgage)
-    (sqm * price_per_sqm) - mortgage
+    ((sqm * price_per_sqm) - mortgage) * 100
   end
 
   private
@@ -45,4 +58,15 @@ class PricePointsController < ApplicationController
   def price_point_params
     params.require(:price_point).permit(:cents, :date, :text)
   end
+
+  def real_estate_params
+    params.require(:real_estates).permit(:sqm, :price_per_sqm, :mortgage)
+  end
+  # get_all_price_points_by_month
+
+  # get_all_price_points_by_asset_and_month
+
+  # get_all_inital_price_points
+
+
 end
