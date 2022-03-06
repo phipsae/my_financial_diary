@@ -2,8 +2,19 @@
   <div class="container padding-x-spacing-4 padding-lg-x-spacing-6">
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10 inner-container inner-container-light padding-y-spacing-7">
-        <h2 class="text-center">Create a new asset</h2>
-        <%= render "shared/form_new_asset", asset: @asset %>
+        <% if params[:category] == "real_estate" %>
+          <div class="row no-gutters align-items-center">
+            <i class="real_estate fa-2x text-primary"></i>
+            <h2 class="text-center">Create a real estate asset</h2>
+          </div>
+        <% else %>
+          <h2 class="text-center">Create a new asset</h2>
+        <% end %>
+        <% if @asset.category == "real_estate" %>
+          <%= render "shared/form_asset_create_real_estate", asset: @asset %>
+        <% else %>
+          <%= render "shared/form_new_asset", asset: @asset %>
+        <% end %>
       </div>
     </div>
   </div>

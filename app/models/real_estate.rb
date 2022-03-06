@@ -1,5 +1,6 @@
 class RealEstate < ApplicationRecord
   belongs_to :asset
+  has_many :price_points # , through: :assets
 
-  validates :address, :sqm, :price_per_sqm, :mortgage, presence: true
+  validates :sqm, :price_per_sqm, :mortgage, presence: true
 end
