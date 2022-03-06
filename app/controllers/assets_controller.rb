@@ -1,3 +1,7 @@
+require "json"
+require "open-uri"
+
+
 class AssetsController < ApplicationController
   before_action :set_asset, only: [ :show, :edit, :update ]
 
@@ -21,8 +25,10 @@ class AssetsController < ApplicationController
   def show
     authorize @asset
     @price_point = PricePoint.new(asset: @asset)
+    coinmarketcap_api(params[:amount], params[:symbol]) if params[:amount].present? && params[:symbol].present?
     @category = set_asset.category
     @latest_price_point = get_last_price_point(@asset)
+    @sorted_price_points = @asset.price_points.order(date: :desc, id: :desc)
     @categories_hash = create_categories_hash(current_user)
     @all_assets_hash = index_all_assets(current_user)
   end
@@ -142,6 +148,7 @@ class AssetsController < ApplicationController
     last_pp
   end
 
+
   private
 
   def set_asset
@@ -150,6 +157,13 @@ class AssetsController < ApplicationController
 
   def asset_params
     params.require(:asset).permit(:name, :category, :sub_category)
+  end
+
+  def coinmarketcap_api(amount, symbol)
+    url = "https://pro-api.coinmarketcap.com/v2/tools/price-conversion?amount=#{amount}&symbol=#{symbol}&CMC_PRO_API_KEY=#{ENV["COINMARKETCAP_API_KEY"]}"
+    response = URI.open(url).read
+    @data = JSON.parse(response)
+    @value = @data["data"][0]["quote"]["USD"]["price"]
   end
 
   def asset_real_estate_params

@@ -1,77 +1,51 @@
-<%= @asset.category %>
-
-<h1>Asset#show</h1>
-<p>Find me in app/views/asset/show.html.erb</p>
-
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div class="inner-container inner-container-light padding-y-spacing-7 padding-x-spacing-4">
-        <div data-controller="coin-list">
-          <%= form_with url: "test", method: :get, html: { class: 'mb-5', data: { coin_list_target: 'form' } } do |f| %>
-            <%= f.text_field :amount,
-                            class: "form-control",
-                            placeholder: 'Type in a crypto amount',
-                            value: params[:amount],
-                            data: {
-                              coin_list_target: 'amount'
-                            } %>
-            <%= f.text_field :symbol,
-                            class: "form-control",
-                            placeholder: 'Select Crypto',
-                            value: params[:symbol],
-                            data: {
-                              coin_list_target: 'symbol'
-                            } %>
-            <%= f.submit data: {
-                              coin_list_target: 'submit',
-                              action: "coin-list#update"
-                            } %>
-          <% end %>
-          <div data-coin-list-target="list">
-            <!-- [...] -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<section class="margin-y-spacing-7">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-lg-4">
-      </div>
-      <div class="col-12 col-lg-8">
-        <div class="inner-container inner-container-light padding-y-spacing-7 padding-x-spacing-4">
-          <div class="d-flex form-row">
+<div class="form-row">
             <div class="col-12 col-lg-6">
-              <label>Previous Amount</label>
+              <label>Previous <%=@asset.sub_category.upcase%> Value</label>
               <div class="d-flex form-control input-styling align-items-center margin-bottom-spacing-5">
-                <span><%= ((@latest_price_point.cents / 100.0) / 43000).round(4) %></span>
+                <% if @latest_price_point.nil? %>
+                  <span>0€</span>
+                <% else %>
+                  <span><%= number_with_delimiter((@latest_price_point.cents / 100.00), options = {}) %> €</span>
+                <% end %>
               </div>
             </div>
             <div class="col-12 col-lg-6">
-              <label>Previous Total Value</label>
+              <label>Previous <%=@asset.sub_category.upcase%> Coin Number</label>
               <div class="d-flex form-control input-styling align-items-center margin-bottom-spacing-5">
-                <span><%= number_with_delimiter((@latest_price_point.cents / 100), options = {}) %> €</span>
+                <% if @latest_price_point.nil? %>
+                  <span>0</span>
+                <% else %>
+                  <span><%= number_with_delimiter((@latest_price_point.crypto_amount), options = {}) %></span>
+                <% end %>
               </div>
             </div>
           </div>
-            <%= simple_form_for [ @asset, @price_point ] do |f| %>
-              <div class="form-inputs">
+          <div data-controller="coin-list">
+          <%= form_tag asset_path(@asset), method: :get do |f| %>
+            <div class="form-inputs">
+              <div class="form-row margin-bottom-spacing-5">
+                <div class="col-12">
+                  <%= text_field_tag :amount, params[:amount], class:"w-100", placeholder: "Type in #{@asset.sub_category.upcase} amount" %>
+                </div>
+                <div class="col-12">
+                  <%= hidden_field_tag :symbol, @asset.sub_category%>
+                </div>
+               </div>
                 <div class="form-row margin-bottom-spacing-5">
                   <div class="col-12 col-lg-6">
-                    <%= f.input :cents, as: :decimal, label: "Amount"%>
+                    <%= submit_tag "Get Crypto value", class:'cta cta-light-with-border w-100' %>
                   </div>
-              <div class="col-12 col-lg-6">
-                <label>Previous Total Value</label>
-                <div class="d-flex form-control input-styling align-items-center margin-bottom-spacing-5">
-                  <span><%= number_with_delimiter((@latest_price_point.cents / 100), options = {}) %> €</span>
                 </div>
-              </div>
+              <% end %>
+            </div>
+
+            <%= simple_form_for [ asset, price_point ] do |f| %>
+              <div class="form-inputs">
+               <%= f.hidden_field :crypto_amount, label: "Number of coins", value: params[:amount]%>
+                <div class="form-row margin-bottom-spacing-5">
+                  <div class="col-12">
+                    <%= f.input :cents, label: "Crypto Value", input_html: {value: @value} %>
+                  </div>
                 </div>
                 <div class="form-row margin-bottom-spacing-5">
                   <div class="col-12">
@@ -87,22 +61,3 @@
               <%= f.submit "Add price point", class: "cta cta-dark" %>
             <% end %>
         </div>
-        <div class="padding-top-spacing-7">
-        <h2>Recent Activities</h2>
-        <div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-3">
-        <% @asset.price_points.each_with_index do |price_point, index| %>
-          <div class="d-flex align-items-center padding-y-spacing-4">
-            <span class="activities-value"><%= number_with_delimiter((price_point.cents / 100), options = {}) %> €</span>
-            <span class="activities-date"><%= price_point.date %></span>
-            <span class="activities-comment"><%= price_point.text %></span>
-          </div>
-          <% unless index == @asset.price_points.size - 1 %>
-            <div class="d-flex activities-row margin-x-spacing-negative-5 margin-lg-x-spacing-negative-6"></div>
-          <% end %>
-        <% end %>
-        </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
