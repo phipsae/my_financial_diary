@@ -15,6 +15,12 @@
         <%= render "index_asset" %>
       </div>
       <div class="col-12 col-lg-8">
+        <% if @price_point.id != nil %>
+          <h2> Update <%= @asset.sub_category.humanize %> price point </h2>
+        <% else %>
+          <h2> Create new <%= @asset.sub_category.humanize %> price point </h2>
+        <% end %>
+
         <div class="inner-container inner-container-light padding-y-spacing-7 padding-x-spacing-4">
           <label>Previous Amount</label>
           <div class="d-flex form-control input-styling align-items-center margin-bottom-spacing-5">
@@ -29,7 +35,6 @@
           <% else %>
             <%= render "shared/form_price_point_general", asset: @asset, price_point: @price_point %>
           <% end %>
-
         </div>
         <% unless @price_points.size == 0 %>
           <%= render "price_points/index_pp" %>

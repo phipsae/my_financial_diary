@@ -8,7 +8,11 @@
             <h2 class="text-center">Create a real estate asset</h2>
           </div>
         <% else %>
-          <h2 class="text-center">Create a new asset</h2>
+          <% if @asset.present? %>
+            <h2 class="text-center">Change <%= @asset.category %> asset</h2>
+          <% else %>
+            <h2 class="text-center">Create a new <%= @asset.category %> asset</h2>
+          <% end %>
         <% end %>
         <% if @asset.category == "real_estate" %>
           <%= render "shared/form_asset_create_real_estate", asset: @asset %>

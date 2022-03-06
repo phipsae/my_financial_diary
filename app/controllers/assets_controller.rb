@@ -20,16 +20,30 @@ class AssetsController < ApplicationController
 
   def show
     authorize @asset
-    @price_point = PricePoint.new(asset: @asset)
+    if params[:pp_id].present?
+      @price_point = PricePoint.find(params[:pp_id])
+    else
+      @price_point = PricePoint.new(asset: @asset)
+    end
     @category = set_asset.category
     @latest_price_point = get_last_price_point(@asset)
     @categories_hash = create_categories_hash(current_user)
     @all_assets_hash = index_all_assets(current_user)
-    @price_points = @asset.price_points
+    @price_points = @asset.price_points.order(date: :desc, id: :desc)
   end
 
-  # def update
-  # end
+  def edit
+    @asset = set_asset
+    authorize @asset
+    render "assets/new"
+  end
+
+  def update
+    @asset = set_asset
+    authorize @asset
+    @asset.update(asset_params)
+    redirect_to asset_path(@asset)
+  end
 
   def destroy
     @asset = Asset.find(params[:id])
@@ -41,8 +55,6 @@ class AssetsController < ApplicationController
   def new
     if (category = params['category']).present?
       @asset = Asset.new(category: category)
-      # @asset.real_estates.build if category == "real_estate"
-      # @asset.price_points.build if category == "real_estate"
     else
       @asset = Asset.new
     end
@@ -75,11 +87,13 @@ class AssetsController < ApplicationController
             redirect_to "/assets?query=real_estate"
           end
         end
-      elsif @asset.category != "real_estate"
-        redirect_to asset_url(@asset) if @asset.save
-      else
-        render :new
       end
+    elsif @asset.category != "real_estate"
+      if @asset.save
+        redirect_to asset_url(@asset) if @asset.save
+      end
+    else
+      render :new
     end
   end
 

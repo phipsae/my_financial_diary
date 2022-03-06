@@ -19,13 +19,17 @@ class PricePointsController < ApplicationController
     end
   end
 
-  def edit
+  # def edit
+  #   @price_point = set_price_point
+  #   authorize @price_point
+  # end
+
+  def update
     @price_point = set_price_point
     authorize @price_point
+    @price_point.update(price_point_params)
+    redirect_to asset_path(@price_point.asset)
   end
-
-  # def update
-  # end
 
   def new
     @price_point = PricePoint.new
