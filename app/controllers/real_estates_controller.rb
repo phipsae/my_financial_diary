@@ -16,8 +16,4 @@ class RealEstatesController < ApplicationController
       render :new
     end
   end
-
-  def update
-    raise
-  end
 end

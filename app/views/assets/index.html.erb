@@ -22,7 +22,11 @@
       <div class="col-12 col-lg-8">
         <% @assets.each do |asset| %>
           <% if asset.category == "cash" %>
-            <p> Previous amount: <%= number_to_currency(@all_assets_hash[:"cash"] / 100, precision: 0, unit: "€") %> </p>
+            <div class="inner-container inner-container-light padding-y-spacing-7 padding-x-spacing-4">
+              <label>Previous Amount</label>
+              <p> <%= number_to_currency(@all_assets_hash[:"cash"] / 100, precision: 0, unit: "€") %> </p>
+              <%= render "shared/form_price_point_general", asset: asset, price_point: @price_point %>
+            </div>
           <% else asset.category == "securities" %>
             <%=link_to asset_path(asset.id) do %>
               <%= render "shared/cards", asset: asset %>

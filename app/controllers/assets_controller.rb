@@ -11,6 +11,18 @@ class AssetsController < ApplicationController
     price_point_controler = PricePointsController.new
     @price_points = price_point_controler.index_pp(params[:query], current_user)
 
+    # cash
+    if params[:query] == "cash" && Asset.where(category: "cash").empty?
+      @cash_asset = Asset.new
+      @cash_asset.category = "cash"
+      @cash_asset.sub_category = "cash"
+      @cash_asset.name = "cash"
+      @cash_asset.user = current_user
+      @cash_asset.save
+    elsif params[:query] == "cash"
+      @price_point = PricePoint.new(asset: @cash_asset)
+    end
+
     # display specific assets
     if params[:query].present?
       @assets = Asset.where(category: params[:query], user_id: current_user)

@@ -26,13 +26,26 @@ class PricePointsController < ApplicationController
 
   def update
     @price_point = set_price_point
+    @category = Asset.find(params[:asset_id]).category
     authorize @price_point
     @price_point.update(price_point_params)
+    if @category == "real_estate"
+      @real_estate = Asset.find(params[:asset_id]).real_estate
+      @real_estate.update(real_estate_params)
+      @price_point.cents = calculate_real_estate_price(
+        @real_estate.sqm,
+        @real_estate.price_per_sqm,
+        @real_estate.mortgage
+      )
+      @price_point.save
+    end
     redirect_to asset_path(@price_point.asset)
   end
 
   def new
     @price_point = PricePoint.new
+    raise
+    @asset = Asset.new # for cash
     authorize @price_point
   end
 

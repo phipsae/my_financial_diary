@@ -24,11 +24,11 @@
               <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1<% if category == params[:query]%> active-font<% end %>">
-                          <%= category.capitalize %>
+                          <%= category.capitalize.humanize %>
                         </div>
                       <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value<% if category == params[:query]%>-active<% end %> font-weight-bold">
                       <% if all_assets_hash[:"#{category}"] != nil %>
-                          <%= number_to_currency(all_assets_hash[:"#{category}"] / 100, precsion: 0, unit: "€") %>
+                          <%= number_to_currency(all_assets_hash[:"#{category}"] / 100, precision: 0, unit: "€") %>
                           <% else %>
                             -
                           <% end %>

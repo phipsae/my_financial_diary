@@ -31,6 +31,7 @@
             <% end %>
           </div>
           <% if @asset.category == "real_estate" %>
+
             <%= render "shared/form_price_point_real_estate", asset: @asset, price_point: @price_point %>
           <% else %>
             <%= render "shared/form_price_point_general", asset: @asset, price_point: @price_point %>
