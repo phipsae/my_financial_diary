@@ -1,14 +1,26 @@
 <h2>Recent Activities</h2>
-<div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-3">
-  <% @price_points.each_with_index do |pp, index| %>
-    <div class="d-flex align-items-center padding-y-spacing-4">
-      <span class="activities-category"><i class="<%= pp.asset.category  %> fa-2x text-primary"></i></span>
-      <span class="activities-value"><%= number_to_currency( (pp.cents / 100), precision: 0, unit: "€") %></span>
-      <span class="activities-date"><%= pp.date %></span>
-      <span class="activities-comment"><%= pp.text %></span>
-    </div>
-    <% unless index == @price_points.size - 1 %>
-      <div class="d-flex activities-row margin-x-spacing-negative-5 margin-lg-x-spacing-negative-6"></div>
+<% unless @price_points.size == 0 %>
+  <div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-3">
+    <% @price_points.each_with_index do |pp, index| %>
+      <div class="d-flex align-items-center padding-y-spacing-4">
+        <span class="activities-category"><i class="<%= pp.asset.category  %> fa-2x text-primary"></i></span>
+        <span class="activities-value"><%= number_to_currency( (pp.cents / 100), precision: 0, unit: "€") %></span>
+        <span class="activities-date"><%= pp.date %></span>
+        <span class="activities-comment"><%= pp.text %></span>
+        <span class="activities-edit">
+          <%= link_to  asset_path(pp.asset.id, pp_id: pp.id) do %>
+            <%= icon('fas', 'edit', "FA ruby rotz") %>
+          <% end %>
+        </span>
+        <span class="activities-delete">
+          <%= link_to  price_point_path(pp.id), :method => :delete do %>
+            <%= icon('fas', 'trash', "FA ruby rotz") %>
+          <% end %>
+        </span>
+      </div>
+      <% unless index == @price_points.size - 1 %>
+        <div class="d-flex activities-row margin-x-spacing-negative-5 margin-lg-x-spacing-negative-6"></div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>

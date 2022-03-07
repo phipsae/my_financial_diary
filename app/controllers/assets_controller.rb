@@ -15,6 +15,18 @@ class AssetsController < ApplicationController
     price_point_controler = PricePointsController.new
     @price_points = price_point_controler.index_pp(params[:query], current_user)
 
+    # cash
+    if params[:query] == "cash" && Asset.where(category: "cash").empty?
+      @cash_asset = Asset.new
+      @cash_asset.category = "cash"
+      @cash_asset.sub_category = "cash"
+      @cash_asset.name = "cash"
+      @cash_asset.user = current_user
+      @cash_asset.save
+    elsif params[:query] == "cash"
+      @price_point = PricePoint.new(asset: @cash_asset)
+    end
+
     # display specific assets
     if params[:query].present?
       @assets = Asset.where(category: params[:query], user_id: current_user)
@@ -24,26 +36,43 @@ class AssetsController < ApplicationController
 
   def show
     authorize @asset
-    @price_point = PricePoint.new(asset: @asset)
-    coinmarketcap_api(params[:amount], params[:symbol]) if params[:amount].present? && params[:symbol].present?
+    if params[:pp_id].present?
+      @price_point = PricePoint.find(params[:pp_id])
+    else
+      @price_point = PricePoint.new(asset: @asset)
+      coinmarketcap_api(params[:amount], params[:symbol]) if params[:amount].present? && params[:symbol].present?
+    end
     @category = set_asset.category
     @latest_price_point = get_last_price_point(@asset)
     @sorted_price_points = @asset.price_points.order(date: :desc, id: :desc)
     @categories_hash = create_categories_hash(current_user)
     @all_assets_hash = index_all_assets(current_user)
+    @price_points = @asset.price_points.order(date: :desc, id: :desc)
+  end
+
+  def edit
+    @asset = set_asset
+    authorize @asset
+    render "assets/new"
   end
 
   def update
+    @asset = set_asset
+    authorize @asset
+    @asset.update(asset_params)
+    redirect_to asset_path(@asset)
   end
 
   def destroy
+    @asset = Asset.find(params[:id])
+    authorize @asset
+    @asset.destroy
+    redirect_to assets_path(query: @asset.category)
   end
 
   def new
     if (category = params['category']).present?
       @asset = Asset.new(category: category)
-      # @asset.real_estates.build if category == "real_estate"
-      # @asset.price_points.build if category == "real_estate"
     else
       @asset = Asset.new
     end
@@ -76,11 +105,13 @@ class AssetsController < ApplicationController
             redirect_to "/assets?query=real_estate"
           end
         end
-      elsif @asset.category != "real_estate"
-        redirect_to asset_url(@asset) if @asset.save
-      else
-        render :new
       end
+    elsif @asset.category != "real_estate"
+      if @asset.save
+        redirect_to asset_url(@asset) if @asset.save
+      end
+    else
+      render :new
     end
   end
 
