@@ -29,10 +29,10 @@
                       <%= asset[0].capitalize %>
                     </div>
                   <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold <% if asset[0].to_s == @asset.sub_category%> -active<% end %>">
-                    <% if @latest_price_point != nil %>
+                    <% if asset[1][:value] != 0 %>
                         <%= number_to_currency(asset[1][:value] / 100, precision: 0, unit: "€") %>
                     <% else %>
-                      -
+                        -
                     <% end %>
                   </div>
                 </div>

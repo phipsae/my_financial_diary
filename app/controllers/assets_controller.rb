@@ -109,9 +109,8 @@ class AssetsController < ApplicationController
         redirect_to "/assets?query=real_estate" if @real_estate.save && @price_point.save
       end
     elsif @asset.category != "real_estate"
-      if @asset.save
-        redirect_to asset_url(@asset) if @asset.save
-      end
+      # redirect_to asset_url(@asset) if @asset.save
+      redirect_to asset_path(@asset) if @asset.save
     else
       render :new
     end
@@ -167,7 +166,7 @@ class AssetsController < ApplicationController
         cents = 0
         date = "2022-03-03"
       end
-      category_hash[:"#{asset.name}"] = { value: cents, date: date } # sub_category
+      category_hash[:"#{asset.name}"] = { value: cents, date: date } # sub_category changed to name !!!!
     end
     category_hash
   end
