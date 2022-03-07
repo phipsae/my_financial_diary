@@ -70,3 +70,8 @@ gem 'faker'
 
 #dotenv
 gem 'dotenv-rails', groups: [:development, :test]
+
+#rack cors
+gem 'rack-cors', :require => 'rack/cors'
+
+gem 'rest-client', '~> 2.1'

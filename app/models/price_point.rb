@@ -4,4 +4,9 @@ class PricePoint < ApplicationRecord
 
   accepts_nested_attributes_for :real_estate
   validates :cents, :date, presence: true
+  before_save :convert_to_cents
+
+  def convert_to_cents
+    self.cents = cents * 100
+  end
 end

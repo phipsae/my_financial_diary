@@ -30,11 +30,12 @@
               <span><%= number_with_delimiter((@latest_price_point.cents / 100.00), options = {}) %> €</span>
             <% end %>
           </div>
-          <% if @asset.category == "real_estate" %>
-
+          <% if @asset.category == "crypto" %>
+            <%= render "shared/form_asset_show_crypto", asset: @asset, price_point: @price_point %>
+          <% elsif @asset.category == "real_estate" %>
             <%= render "shared/form_price_point_real_estate", asset: @asset, price_point: @price_point %>
           <% else %>
-            <%= render "shared/form_price_point_general", asset: @asset, price_point: @price_point %>
+            <%= render "shared/form_asset_show_general", asset: @asset, price_point: @price_point %>
           <% end %>
         </div>
         <% unless @price_points.size == 0 %>
