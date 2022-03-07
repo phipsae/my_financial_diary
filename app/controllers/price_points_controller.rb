@@ -67,7 +67,8 @@ class PricePointsController < ApplicationController
         end
       end
     elsif @price_point.save
-      redirect_to asset_path(@asset, anchor: "price-point-#{@price_point.id}")
+      redirect_to asset_path(@asset, anchor: "price-point-#{@price_point.id}") if @asset.category != "cash"
+      redirect_to assets_path(query: "cash", anchor: "price-point-#{@price_point.id}") if @asset.category == "cash"
     else
       render :new
     end

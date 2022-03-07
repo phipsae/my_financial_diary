@@ -16,21 +16,27 @@ class AssetsController < ApplicationController
     @price_points = price_point_controler.index_pp(params[:query], current_user)
 
     # cash
-    if params[:query] == "cash" && Asset.where(category: "cash").empty?
-      @cash_asset = Asset.new
-      @cash_asset.category = "cash"
-      @cash_asset.sub_category = "cash"
-      @cash_asset.name = "cash"
-      @cash_asset.user = current_user
-      @cash_asset.save
-    elsif params[:query] == "cash"
-      @price_point = PricePoint.new(asset: @cash_asset)
-    end
+    create_cash_object(params[:query], current_user)
 
     # display specific assets
     if params[:query].present?
       @assets = Asset.where(category: params[:query], user_id: current_user)
       @category = params[:query]
+    end
+  end
+
+  # create cash object
+
+  def create_cash_object(params, user )
+    if params == "cash" && Asset.where(category: "cash").empty?
+      @cash_asset = Asset.new
+      @cash_asset.category = "cash"
+      @cash_asset.sub_category = "cash"
+      @cash_asset.name = "cash"
+      @cash_asset.user = user
+      @cash_asset.save
+    elsif params == "cash"
+      @price_point = PricePoint.new(asset: @cash_asset)
     end
   end
 
@@ -97,14 +103,10 @@ class AssetsController < ApplicationController
       )
       authorize @real_estate
       authorize @price_point
-      if @asset.save # && @real_estate.save && price_point.save
+      if @asset.save
         @real_estate.asset = @asset
         @price_point.asset = @asset
-        if @real_estate.save
-          if @price_point.save
-            redirect_to "/assets?query=real_estate"
-          end
-        end
+        redirect_to "/assets?query=real_estate" if @real_estate.save && @price_point.save
       end
     elsif @asset.category != "real_estate"
       if @asset.save
@@ -147,7 +149,6 @@ class AssetsController < ApplicationController
   def create_categories_hash(user)
     @categories_hash = {}
     Asset.categories.each_key do |category|
-      # user_id: current_user, DONT forget to add
       @assets = Asset.where(user_id: user, category: category)
       category_hash = get_category_hash(@assets)
       @categories_hash[:"#{category}"] = category_hash
@@ -166,7 +167,7 @@ class AssetsController < ApplicationController
         cents = 0
         date = "2022-03-03"
       end
-      category_hash[:"#{asset.sub_category}"] = { value: cents, date: date }
+      category_hash[:"#{asset.name}"] = { value: cents, date: date } # sub_category
     end
     category_hash
   end
@@ -198,7 +199,7 @@ class AssetsController < ApplicationController
   end
 
   def asset_real_estate_params
-    params.require(:asset).permit(:name, :category, :sub_category) # real_estates_attributes: [ :sqm, :price_per_sqm, :mortgage ], price_points_attributes: [ :cents, :text, :date ]
+    params.require(:asset).permit(:name, :category, :sub_category)
   end
 
   def real_estates_params
@@ -209,10 +210,3 @@ class AssetsController < ApplicationController
     params.require(:price_points).permit(:cents, :text, :date)
   end
 end
-
-
-# {"authenticity_token"=>"ikCVmdx+FdHlTdtlrVDV+5D9qUKslseG6ZSQO2PcAPQPG9G50g+8aJNmruaJBHiv9/KbQ1+tEXHQLH54Dq6TXw==",
-#  "asset"=>{"name"=>"asdds", "category"=>"real_estate", "sub_category"=>"flat"},
-#  "real_estates"=>{"sqm"=>"123", "price_per_sqm"=>"123", "mortgage"=>"123"},
-#  "price_points"=>{"date"=>"2022-03-05", "text"=>"asdsa"},
-#  "commit"=>"Add Asset"}
