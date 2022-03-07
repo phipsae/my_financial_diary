@@ -1,15 +1,5 @@
 class PricePointsController < ApplicationController
-  before_action :set_asset, only: [ :create ]
-
-  # def index
-  #   @price_points = policy_scope(PricePoint)
-  # end
-
-  # def show
-  #   raise
-  #   @price_point = set_price_point
-  #   authorize @price_point
-  # end
+  before_action :set_asset, only: [ :create, :update, :destroy ]
 
   def index_pp(params, user)
     if params.present?
@@ -19,13 +9,7 @@ class PricePointsController < ApplicationController
     end
   end
 
-  # def edit
-  #   @price_point = set_price_point
-  #   authorize @price_point
-  # end
-
   def update
-    @price_point = set_price_point
     @category = Asset.find(params[:asset_id]).category
     authorize @price_point
     @price_point.update(price_point_params)
@@ -44,7 +28,6 @@ class PricePointsController < ApplicationController
 
   def new
     @price_point = PricePoint.new
-    raise
     @asset = Asset.new # for cash
     authorize @price_point
   end
@@ -67,7 +50,8 @@ class PricePointsController < ApplicationController
         end
       end
     elsif @price_point.save
-      redirect_to asset_path(@asset, anchor: "price-point-#{@price_point.id}")
+      redirect_to asset_path(@asset, anchor: "price-point-#{@price_point.id}") if @asset.category != "cash"
+      redirect_to assets_path(query: "cash", anchor: "price-point-#{@price_point.id}") if @asset.category == "cash"
     else
       render :new
     end
@@ -78,7 +62,6 @@ class PricePointsController < ApplicationController
   end
 
   def destroy
-    @price_point = PricePoint.find(params[:id])
     authorize @price_point
     @price_point.destroy
     redirect_back(fallback_location: dashboard_path)

@@ -8,12 +8,12 @@
     <% end %>
 
     <%= f.input :cents, :as => :hidden %>
-    <div class="form-row margin-bottom-spacing-5">
+    <div class="form-row ">
       <div class="col-12">
         <%= f.input :date, as: :date, label: "Date, which the value applies to", html5: true, input_html: {value: Date.today}%>
       </div>
     </div>
-    <div class="form-row margin-bottom-spacing-5">
+    <div class="form-row ">
       <div class="col-12">
         <%= f.input :text, label: "Add your comment", input_html: {rows: 4} %>
       </div>

@@ -22,7 +22,6 @@ end
 
 ## Asset_kind
 categories = {
-  cash: ["cash"],
   securities: ["bonds", "shares", "fonds"],
   real_estate: ["Flat 1", "Flat 2", "House 1"],
   raw_materials: ["gold", "silver", "others"],

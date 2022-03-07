@@ -1,6 +1,6 @@
 <%= simple_form_for asset do |f| %>
   <div class="form-inputs">
-    <div class="form-row margin-bottom-spacing-5">
+    <div class="form-row ">
       <div class="col-12">
         <%= f.input :name, label: "Give your asset a name" %>
       </div>
@@ -8,7 +8,7 @@
 
     <%= f.input :category, :as => :hidden %>
 
-    <div class="form-row margin-bottom-spacing-5">
+    <div class="form-row ">
       <div class="col-12">
         <%= f.input :sub_category, collection: [["Cash", "cash"],["Shares", "shares"],["Fonds", "fonds"],["Bonds", "bonds"],["Flat", "flat"],["House", "house"],["Gold", "gold"],["Silver", "silver"],["BTC", "btc"],["ETH", "eth"],["DOT", "dot"],["Car", "car"],["Others", "others"]], label: "What Sub Category is your asset in?" %>
       </div>

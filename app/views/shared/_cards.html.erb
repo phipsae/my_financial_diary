@@ -5,7 +5,8 @@
                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                     <%= asset.sub_category %></div>
                 <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold">
-                <%= number_to_currency( @categories_hash[:"#{asset.category}"][:"#{asset.sub_category}"][:value] / 100, precision: 0, unit: "€") %>
+                <% ## asset.sub_category changed to asset.name ##%>
+                <%= number_to_currency( @categories_hash[:"#{asset.category}"][:"#{asset.name}"][:value] / 100, precision: 0, unit: "€") %>
                 </div>
             </div>
             <div class="col-auto">
