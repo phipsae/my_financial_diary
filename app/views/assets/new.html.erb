@@ -14,8 +14,8 @@
             <h2 class="text-center">Create a new <%= @asset.category %> asset</h2>
           <% end %>
         <% end %>
-
-        <% if @asset.category == "real_estate" && !@asset.present? %>
+        <% # && !@asset.present? do I need it? %>
+        <% if @asset.category == "real_estate"  %>
           <%= render "shared/form_asset_create_real_estate", asset: @asset %>
         <% else %>
           <%= render "shared/form_new_asset", asset: @asset %>
