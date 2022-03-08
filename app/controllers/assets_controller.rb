@@ -22,6 +22,17 @@ class AssetsController < ApplicationController
     end
   end
 
+    def crypto_api
+    @assets = policy_scope(Asset)
+    authorize @assets
+    coinmarketcap_api(params[:amount], params[:symbol]) if params[:amount].present? && params[:symbol].present?
+    respond_to do |format|
+      format.html { redirect_to crypto_asset_path(@asset) }
+      format.json # Follow the classic Rails flow and look for a create.json view
+    end
+  end
+
+
   def show
     authorize @asset
     @price_point = PricePoint.new(asset: @asset)
