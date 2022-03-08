@@ -22,12 +22,18 @@ class AssetsController < ApplicationController
     if params[:query].present?
       @assets = Asset.where(category: params[:query], user_id: current_user)
       @category = params[:query]
+      # for displaying create button
+      if Asset::SUB_CATEGORIES[@category.to_sym].nil?
+        @subs_tracker = 1
+      else
+        @subs_tracker = Asset::SUB_CATEGORIES[@category.to_sym].length - @assets.length
+      end
     end
   end
 
   # create cash object
 
-  def create_cash_object(params, user )
+  def create_cash_object(params, user)
     if params == "cash" && Asset.where(category: "cash").empty?
       @cash_asset = Asset.new
       @cash_asset.category = "cash"
@@ -77,10 +83,9 @@ class AssetsController < ApplicationController
   end
 
   def new
-    if (category = params['category']).present?
-      @asset = Asset.new(category: category)
-    else
-      @asset = Asset.new
+    @asset = Asset.new(category: params['category'])
+    if @asset.category == "securities" || @asset.category == "raw_materials" || @asset.category == "crypto"
+      @subs_array = get_subs_of_cat(current_user, params)
     end
     authorize @asset
   end
@@ -110,11 +115,27 @@ class AssetsController < ApplicationController
       end
     elsif @asset.category != "real_estate"
       # redirect_to asset_url(@asset) if @asset.save
+      @asset.name = @asset.sub_category
       redirect_to asset_path(@asset) if @asset.save
     else
       render :new
     end
   end
+
+  # helper functions
+
+  def get_subs_of_cat(user, params)
+    subs_inital_hash = Asset::SUB_CATEGORIES[params[:category].to_sym]
+    category_hash = create_categories_hash(user)
+    subs_user = category_hash[params[:category].to_sym].keys # current_user.assets.where(category: params["category"])
+    render_subs = subs_inital_hash.keys - subs_user
+    subs_array = []
+    render_subs.each do |sub|
+      subs_array << subs_inital_hash[sub]
+    end
+    subs_array
+  end
+
 
   def calculate_total_value_asset(categories_hash)
     @total_value = 0

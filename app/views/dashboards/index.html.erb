@@ -15,6 +15,11 @@
         <%= render "assets/index_all_assets", all_assets_hash: @all_assets_hash %>
       </div>
       <div class="col-12 col-lg-8">
+      <button class="btn btn-primary btn-lg" data-controller="chart-js">
+        Click me!
+      </button>
+        <%= pie_chart(@all_assets_hash, legend: false) %>
+        <%= line_chart(@all_assets_hash, legend: false) %>
         <%= render "price_points/index_pp" %>
       </div>
     </div>
