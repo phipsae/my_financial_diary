@@ -6,6 +6,7 @@ class RealEstatesController < ApplicationController
   end
 
   def create
+    raise
     @real_estate = RealEstate.new(real_estate_params)
     @real_estate.asset = @asset
     authorize @price_point

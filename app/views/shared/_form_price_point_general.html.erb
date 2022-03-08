@@ -1,4 +1,4 @@
-<%= simple_form_for [ asset, price_point ] do |f| %>
+<%= simple_form_for [ asset, price_point ], url: (price_point.new_record? ? asset_price_points_path(asset) : asset_price_point_path(asset, price_point)) do |f| %>
   <div class="form-inputs">
     <div class="form-row margin-bottom-spacing-5">
       <div class="col-12">

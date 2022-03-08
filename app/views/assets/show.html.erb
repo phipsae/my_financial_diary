@@ -15,6 +15,12 @@
         <%= render "index_asset" %>
       </div>
       <div class="col-12 col-lg-8">
+        <% if @price_point.id != nil %>
+          <h2> Update <%= @asset.sub_category.humanize %> price point </h2>
+        <% else %>
+          <h2> Create new <%= @asset.sub_category.humanize %> price point </h2>
+        <% end %>
+
         <div class="inner-container inner-container-light padding-y-spacing-7 padding-x-spacing-4">
           <% if @asset.category == "crypto" %>
             <%= render "shared/form_asset_show_crypto", asset: @asset, price_point: @price_point %>
@@ -24,22 +30,8 @@
             <%= render "shared/form_asset_show_general", asset: @asset, price_point: @price_point %>
           <% end %>
         </div>
-        <% unless @asset.price_points.size == 0 %>
-        <div class="padding-top-spacing-7">
-          <h2>Recent Activities</h2>
-          <div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-3">
-          <% @sorted_price_points.each_with_index do |price_point, index| %>
-            <div id="price-point-<%=price_point.id%>" class="d-flex align-items-center padding-y-spacing-4">
-              <span class="activities-value"><%= number_with_delimiter((price_point.cents / 100), options = {}) %> €</span>
-              <span class="activities-date"><%= price_point.date %></span>
-              <span class="activities-comment"><%= price_point.text %></span>
-            </div>
-            <% unless index == @asset.price_points.size - 1 %>
-              <div class="d-flex activities-row margin-x-spacing-negative-5 margin-lg-x-spacing-negative-6"></div>
-            <% end %>
-          <% end %>
-          </div>
-        </div>
+        <% unless @price_points.size == 0 %>
+          <%= render "price_points/index_pp" %>
         <% end %>
       </div>
     </div>
