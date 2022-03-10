@@ -1,7 +1,6 @@
 require "json"
 require "open-uri"
 
-
 class AssetsController < ApplicationController
   before_action :set_asset, only: [ :show, :edit, :update ]
 
@@ -35,6 +34,16 @@ class AssetsController < ApplicationController
     end
   end
 
+  # def crypto_api
+  #   @assets = policy_scope(Asset)
+  #   authorize @assets
+  #   coinmarketcap_api(params[:amount], params[:symbol]) if params[:amount].present? && params[:symbol].present?
+  #   respond_to do |format|
+  #     format.html { redirect_to asset_path(@asset.id) }
+  #     format.json # Follow the classic Rails flow and look for a create.json view
+  #   end
+  # end
+
   # create cash object
 
   def create_cash_object(params, user)
@@ -56,7 +65,12 @@ class AssetsController < ApplicationController
       @price_point = PricePoint.find(params[:pp_id])
     else
       @price_point = PricePoint.new(asset: @asset)
-      coinmarketcap_api(params[:amount], params[:symbol]) if params[:amount].present? && params[:symbol].present?
+      @result = coinmarketcap_api(params[:amount], params[:symbol]) if params[:amount].present? && params[:symbol].present?
+    end
+
+    respond_to do |format|
+      format.html # Follow regular flow of Rails
+      format.text { render partial: 'shared/form_asset_show_crypto_value.html', locals: { asset: @asset, price_point: @price_point } }
     end
     @category = set_asset.category
     @latest_price_point = get_last_price_point(@asset)
@@ -216,10 +230,10 @@ class AssetsController < ApplicationController
   end
 
   def coinmarketcap_api(amount, symbol)
-    url = "https://pro-api.coinmarketcap.com/v2/tools/price-conversion?amount=#{amount}&symbol=#{symbol}&CMC_PRO_API_KEY=#{ENV["COINMARKETCAP_API_KEY"]}"
+    url = "https://pro-api.coinmarketcap.com/v2/tools/price-conversion?amount=#{amount}&symbol=#{symbol}&convert=EUR&CMC_PRO_API_KEY=#{ENV["COINMARKETCAP_API_KEY"]}"
     response = URI.open(url).read
     @data = JSON.parse(response)
-    @value = @data["data"][0]["quote"]["USD"]["price"]
+    @value = @data["data"][0]["quote"]["EUR"]["price"]
   end
 
   def asset_real_estate_params
