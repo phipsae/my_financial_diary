@@ -21,7 +21,7 @@ class Asset < ApplicationRecord
   SUB_CATEGORIES = {
     securities: { bonds: ["Bonds", "bonds"], shares: ["Shares", "shares"], fonds: ["Fonds", "fonds"] },
     raw_materials: { gold: ["Gold", "gold"], silver: ["Silver", "silver"], others: ["Others", "others"] },
-    crypto: { btc: ["BTC", "btc"], eth: ["ETH", "eth"], others: ["Others", "others"] }
+    crypto: { btc: ["BTC", "btc"], eth: ["ETH", "eth"], usdt: ["Tether", "usdt"], bnb: ["BNB", "bnb"], usdc: ["USD Coin", "usdc"], luna: ["Terra", "luna"], xrp: ["XRP", "xrp"], ada: ["Cardano", "ada"], sol: ["Solana", "sol"], avax: ["Avalanche", "avax"], dot: ["Polkadot", "dot"],others: ["Others", "others"] }
   }
 
   validates :name, :category, :sub_category, presence: true
