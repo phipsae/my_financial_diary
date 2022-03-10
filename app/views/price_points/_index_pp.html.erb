@@ -8,7 +8,7 @@
         <span class="activities-date"><%= pp.date %></span>
         <span class="activities-comment"><%= pp.text %></span>
         <span class="activities-edit">
-          <% unless @category == "crypto"%>
+          <% unless pp.asset.category == "crypto"%>
           <%= link_to  asset_path(pp.asset.id, pp_id: pp.id) do %>
             <%= icon('far', 'edit') %>
           <% end %>
