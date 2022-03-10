@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_05_102027) do
+ActiveRecord::Schema.define(version: 2022_03_10_190118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(version: 2022_03_05_102027) do
     t.string "author"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "published"
+    t.datetime "published_at"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "assets", force: :cascade do |t|
@@ -35,6 +39,16 @@ ActiveRecord::Schema.define(version: 2022_03_05_102027) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_assets_on_user_id"
+  end
+
+  create_table "elements", force: :cascade do |t|
+    t.string "element_type"
+    t.text "content"
+    t.bigint "article_id", null: false
+    t.integer "position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_id"], name: "index_elements_on_article_id"
   end
 
   create_table "price_points", force: :cascade do |t|
@@ -76,6 +90,7 @@ ActiveRecord::Schema.define(version: 2022_03_05_102027) do
   end
 
   add_foreign_key "assets", "users"
+  add_foreign_key "elements", "articles"
   add_foreign_key "price_points", "assets"
   add_foreign_key "real_estates", "assets"
 end
