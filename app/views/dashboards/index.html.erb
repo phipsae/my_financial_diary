@@ -19,7 +19,9 @@
         Click me!
       </button>
         <%= pie_chart(@all_assets_hash, legend: false) %>
-        <%= line_chart(@all_assets_hash, legend: false) %>
+        <div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-3">
+          <%= line_chart(@line_chart_data, legend: false) %>
+        </div>
         <%= render "price_points/index_pp" %>
       </div>
     </div>

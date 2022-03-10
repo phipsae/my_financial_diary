@@ -8,5 +8,9 @@ class DashboardsController < ApplicationController
     # price_points
     price_point_controller = PricePointsController.new
     @price_points = price_point_controller.index_pp(params[:query], current_user)
+
+    #chart
+    charts_controller = ChartsController.new
+    @line_chart_data = charts_controller.all_asset_hash_value(current_user)
   end
 end

@@ -22,6 +22,10 @@ class AssetsController < ApplicationController
     if params[:query].present?
       @assets = Asset.where(category: params[:query], user_id: current_user)
       @category = params[:query]
+      # chart
+
+      charts_controller = ChartsController.new
+      @line_chart_data = charts_controller.cat_hash_date_value(@category, current_user)
       # for displaying create button
       if Asset::SUB_CATEGORIES[@category.to_sym].nil?
         @subs_tracker = 1
