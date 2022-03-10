@@ -22,6 +22,9 @@
         <%= render "index_all_assets", all_assets_hash: @all_assets_hash %>
       </div>
       <div class="col-12 col-lg-8">
+        <div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-3">
+          <%= line_chart(@line_chart_data, legend: false) %>
+        </div>
         <% @assets.each do |asset| %>
           <% if asset.category == "cash" %>
             <div class="inner-container inner-container-light padding-y-spacing-7 padding-x-spacing-4">

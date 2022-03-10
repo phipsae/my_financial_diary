@@ -18,6 +18,8 @@ class Asset < ApplicationRecord
     others: 6
   }
 
+  CATEGORIES = ["cash", "securities", "real_estate", "raw_materials", "crypto", "cars", "others"]
+
   SUB_CATEGORIES = {
     securities: { bonds: ["Bonds", "bonds"], shares: ["Shares", "shares"], fonds: ["Fonds", "fonds"] },
     raw_materials: { gold: ["Gold", "gold"], silver: ["Silver", "silver"], others: ["Others", "others"] },

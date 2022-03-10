@@ -68,6 +68,11 @@ class PricePointsController < ApplicationController
     redirect_back(fallback_location: dashboard_path)
   end
 
+
+
+
+
+
   private
 
   def set_price_point
