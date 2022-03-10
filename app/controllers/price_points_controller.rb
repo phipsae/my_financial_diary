@@ -1,5 +1,5 @@
 class PricePointsController < ApplicationController
-  before_action :set_asset, only: [ :create, :update, :destroy ]
+  before_action :set_asset, only: [ :create, :update ]
 
   def index_pp(params, user)
     if params.present?
@@ -62,6 +62,7 @@ class PricePointsController < ApplicationController
   end
 
   def destroy
+    @price_point = set_price_point
     authorize @price_point
     @price_point.destroy
     redirect_back(fallback_location: dashboard_path)

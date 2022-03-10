@@ -18,21 +18,12 @@ class Asset < ApplicationRecord
     others: 6
   }
 
-  # enum sub_category: {
-  #   cash: 0,
-  #   shares: 1,
-  #   fonds: 2,
-  #   bonds: 3,
-  #   house: 4,
-  #   flat: 5,
-  #   gold: 6,
-  #   silver: 7,
-  #   btc: 8,
-  #   eth: 9,
-  #   dot: 10,
-  #   car: 11,
-  #   other: 12
-  # }
+  SUB_CATEGORIES = {
+    securities: { bonds: ["Bonds", "bonds"], shares: ["Shares", "shares"], fonds: ["Fonds", "fonds"] },
+    raw_materials: { gold: ["Gold", "gold"], silver: ["Silver", "silver"], others: ["Others", "others"] },
+    crypto: { btc: ["BTC", "btc"], eth: ["ETH", "eth"], others: ["Others", "others"] }
+  }
 
   validates :name, :category, :sub_category, presence: true
+  # validates :sub_category, uniqueness: true
 end

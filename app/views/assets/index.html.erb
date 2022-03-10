@@ -7,7 +7,9 @@
       <% if @category == "securities" and @categories_hash[:securities].length == 3 %>
        <% elsif @category != "cash" %>
       <div class="col-12 col-lg-4 text-right">
-        <%= link_to "Create new #{@category.humanize}", new_asset_path(category: @category), class: "cta cta-light" %>
+        <% if @subs_tracker > 0 %>
+          <%= link_to "Create new #{@category.humanize}", new_asset_path(category: @category), class: "cta cta-light" %>
+        <% end %>
       </div>
       <% end %>
     </div>
