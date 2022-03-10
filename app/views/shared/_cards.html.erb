@@ -10,12 +10,11 @@
                 </div>
             </div>
             <div class="col-auto">
-                <i class="<%=asset.category  %> fa-2x text-primary"></i>
                 <%= link_to edit_asset_path(asset) do %>
-                  <%= icon('fas', 'edit', "FA ruby rotz") %>
+                  <%= icon('far', 'edit', class: "margin-right-spacing-2") %>
                 <% end %>
                 <%= link_to asset_path(asset), method: :delete do %>
-                  <%= icon('fas', 'trash', "FA ruby rotz") %>
+                  <%= icon('fas', 'trash-alt') %>
                 <% end %>
             </div>
         </div>

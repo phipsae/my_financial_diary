@@ -8,13 +8,15 @@
         <span class="activities-date"><%= pp.date %></span>
         <span class="activities-comment"><%= pp.text %></span>
         <span class="activities-edit">
+          <% unless @category == "crypto"%>
           <%= link_to  asset_path(pp.asset.id, pp_id: pp.id) do %>
-            <%= icon('fas', 'edit', "FA ruby rotz") %>
+            <%= icon('far', 'edit') %>
           <% end %>
+        <% end %>
         </span>
         <span class="activities-delete">
           <%= link_to  price_point_path(pp.id), :method => :delete, remote: true do %>
-            <%= icon('fas', 'trash', "FA ruby rotz") %>
+            <%= icon('fas', 'trash-alt') %>
           <% end %>
         </span>
       </div>
@@ -22,5 +24,11 @@
         <div class="d-flex activities-row margin-x-spacing-negative-5 margin-lg-x-spacing-negative-6"></div>
       <% end %>
     <% end %>
+  </div>
+  <% else %>
+    <div id="price-points" class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-3">
+      <div id="price-point-no" class="d-flex align-items-center padding-y-spacing-4">
+        <span class="activities-no-price-point">Currently you do not have any price points added. Start adding your first price point by clicking here: <%= link_to "Add first price point", new_asset_path(category: @category), style: "color: #242533; text-decoration: underline" %></span>
+      </div>
   </div>
 <% end %>

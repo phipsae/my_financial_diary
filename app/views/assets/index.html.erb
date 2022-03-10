@@ -4,7 +4,8 @@
       <div class="col-12 col-lg-8">
         <h1><%= @category.humanize %></h1>
       </div>
-       <% if @category != "cash" %>
+      <% if @category == "securities" and @categories_hash[:securities].length == 3 %>
+       <% elsif @category != "cash" %>
       <div class="col-12 col-lg-4 text-right">
         <%= link_to "Create new #{@category.humanize}", new_asset_path(category: @category), class: "cta cta-light" %>
       </div>
@@ -23,11 +24,17 @@
         <% @assets.each do |asset| %>
           <% if asset.category == "cash" %>
             <div class="inner-container inner-container-light padding-y-spacing-7 padding-x-spacing-4">
-              <label>Previous Amount</label>
-              <p> <%= number_to_currency(@all_assets_hash[:"cash"] / 100, precision: 0, unit: "€") %> </p>
-              <%= render "shared/form_price_point_general", asset: asset, price_point: @price_point %>
+            <label>Previous Value</label>
+            <div class="d-flex form-control input-styling align-items-center margin-bottom-spacing-5">
+              <% if @latest_price_point.present? %>
+                <span><%= number_with_delimiter(@all_assets_hash[:"cash"] / 100, precision: 0, unit: "€") %> €</span>
+              <% else %>
+                <span>0 €</span>
+              <% end %>
             </div>
-          <% else asset.category == "securities" %>
+            <%= render "shared/form_price_point_general", asset: asset, price_point: @price_point %>
+            </div>
+          <% else %>
             <%=link_to asset_path(asset.id) do %>
               <%= render "shared/cards", asset: asset %>
             <% end %>
