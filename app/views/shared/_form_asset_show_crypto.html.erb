@@ -10,7 +10,7 @@
               </div>
             </div>
             <div class="col-12 col-lg-6">
-              <label>Previous <%=@asset.sub_category.upcase%> Coin Number</label>
+              <label>Previous <%=@asset.sub_category.upcase%> Coin amount</label>
               <div class="d-flex form-control input-styling align-items-center margin-bottom-spacing-5">
                 <% if @latest_price_point.nil? %>
                   <span>0</span>
@@ -21,43 +21,30 @@
             </div>
           </div>
           <div data-controller="coin-list">
-          <%= form_tag asset_path(@asset), method: :get do |f| %>
+          <%= form_with url: asset_path(@asset), method: :get, html: { class: 'mb-5', data: { coin_list_target: 'form' } } do |f| %>
             <div class="form-inputs">
               <div class="form-row margin-bottom-spacing-5">
                 <div class="col-12">
-                  <%= text_field_tag :amount, params[:amount], class:"w-100", placeholder: "Type in #{@asset.sub_category.upcase} amount" %>
+                 <%= f.label :amount, "Type in your #{@asset.sub_category.upcase} amount" %><br />
+                  <%= f.text_field :amount,
+                                 value: params[:amount],
+                                 class:"w-100",
+                                 placeholder: "Type in #{@asset.sub_category.upcase} amount to get the latest value automatically",
+                                 data: { coin_list_target: 'amount',
+                                        action: "keyup->coin-list#update" } %>
                 </div>
                 <div class="col-12">
-                  <%= hidden_field_tag :symbol, @asset.sub_category%>
+                  <%= f.hidden_field :symbol,
+                            class: "form-control",
+                            placeholder: 'Select Crypto',
+                            value: @asset.sub_category.upcase,
+                            data: {
+                              coin_list_target: 'symbol'
+                            } %>
                 </div>
                </div>
-                <div class="form-row margin-bottom-spacing-5">
-                  <div class="col-12 col-lg-6">
-                    <%= submit_tag "Get Crypto value", class:'cta cta-light-with-border w-100' %>
-                  </div>
-                </div>
               <% end %>
             </div>
 
-            <%= simple_form_for [ asset, price_point ] do |f| %>
-              <div class="form-inputs">
-               <%= f.hidden_field :crypto_amount, label: "Number of coins", value: params[:amount]%>
-                <div class="form-row margin-bottom-spacing-5">
-                  <div class="col-12">
-                    <%= f.input :cents, label: "Crypto Value", input_html: {value: @value} %>
-                  </div>
-                </div>
-                <div class="form-row margin-bottom-spacing-5">
-                  <div class="col-12">
-                    <%= f.input :date, as: :date, label: "Date, which the value applies to", html5: true, input_html: {value: Date.today}%>
-                  </div>
-                </div>
-                <div class="form-row margin-bottom-spacing-5">
-                  <div class="col-12">
-                    <%= f.input :text, label: "Add your comment", input_html: {rows: 4} %>
-                  </div>
-                </div>
-              </div>
-              <%= f.submit "Add price point", class: "cta cta-dark" %>
-            <% end %>
+        <%= render 'shared/form_asset_show_crypto_value', asset: @asset, price_point: @price_point %>
         </div>

@@ -18,6 +18,10 @@ class AssetPolicy < ApplicationPolicy
     true
   end
 
+  def crypto_api?
+    true
+  end
+
   def update?
     true
   end
