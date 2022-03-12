@@ -15,12 +15,25 @@
         <%= render "assets/index_all_assets", all_assets_hash: @all_assets_hash %>
       </div>
       <div class="col-12 col-lg-8">
-      <button class="btn btn-primary btn-lg" data-controller="chart-js">
-        Click me!
-      </button>
-        <%= pie_chart(@all_assets_hash, legend: false) %>
-        <div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-3">
-          <%= line_chart(@line_chart_data, legend: false) %>
+        <div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-4 padding-y-spacing-4" data-controller="chart-js" data-chart-js-hidden-class="hidden">
+          <button class="btn btn-primary btn-lg" data-action="click->chart-js#hiddenPie" data-chart-js-target="button">
+          Line Chart
+          </button>
+          <button class="btn btn-primary btn-lg" data-action="click->chart-js#hiddenLine" data-chart-js-target="button" >
+          Pie Chart
+          </button>
+          <span> Performance: <%= @performance %> % </span>
+          <span class="" data-chart-js-target="line" > <%= line_chart(@line_chart_data, legend: false, thousands: ",", prefix: "€" ) %> </span>
+          <span class="hidden" data-chart-js-target="pie"> <%= pie_chart(@all_assets_hash) %> </span>
+          <button class="btn btn-primary btn-lg" >
+            <%= link_to "All", dashboard_path(period: "all") %>
+          </button>
+          <button class="btn btn-primary btn-lg" >
+            <%= link_to "1 year", dashboard_path(period: "1year") %>
+          </button>
+          <button class="btn btn-primary btn-lg" >
+            <%= link_to "3 years", dashboard_path(period: "3years") %>
+          </button>
         </div>
         <%= render "price_points/index_pp" %>
       </div>

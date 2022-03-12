@@ -9,8 +9,17 @@ class DashboardsController < ApplicationController
     price_point_controller = PricePointsController.new
     @price_points = price_point_controller.index_pp(params[:query], current_user)
 
-    #chart
+    # chart
     charts_controller = ChartsController.new
-    @line_chart_data = charts_controller.all_asset_hash_value(current_user)
+    if params[:period] == "3year"
+      @line_chart_data = charts_controller.all_asset_hash_value_month(36, current_user)
+      @performance = charts_controller.calculate_performance_all_asset_in_percent(36, current_user)
+    elsif params[:period] == "1year"
+      @line_chart_data = charts_controller.all_asset_hash_value_month(12, current_user)
+      @performance = charts_controller.calculate_performance_all_asset_in_percent(12, current_user)
+    else
+      @line_chart_data = charts_controller.all_asset_hash_value(current_user)
+      @performance = charts_controller.calculate_total_performance(current_user)
+    end
   end
 end
