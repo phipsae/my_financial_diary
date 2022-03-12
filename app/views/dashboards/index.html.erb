@@ -36,8 +36,9 @@
           </button>
         </div>
         <div class="margin-top-spacing-7">
-          <%= render "price_points/index_pp" %>
+          <%= render partial:  "/price_points/index_pp", collection: @price_points, as: :price_point %>
         </div>
+        <%= render partial: "/shared/load_more", locals: { count: @price_points_count, offset: @offset + @limit } %>
       </div>
     </div>
   </div>
