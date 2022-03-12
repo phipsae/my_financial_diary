@@ -1,6 +1,8 @@
 require "json"
 require "open-uri"
 
+# just for heroku
+
 class AssetsController < ApplicationController
   before_action :set_asset, only: [ :show, :edit, :update ]
 
