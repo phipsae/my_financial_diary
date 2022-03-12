@@ -8,6 +8,7 @@ class DashboardsController < ApplicationController
     # price_points
     price_point_controller = PricePointsController.new
     @price_points_query = price_point_controller.index_pp(params[:query], current_user)
+    @price_points_count = price_point_controller.index_pp(params[:query], current_user).size
     if params[:more].present?
       @price_points = @price_points_query
     else

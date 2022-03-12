@@ -13,6 +13,7 @@ class AssetsController < ApplicationController
     # render specific comments
     price_point_controler = PricePointsController.new
     @price_points_query = price_point_controler.index_pp(params[:query], current_user)
+    @price_points_count = price_point_controler.index_pp(params[:query], current_user).size
     if params[:more] == "1"
       @price_points = @price_points_query
       respond_to do |format|
