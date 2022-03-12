@@ -37,7 +37,8 @@
                 <span>0 €</span>
               <% end %>
             </div>
-            <%= render "shared/form_price_point_general", asset: asset, price_point: @price_point %>
+            <%# TODO: CHANGEEE put query in ruby  %>
+            <%= render "shared/form_price_point_general", asset: Asset.where(category: "cash").first, price_point: @price_point %>
             </div>
           <% else %>
             <%= link_to asset_path(asset.id) do %>

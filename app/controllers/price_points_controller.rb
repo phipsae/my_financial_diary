@@ -9,6 +9,11 @@ class PricePointsController < ApplicationController
     end
   end
 
+  def edit
+    @price_point = set_price_point
+    authorize @price_point
+  end
+
   def update
     @category = Asset.find(params[:asset_id]).category
     authorize @price_point
