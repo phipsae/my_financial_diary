@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_05_102027) do
+ActiveRecord::Schema.define(version: 2022_03_12_101701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2022_03_05_102027) do
   end
 
   create_table "price_points", force: :cascade do |t|
-    t.integer "cents"
+    t.bigint "cents"
     t.date "date"
     t.text "text"
     t.bigint "asset_id", null: false

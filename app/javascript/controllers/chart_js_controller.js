@@ -1,7 +1,17 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  connect() {
-    console.log("Hello from chart js controller")
+  static targets = ["button", "line", "pie"]
+  static classes = ["hidden"]
+
+  hiddenPie() {
+    this.pieTarget.classList.add(this.hiddenClass)
+    this.lineTarget.classList.remove(this.hiddenClass)
+    // this.pieTarget.setAttribute("hidden", "")
+  }
+
+  hiddenLine(){
+    this.lineTarget.classList.add(this.hiddenClass)
+    this.pieTarget.classList.remove(this.hiddenClass)
   }
 }

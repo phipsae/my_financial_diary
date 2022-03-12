@@ -25,6 +25,7 @@ class AssetsController < ApplicationController
 
       charts_controller = ChartsController.new
       @line_chart_data = charts_controller.cat_hash_date_value(@category, current_user)
+      charts_controller.calculate_performance_all_asset_in_percent(13, current_user)
       # for displaying create button
       if Asset::SUB_CATEGORIES[@category.to_sym].nil?
         @subs_tracker = 1
