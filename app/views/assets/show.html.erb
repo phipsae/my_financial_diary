@@ -1,14 +1,22 @@
 <section class="margin-y-spacing-7">
   <div class="container">
-    <div class="row">
-      <div class="col-12">
+    <div class="row align-items-center">
+      <div class="col-12 col-lg-8">
         <h1><%= @asset.name.humanize %></h1>
+      </div>
+      <div class="col-12 col-lg-2 text-right">
+        <%= link_to edit_asset_path(@asset), class: 'cta cta-dark-with-border' do %>
+          <%= icon('far', 'edit') %> Edit
+        <% end %>
+      </div>
+      <div class="col-12 col-lg-2 text-right">
+        <%= link_to asset_path(@asset), class: 'cta cta-light',method: :delete do %>
+          <%= icon('fas', 'trash-alt') %> Delete
+        <% end %>
       </div>
     </div>
   </div>
 </section>
-
-<%= @result %>
 
 <section class="margin-y-spacing-7">
   <div class="container">
@@ -18,9 +26,9 @@
       </div>
       <div class="col-12 col-lg-8">
         <% if @price_point.id != nil %>
-          <h2> Update <%= @asset.sub_category.humanize %> price point </h2>
+          <h2 class="margin-top-spacing-0"> Update <%= @asset.sub_category.humanize %> price point </h2>
         <% else %>
-          <h2> Create new <%= @asset.sub_category.humanize %> price point </h2>
+          <h2 class="margin-top-spacing-0"> Create new <%= @asset.sub_category.humanize %> price point </h2>
         <% end %>
 
         <div class="inner-container inner-container-light padding-y-spacing-7 padding-x-spacing-4">
@@ -33,7 +41,9 @@
           <% end %>
         </div>
         <% unless @price_points.size == 0 %>
-          <%= render "price_points/index_pp" %>
+          <div class="margin-top-spacing-7">
+            <%= render "price_points/index_pp" %>
+          </div>
         <% end %>
       </div>
     </div>

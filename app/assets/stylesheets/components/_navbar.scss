@@ -6,9 +6,17 @@
   background: $satin-linen;
   box-shadow: 0 2px 2px 0 rgb(0, 0, 0 / 14%), 0 3px 1px -2px rgb(0, 0, 0 / 20%), 0 1px 5px 0 rgb(0, 0, 0 / 12%);
   color: $title-dark;
+  position: fixed;
+  top:0;
+  width: 100%;
+  z-index: 99;
 }
 
 .nav-item .active {
+  color: $title-dark !important;
+}
+
+.nav-link {
   color: $title-dark !important;
 }
 
@@ -33,4 +41,10 @@
     background-color: $title-dark !important;
     color: $satin-linen !important;
   }
+}
+
+#navbar-button {
+  background-color: transparent !important;
+  border: none;
+  color: $title-dark;
 }

@@ -42,15 +42,16 @@ input[type=date]::-webkit-calendar-picker-indicator {
     background: none;
     z-index: 1;
 }
+#price_points_date {
+  position: relative;
+}
 input[type=date]:before {
     color: $satin-linen !important;
     background: none !important;
     display: block !important;
     width: 20px !important;
-    height: 20px !important;
     position: absolute !important;
-    top: 44% !important;
-    right: 20px !important;
+    right: 16px !important;
     font-family: "Font Awesome 5 Free" !important;
 	  font-weight: 900 !important;
     font-style: normal !important;

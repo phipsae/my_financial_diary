@@ -1,0 +1,128 @@
+
+<!-- Footer -->
+<footer class="page-footer font-small unique-color-dark">
+
+  <div style="background-color: #6a6cb5;">
+    <div class="container">
+
+      <!-- Grid row-->
+      <div class="row py-4 d-flex align-items-center">
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+          <h6 class="mb-0" style="color: #fff">Get connected with us on social networks!</h6>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-7 text-center text-md-right">
+
+          <!-- Facebook -->
+          <a class="fb-ic" style="color:#F4F4F4;" >
+            <i class="fab fa-facebook-f white-text mr-4"> </i>
+          </a>
+          <!-- Twitter -->
+          <a class="tw-ic" style="color:#F4F4F4;">
+            <i class="fab fa-twitter white-text mr-4"> </i>
+          </a>
+          <!-- Google +-->
+          <a class="gplus-ic" style="color:#F4F4F4;">
+            <i class="fab fa-google-plus-g white-text mr-4"> </i>
+          </a>
+          <!--Linkedin -->
+          <a class="li-ic" style="color:#F4F4F4;">
+            <i class="fab fa-linkedin-in white-text mr-4"> </i>
+          </a>
+          <!--Instagram-->
+          <a class="ins-ic" style="color:#F4F4F4;">
+            <i class="fab fa-instagram white-text"> </i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left mt-5">
+
+    <!-- Grid row -->
+    <div class="row mt-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+        <!-- Content -->
+        <h6 class="text-uppercase font-weight-bold">My Financial Diary</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>Start your journey towards your financial freedom!</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Create an asset</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+         <p><%= link_to "Cash", new_asset_path(category: "cash")%></p>
+         <p><%= link_to "Securities", new_asset_path(category: "securities")%></p>
+         <p><%= link_to "Real Estate", new_asset_path(category: "real_estate")%></p>
+         <p><%= link_to "Crytpo", new_asset_path(category: "crypto")%></p>
+         <p><%= link_to "Cars", new_asset_path(category: "cars")%></p>
+         <p><%= link_to "Others", new_asset_path(category: "others")%></p>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Freedom</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <% if current_user %>
+          <%= link_to "Your Account", edit_user_registration_path  %>
+          <% else %>
+          <%= link_to "Register", new_user_registration_path  %>
+          <% end %>
+        </p>
+        <p>
+          <%= link_to "Dashboard", dashboard_path  %>
+        </p>
+        <p>
+          <%= link_to "Blog", articles_path  %>
+        </p>
+        <p>
+          <%= link_to "About us", root_path  %>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Contact</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <i class="fas fa-home mr-3"></i> Rudi-Dutschke-Straße 26, 10969 Berlin</p>
+        <p>
+          <i class="fas fa-envelope mr-3"></i><a href="mailto:service@myfinancialdiary.com">service@myfinancialdiary.com</a></p>
+        <p>
+          <i class="fas fa-phone mr-3"></i> <a href="tel:00493091700100">+49 30 917 00 100</a></p>
+        <p>
+          <i class="fas fa-print mr-3"></i> <a href="tel:00493091700111">+49 30 917 00 111</a></p>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+</footer>
+<!-- Footer -->

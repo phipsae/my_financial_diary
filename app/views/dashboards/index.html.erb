@@ -15,7 +15,7 @@
         <%= render "assets/index_all_assets", all_assets_hash: @all_assets_hash %>
       </div>
       <div class="col-12 col-lg-8">
-        <div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-4 padding-y-spacing-4" data-controller="chart-js" data-chart-js-hidden-class="hidden">
+        <div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-4 padding-y-spacing-4 margin-bottom-spacing-7" data-controller="chart-js" data-chart-js-hidden-class="hidden">
           <button class="btn btn-primary btn-lg" data-action="click->chart-js#hiddenPie" data-chart-js-target="button">
           Line Chart
           </button>
@@ -35,7 +35,9 @@
             <%= link_to "3 years", dashboard_path(period: "3years") %>
           </button>
         </div>
-        <%= render "price_points/index_pp" %>
+        <div class="margin-top-spacing-7">
+          <%= render "price_points/index_pp" %>
+        </div>
       </div>
     </div>
   </div>
