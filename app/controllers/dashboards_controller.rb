@@ -7,8 +7,12 @@ class DashboardsController < ApplicationController
     @total_value = assets_controller.calculate_total_value(@all_assets_hash)
     # price_points
     price_point_controller = PricePointsController.new
-    @price_points = price_point_controller.index_pp(params[:query], current_user)
-
+    @price_points_query = price_point_controller.index_pp(params[:query], current_user)
+    if params[:more].present?
+      @price_points = @price_points_query
+    else
+      @price_points = @price_points_query.limit(4)
+    end
     # chart
     charts_controller = ChartsController.new
     if params[:period] == "3year"

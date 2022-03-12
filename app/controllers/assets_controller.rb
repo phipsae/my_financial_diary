@@ -12,8 +12,16 @@ class AssetsController < ApplicationController
 
     # render specific comments
     price_point_controler = PricePointsController.new
-    @price_points = price_point_controler.index_pp(params[:query], current_user)
-
+    @price_points_query = price_point_controler.index_pp(params[:query], current_user)
+    if params[:more] == "1"
+      @price_points = @price_points_query
+      respond_to do |format|
+        format.html # Follow regular flow of Rails
+        format.text { render partial: 'price_points/index_pp.html', locals: { asset: @asset, price_point: @price_point } }
+      end
+    else
+      @price_points = @price_points_query.limit(4)
+    end
     # cash
     create_cash_object(params[:query], current_user)
 
@@ -34,16 +42,6 @@ class AssetsController < ApplicationController
       end
     end
   end
-
-  # def crypto_api
-  #   @assets = policy_scope(Asset)
-  #   authorize @assets
-  #   coinmarketcap_api(params[:amount], params[:symbol]) if params[:amount].present? && params[:symbol].present?
-  #   respond_to do |format|
-  #     format.html { redirect_to asset_path(@asset.id) }
-  #     format.json # Follow the classic Rails flow and look for a create.json view
-  #   end
-  # end
 
   # create cash object
 
