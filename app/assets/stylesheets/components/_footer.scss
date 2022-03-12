@@ -1,0 +1,7 @@
+footer p a {
+  color: $satin-linen;
+  &:hover {
+    color: $satin-linen;
+    text-decoration: underline !important;
+  }
+}

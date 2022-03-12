@@ -38,4 +38,15 @@
     color: $title-dark;
   }
 
+    &-dark-with-border {
+    background-color: $title-dark;
+    color: $satin-linen;
+    border: 2px solid $satin-linen;
+  }
+
+  &-dark-with-border:hover {
+    background-color: $satin-linen;
+    color: $title-dark;
+  }
+
 }

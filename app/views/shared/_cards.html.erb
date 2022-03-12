@@ -9,14 +9,6 @@
                 <%= number_to_currency( @categories_hash[:"#{asset.category}"][:"#{asset.name}"][:value] / 100, precision: 0, unit: "€") %>
                 </div>
             </div>
-            <div class="col-auto">
-                <%= link_to edit_asset_path(asset) do %>
-                  <%= icon('far', 'edit', class: "margin-right-spacing-2") %>
-                <% end %>
-                <%= link_to asset_path(asset), method: :delete do %>
-                  <%= icon('fas', 'trash-alt') %>
-                <% end %>
-            </div>
         </div>
     </div>
 </div>
