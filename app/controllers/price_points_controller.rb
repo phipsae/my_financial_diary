@@ -15,6 +15,7 @@ class PricePointsController < ApplicationController
   end
 
   def update
+    @price_point = PricePoint.find(params[:id])
     @category = Asset.find(params[:asset_id]).category
     authorize @price_point
     @price_point.update(price_point_params)

@@ -25,7 +25,7 @@
         <%= render "index_asset" %>
       </div>
       <div class="col-12 col-lg-8">
-        <% if @price_point.id != nil %>
+        <% if !@price_point.new_record? %>
           <h2 class="margin-top-spacing-0"> Update <%= @asset.sub_category.humanize %> price point </h2>
         <% else %>
           <h2 class="margin-top-spacing-0"> Create new <%= @asset.sub_category.humanize %> price point </h2>

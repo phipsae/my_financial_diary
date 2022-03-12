@@ -1,20 +1,36 @@
 <%= simple_form_for [ asset, price_point ], url: (price_point.new_record? ? asset_price_points_path(asset) : asset_price_point_path(asset, price_point)) do |f| %>
   <div class="form-inputs">
-    <div class="form-row margin-bottom-spacing-5">
+    <div class="form-row ">
+      <div class="col-12 margin-bottom-spacing-5">
+      <% if price_point.new_record? %>
+        Previous value: <%= !@pp_last.nil? ? number_to_currency(@pp_last.cents / 100, precision: 0, unit: "€") : "0€ " %>
+      <% else %>
+        Previous value: <%= number_to_currency( @price_point.cents / 100, precision: 0, unit: "€") %>
+      <% end %>
+      </div>
       <div class="col-12">
-        <%= f.input :cents, label: "New Value" %>
+      <%# default: number_to_currency( @price_point.cents / 100, precision: 0, unit: "€")  %>
+        <% if price_point.new_record? %>
+          <%= f.input :cents, label: "New Value" %>
+        <% else %>
+          <%= f.input :cents, label: "New Value", :input_html => { :value => ( @price_point.cents / 100)  }%>
+        <% end %>
       </div>
     </div>
-    <div class="form-row margin-bottom-spacing-5">
+    <div class="form-row">
       <div class="col-12">
         <%= f.input :date, as: :date, label: "Date, which the value applies to", html5: true, input_html: {value: Date.today}%>
       </div>
     </div>
-    <div class="form-row margin-bottom-spacing-5">
+    <div class="form-row">
       <div class="col-12">
         <%= f.input :text, label: "Add your comment", input_html: {rows: 4} %>
       </div>
     </div>
   </div>
-  <%= f.submit "Add price point", class: "cta cta-dark" %>
+  <% if price_point.new_record? %>
+    <%= f.submit "Add price point", class: "cta cta-dark" %>
+  <% else %>
+    <%= f.submit "Update price point", class: "cta cta-dark" %>
+  <% end %>
 <% end %>
