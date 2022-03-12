@@ -18,7 +18,7 @@ class AssetsController < ApplicationController
       @price_points = @price_points_query
       respond_to do |format|
         format.html # Follow regular flow of Rails
-        format.text { render partial: 'price_points/index_pp.html', locals: { asset: @asset, price_point: @price_point } }
+        format.text { render partial: 'price_points/index_pp.html' }
       end
     else
       @price_points = @price_points_query.limit(4)
@@ -65,12 +65,11 @@ class AssetsController < ApplicationController
       @price_point = PricePoint.find(params[:pp_id])
     else
       @price_point = PricePoint.new(asset: @asset)
-      @result = coinmarketcap_api(params[:amount], params[:symbol]) if params[:amount].present? && params[:symbol].present?
-    end
-
-    respond_to do |format|
-      format.html # Follow regular flow of Rails
-      format.text { render partial: 'shared/form_asset_show_crypto_value.html', locals: { asset: @asset, price_point: @price_point } }
+      coinmarketcap_api(params[:amount], params[:symbol]) if params[:amount].present? && params[:symbol].present?
+      respond_to do |format|
+        format.html # Follow regular flow of Rails
+        format.text { render partial: 'shared/form_asset_show_crypto_value.html', locals: { asset: @asset, price_point: @price_point } }
+      end
     end
     @category = set_asset.category
     @latest_price_point = get_last_price_point(@asset)

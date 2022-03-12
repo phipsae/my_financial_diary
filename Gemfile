@@ -78,3 +78,5 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'rack-cors', :require => 'rack/cors'
 
 gem 'rest-client', '~> 2.1'
+
+gem 'heroicon', '~> 0.4.0'

@@ -1,9 +1,9 @@
 <%= link_to assets_path(query: @category) do %>
-  <div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3 <% if "dashboards" == params["controller"]%> active-card<% end %>">
+  <div class="asset-card asset-card-highlight padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3 <% if "dashboards" == params["controller"]%> active-card<% end %>">
     <div class="asset-card-body asset-card-body-light">
         <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 <% if "dashboards" == params["controller"]%> active-font<% end %>">
+                <div class="text-xs font-weight-bold title-light text-uppercase mb-1 <% if "dashboards" == params["controller"]%> active-font<% end %>">
                     Total value
                 </div>
                 <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold <% if "dashboards" == params["controller"]%>-active<% end %>">

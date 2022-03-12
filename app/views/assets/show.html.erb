@@ -6,12 +6,12 @@
       </div>
       <div class="col-12 col-lg-2 text-right">
         <%= link_to edit_asset_path(@asset), class: 'cta cta-dark-with-border' do %>
-          <%= icon('far', 'edit') %> Edit
+          <%= heroicon "pencil", variant: :outline, options:{class: "heroicon-size"} %> Edit
         <% end %>
       </div>
       <div class="col-12 col-lg-2 text-right">
         <%= link_to asset_path(@asset), class: 'cta cta-light',method: :delete do %>
-          <%= icon('fas', 'trash-alt') %> Delete
+          <%= heroicon "trash", variant: :outline, options:{class: "heroicon-size"} %>  Delete
         <% end %>
       </div>
     </div>
