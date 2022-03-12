@@ -1,5 +1,35 @@
 class ChartsController < ApplicationController
-  # objective: {2021-03: 2330000, etc.}
+  # calculate performance
+  def calculate_performance_all_asset_in_percent(months, user)
+    asset_hash = all_asset_hash_value(user)
+    month_keys = asset_hash.keys.reverse
+    performance = 0
+    if months <= month_keys.length # month_year_array(PricePoint.all.order(date: :asc).first.date).reverse
+      month_key_now = month_keys.first
+      month_key_before = month_keys[months - 1]
+      performance = (((asset_hash[month_key_now].to_f / asset_hash[month_key_before]) - 1) * 100).round
+    else
+      performance = calculate_total_performance(user)
+    end
+    performance
+  end
+
+  def calculate_total_performance(user)
+    asset_hash = all_asset_hash_value(user)
+    month_keys = asset_hash.keys.reverse # month_year_array(PricePoint.all.order(date: :asc).first.date).reverse
+    month_key_now = month_keys.first
+    month_key_before = month_keys.last
+    (((asset_hash[month_key_now].to_f / asset_hash[month_key_before]) - 1) * 100).round
+  end
+
+  # Calculate hashes
+  def all_asset_hash_value_month(months, user)
+    asset_hash = all_asset_hash_value(user)
+    month_keys = asset_hash.keys
+    hash = all_asset_hash_value(user)
+    hash.slice(*month_keys.last(months)) if months < month_keys.length
+  end
+
   def all_asset_hash_value(user)
     asset_array = all_cat_hash_value_date(user)
     hash = asset_array.reduce({}) do |sums, location|
@@ -41,7 +71,7 @@ class ChartsController < ApplicationController
     latest_value = 0
     month_year_array.each do |date|
       sub_cat_hash.each do |sub_cat|
-        latest_value = sub_cat[1] if date == sub_cat[0]
+        latest_value = sub_cat[1] / 100 if date == sub_cat[0]
         hash[date] = latest_value
       end
     end
