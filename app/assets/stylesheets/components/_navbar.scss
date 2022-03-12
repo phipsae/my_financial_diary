@@ -12,6 +12,10 @@
   color: $title-dark !important;
 }
 
+.nav-link {
+  color: $title-dark !important;
+}
+
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
@@ -33,4 +37,10 @@
     background-color: $title-dark !important;
     color: $satin-linen !important;
   }
+}
+
+#navbar-button {
+  background-color: transparent !important;
+  border: none;
+  color: $title-dark;
 }
