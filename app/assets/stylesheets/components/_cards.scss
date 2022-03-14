@@ -19,6 +19,13 @@
     color: $satin-linen;
   }
 
+  &-dark-grey {
+    border: solid 2px $satin-linen !important;
+    background-color: $gray;
+    color: $satin-linen;
+  }
+
+
   &-grey {
     background-color: $salt-box;
     color: $satin-linen;
