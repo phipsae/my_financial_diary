@@ -1,6 +1,8 @@
 class RealEstatesController < ApplicationController
 
+  ## TODO: not used at all --> get rid of it
   def new
+    raise
     @real_estate = RealEstate.new
     authorize @real_estate
   end
