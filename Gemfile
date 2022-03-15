@@ -33,6 +33,7 @@ gem 'devise'
 gem 'autoprefixer-rails', '10.2.5'
 # gem "font-awesome-rails"
 gem 'font-awesome-sass'
+# gem 'font-awesome-sass', '~> 4.3.0'
 gem 'simple_form'
 gem "chartkick"
 gem "groupdate"

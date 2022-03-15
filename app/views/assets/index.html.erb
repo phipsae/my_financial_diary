@@ -24,7 +24,7 @@
       </div>
       <div class="col-12 col-lg-8">
         <div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-3 margin-bottom-spacing-7">
-          <%= line_chart(@line_chart_data, legend: false) %>
+          <%= line_chart(@line_chart_data, legend: false, empty: "No asset created yet, add one") %>
         </div>
         <% @assets.each do |asset| %>
           <% if asset.category == "cash" %>

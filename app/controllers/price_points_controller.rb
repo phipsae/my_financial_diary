@@ -43,8 +43,14 @@ class PricePointsController < ApplicationController
     @price_point.asset = @asset
     authorize @price_point
     if @asset.category == "real_estate"
-      @real_estate = Asset.find(params[:asset_id]).real_estate
-      @real_estate.update(real_estate_params)
+      if @asset.real_estate.nil?
+        @real_estate = RealEstate.new(real_estate_params)
+        @asset.real_estate = @real_estate
+        @real_estate.save
+      else
+        @real_estate = Asset.find(params[:asset_id]).real_estate
+        @real_estate.update(real_estate_params)
+      end
       @price_point.cents = calculate_real_estate_price(
         @real_estate.sqm,
         @real_estate.price_per_sqm,
@@ -64,7 +70,7 @@ class PricePointsController < ApplicationController
   end
 
   def calculate_real_estate_price(sqm, price_per_sqm, mortgage)
-    ((sqm * price_per_sqm) - mortgage) * 100
+    ((sqm * price_per_sqm) - mortgage)
   end
 
   def destroy

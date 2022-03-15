@@ -1,12 +1,19 @@
 <%= simple_form_for [ asset, price_point ], url: (price_point.new_record? ? asset_price_points_path(asset) : asset_price_point_path(asset, price_point)) do |f| %>
   <div class="form-inputs">
-
+    <div class="form-row ">
+      <div class="col-12 margin-bottom-spacing-5">
+        <% if price_point.new_record? %>
+          Previous value: <%= !@pp_last.nil? ? number_to_currency(@pp_last.cents / 100, precision: 0, unit: "€") : "0€ " %>
+        <% else %>
+          Previous value: <%= number_to_currency( @price_point.cents / 100, precision: 0, unit: "€") %>
+        <% end %>
+      </div>
+    </div>
     <%= simple_fields_for :real_estates do |p| %>
-      <%= p.input :sqm, label: "Square meters of the real estate", input_html: {value: @asset.real_estate.sqm }  %>
-      <%= p.input :price_per_sqm, input_html: {value: @asset.real_estate.price_per_sqm }  %>
-      <%= p.input :mortgage, input_html: {value: @asset.real_estate.mortgage }  %>
+      <%= p.input :sqm, label: "Square meters of the real estate", input_html: {value: !@asset.real_estate.nil? ? @asset.real_estate.sqm : 0 }  %>
+      <%= p.input :price_per_sqm, input_html: {value: !@asset.real_estate.nil? ? @asset.real_estate.price_per_sqm : 0 }  %>
+      <%= p.input :mortgage, input_html: {value: !@asset.real_estate.nil? ? @asset.real_estate.mortgage : 0 }  %>
     <% end %>
-
     <%= f.input :cents, :as => :hidden %>
     <div class="form-row ">
       <div class="col-12">
@@ -19,5 +26,5 @@
       </div>
     </div>
   </div>
-  <%= f.submit "Add price point", class: "cta cta-dark" %>
+  <%= f.submit class: "cta cta-dark" %>
 <% end %>

@@ -23,8 +23,9 @@
           Pie Chart
           </button>
           <span> Performance: <%= @performance %> % </span>
-          <span class="" data-chart-js-target="line" > <%= line_chart(@line_chart_data, legend: false, thousands: ",", prefix: "€" ) %> </span>
-          <span class="hidden" data-chart-js-target="pie"> <%= pie_chart(@all_assets_hash) %> </span>
+          <%# , empty: "New asset created yet, add one" %>
+          <span class="" data-chart-js-target="line" > <%= line_chart(@line_chart_data, legend: false, thousands: ",", prefix: "€", empty: "No asset created yet, add one"  ) %> </span>
+          <span class="hidden" data-chart-js-target="pie"> <%= pie_chart(@all_assets_hash, empty: "No asset created yet, add one" ) %> </span>
           <button class="btn btn-primary btn-lg" >
             <%= link_to "All", dashboard_path(period: "all") %>
           </button>
