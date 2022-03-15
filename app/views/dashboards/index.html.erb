@@ -1,4 +1,4 @@
-<section class="mt-4">
+<section class="margin-y-spacing-7">
   <div class="container">
         <h1>Your personal dashboard <%= @current_user.first_name %></h1>
   </div>
@@ -19,7 +19,7 @@
             <button class="chart-btn" data-action="click->chart-js#hiddenLine" data-chart-js-target="button" >
             Pie Chart
             </button>
-            <span> Performance: <%= @performance %> % </span>
+            <span class="chart-btn"> Performance: <%= @performance %> % </span>
           </div>
           <div class="chart-container">
             <span class="" data-chart-js-target="line" > <%= line_chart(@line_chart_data, legend: false, thousands: ",", prefix: "€" ) %> </span>
