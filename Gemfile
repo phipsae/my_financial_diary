@@ -37,7 +37,6 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem "chartkick"
 gem "groupdate"
-gem "sticky-rails", " >= 1.0.3"
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
@@ -77,3 +76,5 @@ gem 'faker'
 gem 'rack-cors', :require => 'rack/cors'
 
 gem 'rest-client', '~> 2.1'
+
+gem 'heroicon', '~> 0.4.0'

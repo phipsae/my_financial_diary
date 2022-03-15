@@ -8,8 +8,13 @@ class DashboardsController < ApplicationController
     # price_points
     price_point_controller = PricePointsController.new
     @price_points_query = price_point_controller.index_pp(params[:query], current_user)
-    if params[:more].present?
+    @price_points_count = price_point_controller.index_pp(params[:query], current_user).size
+    if params[:more] == "1"
       @price_points = @price_points_query
+      respond_to do |format|
+        format.html # Follow regular flow of Rails
+        format.text { render partial: 'price_points/index_pp.html', locals: { asset: @asset, price_point: @price_points } }
+      end
     else
       @price_points = @price_points_query.limit(4)
     end
