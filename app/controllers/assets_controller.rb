@@ -1,6 +1,8 @@
 require "json"
 require "open-uri"
 
+# just for heroku
+
 class AssetsController < ApplicationController
   before_action :set_asset, only: [ :show, :edit, :update ]
 
@@ -65,11 +67,13 @@ class AssetsController < ApplicationController
       @price_point = PricePoint.find(params[:pp_id])
     else
       @price_point = PricePoint.new(asset: @asset)
+      @pp_last = get_last_price_point(params[:id])
       coinmarketcap_api(params[:amount], params[:symbol]) if params[:amount].present? && params[:symbol].present?
-      respond_to do |format|
-        format.html # Follow regular flow of Rails
-        format.text { render partial: 'shared/form_asset_show_crypto_value.html', locals: { asset: @asset, price_point: @price_point } }
-      end
+    end
+    # raise
+    respond_to do |format|
+      format.html # Follow regular flow of Rails
+      format.text { render partial: 'shared/form_asset_show_crypto_value.html', locals: { asset: @asset, price_point: @price_point } }
     end
     @category = set_asset.category
     @latest_price_point = get_last_price_point(@asset)

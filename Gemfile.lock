@@ -266,7 +266,6 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
-  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
@@ -297,6 +296,10 @@ DEPENDENCIES
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
+<<<<<<< HEAD
+=======
+  sticky-rails (>= 1.0.3)
+>>>>>>> master
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)
@@ -307,4 +310,4 @@ RUBY VERSION
    ruby 2.7.4p191
 
 BUNDLED WITH
-   2.3.6
+   2.3.8
