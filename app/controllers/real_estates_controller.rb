@@ -1,5 +1,4 @@
 class RealEstatesController < ApplicationController
-
   ## TODO: not used at all --> get rid of it
   def new
     raise
