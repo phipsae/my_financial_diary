@@ -3,7 +3,11 @@
         <h1>A diary to track your financial growth!</h1>
         <p class="mb-3">Write your own financial history</p>
         <br>
-          <%= link_to "Register now", new_user_registration_path, class: "cta cta-light" %>
+        <% if current_user %>
+          <a class="cta cta-light" href="/dashboard"> Go to dashboard</a>
+        <% else %>
+          <a class="cta cta-light" href="users/sign_up">Register now</a>
+        <% end %>
       </div>
     </div>
 <section class="dark py-5 margin-top-negative-section">

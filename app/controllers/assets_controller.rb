@@ -1,7 +1,7 @@
 require "json"
 require "open-uri"
 
-# just for heroku
+# just for heroku!!!!
 
 class AssetsController < ApplicationController
   before_action :set_asset, only: [ :show, :edit, :update ]
@@ -120,7 +120,7 @@ class AssetsController < ApplicationController
 
     if @asset.category == "real_estate"
       @real_estate = RealEstate.new(real_estates_params)
-      @asset.sub_category = "flat"
+      @asset.sub_category = @asset.name
       @price_point = PricePoint.new(price_points_params)
       @price_point.cents = price_point_controller.calculate_real_estate_price(
         @real_estate.sqm,

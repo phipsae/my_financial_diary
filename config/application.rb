@@ -17,6 +17,7 @@ module MyFinancialDiary
     config.load_defaults 6.0
     config.action_view.embed_authenticity_token_in_remote_forms = true
     config.assets.initialize_on_precompile = false
+
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
