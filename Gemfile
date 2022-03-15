@@ -36,7 +36,6 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem "chartkick"
 gem "groupdate"
-gem "sticky-rails", " >= 1.0.3"
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
