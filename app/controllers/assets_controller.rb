@@ -15,11 +15,12 @@ class AssetsController < ApplicationController
     # render specific comments
     price_point_controler = PricePointsController.new
     @price_points_query = price_point_controler.index_pp(params[:query], current_user)
+    @price_points_count = price_point_controler.index_pp(params[:query], current_user).size
     if params[:more] == "1"
       @price_points = @price_points_query
       respond_to do |format|
         format.html # Follow regular flow of Rails
-        format.text { render partial: 'price_points/index_pp.html', locals: { asset: @asset, price_point: @price_point } }
+        format.text { render partial: 'price_points/index_pp.html' }
       end
     else
       @price_points = @price_points_query.limit(4)
@@ -67,7 +68,7 @@ class AssetsController < ApplicationController
     else
       @price_point = PricePoint.new(asset: @asset)
       @pp_last = get_last_price_point(params[:id])
-      @result = coinmarketcap_api(params[:amount], params[:symbol]) if params[:amount].present? && params[:symbol].present?
+      coinmarketcap_api(params[:amount], params[:symbol]) if params[:amount].present? && params[:symbol].present?
     end
     # raise
     respond_to do |format|

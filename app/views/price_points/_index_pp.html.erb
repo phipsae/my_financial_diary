@@ -6,7 +6,7 @@
       <div id="price-point-<%= pp.id %>" class="d-flex align-items-center padding-y-spacing-4">
         <span class="activities-category"><i class="<%= pp.asset.category  %> fa-2x text-primary"></i></span>
         <span class="activities-value"><%= number_to_currency( (pp.cents / 100), precision: 0, unit: "€") %></span>
-        <span class="activities-date"><%= pp.date %></span>
+        <span class="activities-date"><%= time_ago_in_words(pp.date) %> ago</span>
         <span class="activities-comment"><%= pp.text %></span>
         <span class="activities-edit">
           <% unless pp.asset.category == "crypto"%>
@@ -15,7 +15,7 @@
           <% end %>
         <% end %>
         </span>
-        <span class="activities-delete">
+        <span class="activities-delete text-right">
           <%= link_to  price_point_path(pp.id), :method => :delete, remote: true do %>
             <%= icon('fas', 'trash-alt') %>
           <% end %>
