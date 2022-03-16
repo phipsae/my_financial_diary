@@ -22,7 +22,7 @@
           </div>
           <div class="chart-container padding-x-spacing-5 padding-lg-x-spacing-4 padding-y-spacing-4">
             <span class="" data-chart-js-target="line"> <%= line_chart(@line_chart_data, legend: false, thousands: ",", prefix: "€", empty: "No asset created yet, add one", colors: ["#666"]) %> </span>
-            <span class="hidden" data-chart-js-target="pie"> <%= pie_chart(@all_assets_hash, empty: "No asset created yet, add one", legend: "right", thousands: ",", precision: 3, donut: true, colors: ["#DCDCDC", "#696969", "#A9A9A9", "#708090", "#2F4F4F", "#000000", "#708090" ]) %> </span>
+            <span class="hidden" data-chart-js-target="pie"> <%= pie_chart(@all_assets_hash, empty: "No asset created yet, add one", legend: "right", thousands: ",", donut: true, colors: ["#DCDCDC", "#696969", "#A9A9A9", "#708090", "#2F4F4F", "#000000", "#708090" ]) %> </span>
           </div>
           <span class="performance"> Performance: <%= number_to_currency(@performance, precision: 0, unit: "") %>% </span>
           <div class= "chart-btn-container mt-2" id="bottom">
