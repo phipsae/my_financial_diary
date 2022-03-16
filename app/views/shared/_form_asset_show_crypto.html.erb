@@ -27,7 +27,7 @@
                 <div class="form-row margin-bottom-spacing-5">
                   <div class="col-12">
                   <%= f.label :amount, "Type in your #{@asset.sub_category.upcase} amount" %><br />
-                    <%= f.text_field :amount,
+                    <%= f.number_field :amount,
                                   value: params[:amount],
                                   class:"w-100",
                                   placeholder: "Type in #{@asset.sub_category.upcase} amount to get the latest value automatically",
