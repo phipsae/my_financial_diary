@@ -5,6 +5,7 @@
   <% else %>
     <span>0 €</span>
   <% end %>
+  <% raise %>
 </div>
 <%= simple_form_for([ asset, price_point ], remote: true) do |f| %>
   <div class="form-inputs">

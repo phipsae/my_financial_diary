@@ -28,6 +28,7 @@ class ChartsController < ApplicationController
     month_keys = asset_hash.keys
     hash = all_asset_hash_value(user)
     hash.slice(*month_keys.last(months)) if months < month_keys.length
+    hash
   end
 
   def all_asset_hash_value(user)

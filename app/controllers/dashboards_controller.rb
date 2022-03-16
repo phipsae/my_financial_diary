@@ -20,7 +20,7 @@ class DashboardsController < ApplicationController
     end
     # chart
     charts_controller = ChartsController.new
-    if params[:period] == "3year"
+    if params[:period] == "3years"
       @line_chart_data = charts_controller.all_asset_hash_value_month(36, current_user)
       @performance = charts_controller.calculate_performance_all_asset_in_percent(36, current_user)
     elsif params[:period] == "1year"

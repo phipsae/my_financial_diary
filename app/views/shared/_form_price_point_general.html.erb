@@ -9,7 +9,6 @@
       <% end %>
       </div>
       <div class="col-12">
-      <%# default: number_to_currency( @price_point.cents / 100, precision: 0, unit: "€")  %>
         <% if price_point.new_record? %>
           <%= f.input :cents, label: "New Value" %>
         <% else %>

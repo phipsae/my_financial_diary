@@ -27,13 +27,13 @@ class AssetsController < ApplicationController
     end
     # cash
     create_cash_object(params[:query], current_user)
-
     # display specific assets
     if params[:query].present?
       @assets = Asset.where(category: params[:query], user_id: current_user)
       @category = params[:query]
-      # chart
+      @latest_price_point = get_last_price_point(@assets.first)
 
+      # chart
       charts_controller = ChartsController.new
       @line_chart_data = charts_controller.cat_hash_date_value(@category, current_user)
       charts_controller.calculate_performance_all_asset_in_percent(13, current_user)
