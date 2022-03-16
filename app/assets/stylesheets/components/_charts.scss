@@ -5,3 +5,57 @@
 .display {
     display: flex;
 }
+
+.chart-btn {
+  border-radius: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px 32px;
+  background-color: $satin-linen;
+  color: $title-dark;
+  border: 2px solid $title-dark;
+  &:hover{
+    background-color: $title-dark;
+    color: $satin-linen;
+  }
+}
+
+
+.chart-btn-container{
+  display: flex;
+  align-content: space-arround;
+}
+
+.chart-container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+#line-btn{
+  width: 50%;
+  border-radius: 10px 0 0 0;
+}
+
+#chart-btn{
+  width: 50%;
+  border-radius: 0 10px 0 0;
+}
+
+#bottom{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+}
+
+#btn-all{
+  border-radius: 0 0 0 10px;
+}
+
+#btn-1{
+  border-radius: 0 0 0 0;
+}
+
+#btn-3{
+  border-radius: 0 0 10px 0;
+}

@@ -1,40 +1,41 @@
 <section class="margin-y-spacing-7">
   <div class="container">
-    <div class="row">
-      <div class="col-12">
         <h1>Your personal dashboard <%= @current_user.first_name %></h1>
-      </div>
-    </div>
   </div>
 </section>
 
-<section class="margin-y-spacing-7">
+<section class="">
   <div class="container">
     <div class="row">
       <div class="col-12 col-lg-4">
         <%= render "assets/index_all_assets", all_assets_hash: @all_assets_hash %>
       </div>
       <div class="col-12 col-lg-8">
-        <div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-4 padding-y-spacing-4 margin-bottom-spacing-7" data-controller="chart-js" data-chart-js-hidden-class="hidden">
-          <button class="btn btn-primary btn-lg" data-action="click->chart-js#hiddenPie" data-chart-js-target="button">
-          Line Chart
-          </button>
-          <button class="btn btn-primary btn-lg" data-action="click->chart-js#hiddenLine" data-chart-js-target="button" >
-          Pie Chart
-          </button>
+        <div class="activities activities-light margin-bottom-spacing-7" data-controller="chart-js" data-chart-js-hidden-class="hidden">
+          <div class= "chart-btn-container">
+            <button class="chart-btn" id="line-btn" data-action="click->chart-js#hiddenPie" data-chart-js-target="button">
+            Line Chart
+            </button>
+            <button class="chart-btn" id="chart-btn" data-action="click->chart-js#hiddenLine" data-chart-js-target="button" >
+            Pie Chart
+            </button>
+          </div>
+          <div class="chart-container padding-x-spacing-5 padding-lg-x-spacing-4 padding-y-spacing-4">
+            <span class="" data-chart-js-target="line"> <%= line_chart(@line_chart_data, legend: false, thousands: ",", prefix: "€", empty: "No asset created yet, add one") %> </span>
+            <span class="hidden" data-chart-js-target="pie"> <%= pie_chart(@all_assets_hash, empty: "No asset created yet, add one") %> </span>
+          </div>
           <span> Performance: <%= @performance %> % </span>
-          <%# , empty: "New asset created yet, add one" %>
-          <span class="" data-chart-js-target="line" > <%= line_chart(@line_chart_data, legend: false, thousands: ",", prefix: "€", empty: "No asset created yet, add one"  ) %> </span>
-          <span class="hidden" data-chart-js-target="pie"> <%= pie_chart(@all_assets_hash, empty: "No asset created yet, add one" ) %> </span>
-          <button class="btn btn-primary btn-lg" >
-            <%= link_to "All", dashboard_path(period: "all") %>
-          </button>
-          <button class="btn btn-primary btn-lg" >
-            <%= link_to "1 year", dashboard_path(period: "1year") %>
-          </button>
-          <button class="btn btn-primary btn-lg" >
-            <%= link_to "3 years", dashboard_path(period: "3years") %>
-          </button>
+          <div class= "chart-btn-container mt-2" id="bottom">
+            <button class="chart-btn" id="btn-all">
+              <%= link_to "All", dashboard_path(period: "all") %>
+            </button>
+            <button class="chart-btn" id="btn-1" >
+              <%= link_to "1 year", dashboard_path(period: "1year") %>
+            </button>
+            <button class="chart-btn" id="btn-3" >
+              <%= link_to "3 years", dashboard_path(period: "3years") %>
+            </button>
+          </div>
         </div>
         <div data-controller="price-point">
           <div class="margin-top-spacing-7">
@@ -62,3 +63,6 @@
     </div>
   </div>
 </section>
+
+
+<%# padding-x-spacing-5 padding-lg-x-spacing-4 padding-y-spacing-4 %>
