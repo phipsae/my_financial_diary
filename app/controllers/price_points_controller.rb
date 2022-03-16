@@ -1,15 +1,21 @@
 class PricePointsController < ApplicationController
   before_action :set_asset, only: [ :create, :update ]
 
-  def index_pp(params, user)
-    if params.present?
-      @price_points = PricePoint.where(asset: Asset.where(category: params, user_id: user)).order(date: :desc, id: :desc) # user_id: current_user, DONT forget to add
+  def index_pp(category, user)
+    if category.present?
+      @query = PricePoint.where(asset: Asset.where(category: category, user_id: user)).order(date: :desc, id: :desc) # user_id: current_user, DONT forget to add
     else
-      @price_points = PricePoint.where(asset: Asset.where(user_id: user)).order(date: :desc, id: :desc) # user_id: current_user, DONT forget to add
+      @query = PricePoint.where(asset: Asset.where(user_id: user)).order(date: :desc, id: :desc) # user_id: current_user, DONT forget to add
     end
   end
 
+  def edit
+    @price_point = set_price_point
+    authorize @price_point
+  end
+
   def update
+    @price_point = PricePoint.find(params[:id])
     @category = Asset.find(params[:asset_id]).category
     authorize @price_point
     @price_point.update(price_point_params)
@@ -37,8 +43,14 @@ class PricePointsController < ApplicationController
     @price_point.asset = @asset
     authorize @price_point
     if @asset.category == "real_estate"
-      @real_estate = Asset.find(params[:asset_id]).real_estate
-      @real_estate.update(real_estate_params)
+      if @asset.real_estate.nil?
+        @real_estate = RealEstate.new(real_estate_params)
+        @asset.real_estate = @real_estate
+        @real_estate.save
+      else
+        @real_estate = Asset.find(params[:asset_id]).real_estate
+        @real_estate.update(real_estate_params)
+      end
       @price_point.cents = calculate_real_estate_price(
         @real_estate.sqm,
         @real_estate.price_per_sqm,
@@ -58,7 +70,7 @@ class PricePointsController < ApplicationController
   end
 
   def calculate_real_estate_price(sqm, price_per_sqm, mortgage)
-    ((sqm * price_per_sqm) - mortgage) * 100
+    ((sqm * price_per_sqm) - mortgage)
   end
 
   def destroy

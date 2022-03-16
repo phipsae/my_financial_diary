@@ -1,16 +1,16 @@
 <%= link_to assets_path(query: @category) do %>
-  <div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3 <% if "dashboards" == params["controller"]%> active-card<% end %>">
+  <div class="asset-card asset-card-highlight padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3 <% if "dashboards" == params["controller"]%> active-card<% end %>">
     <div class="asset-card-body asset-card-body-light">
-        <div class="row no-gutters align-items-center">
+        <div class="row no-gutters align-items-center d-flex justify-content-between">
             <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 <% if "dashboards" == params["controller"]%> active-font<% end %>">
+                <div class="text-xs font-weight-bold title-light text-uppercase mb-1 <% if "dashboards" == params["controller"]%> active-font<% end %>">
                     Total value
                 </div>
                 <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold <% if "dashboards" == params["controller"]%>-active<% end %>">
                   <%= number_to_currency(@all_assets_hash[:"#{@category}"] / 100, precision: 0, unit: "€") %>
                 </div>
             </div>
-            <div class="col-auto">
+            <div class="margin-top-spacing-3">
                 <i class="totalValue"></i>
             </div>
         </div>
@@ -19,11 +19,11 @@
 <% end %>
 
 <% @categories_hash[:"#{@asset.category}"].each do |asset| %>
-<% ## sub_category: changed to name: ##%>
-  <%=link_to asset_path(Asset.where(user: current_user, name: asset[0]).take.id) do %>
-    <div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3 <% if asset[0].to_s == @asset.sub_category%> active-card<% end %>">
+<%# TODO: set anchor that jumping is prevented %>
+  <%=link_to asset_path(Asset.where(user: current_user, name: asset[0]).take.id, anchor: "#{@asset.name}-anchor") do %>
+    <div id="<%=@asset.name%>-anchor" class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3 <% if asset[0].to_s == @asset.sub_category%> active-card<% end %>">
       <div class="asset-card-body asset-card-body-light">
-          <div class="row no-gutters align-items-center">
+          <div class="row no-gutters align-items-center d-flex justify-content-between">
               <div class="col mr-2">
                   <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 <% if asset[0].to_s == @asset.sub_category%> active-font<% end %>">
                       <%= asset[0].capitalize %>
@@ -36,7 +36,7 @@
                     <% end %>
                   </div>
                 </div>
-              <div class="col-auto">
+              <div class="margin-top-spacing-3">
                   <i class="<%= @category  %> fa-2x text-primary"></i>
               </div>
           </div>

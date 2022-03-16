@@ -24,7 +24,7 @@
       </div>
       <div class="col-12 col-lg-8">
         <div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-3 margin-bottom-spacing-7">
-          <%= line_chart(@line_chart_data, legend: false) %>
+          <%= line_chart(@line_chart_data, legend: false, empty: "No asset created yet, add one") %>
         </div>
         <% @assets.each do |asset| %>
           <% if asset.category == "cash" %>
@@ -37,7 +37,8 @@
                 <span>0 €</span>
               <% end %>
             </div>
-            <%= render "shared/form_price_point_general", asset: asset, price_point: @price_point %>
+            <%# TODO: CHANGEEE put query in ruby  %>
+            <%= render "shared/form_price_point_general", asset: Asset.where(category: "cash").first, price_point: @price_point %>
             </div>
           <% else %>
             <%= link_to asset_path(asset.id) do %>
@@ -45,8 +46,32 @@
             <% end %>
           <% end %>
         <% end %>
-        <div class="margin-top-spacing-7">
-            <%= render "price_points/index_pp" %>
+        <div data-controller="price-point">
+          <div class="margin-top-spacing-7">
+              <%= render "price_points/index_pp" %>
+          </div>
+
+          <div class="margin-top-spacing-7">
+          <% if @price_points_count > 4 && params[:more] != "1" %>
+            <%= form_with url: assets_path, method: :get, html: { class: 'mb-5', data: { price_point_target: 'form' } } do |f| %>
+            <%= f.hidden_field :more,
+                              value: 1,
+                              data: {
+                                price_point_target: 'more'
+                              } %>
+            <%= f.hidden_field :query,
+                              value: @category,
+                              data: {
+                                price_point_target: 'query'
+                              } %>
+            <%= f.submit "Show all",
+                        class: "cta cta-dark-with-border",
+                        data: {
+                          action: "click->price-point#assetsUpdate"
+                        } %>
+            <% end %>
+          <% end %>
+          </div>
         </div>
       </div>
     </div>

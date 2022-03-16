@@ -11,7 +11,7 @@ class ChartsController < ApplicationController
     else
       performance = calculate_total_performance(user)
     end
-    performance
+    performance.nil? ? 0 : performance
   end
 
   def calculate_total_performance(user)
@@ -19,7 +19,7 @@ class ChartsController < ApplicationController
     month_keys = asset_hash.keys.reverse # month_year_array(PricePoint.all.order(date: :asc).first.date).reverse
     month_key_now = month_keys.first
     month_key_before = month_keys.last
-    (((asset_hash[month_key_now].to_f / asset_hash[month_key_before]) - 1) * 100).round
+    asset_hash[month_key_before].nil? ? 0 : (((asset_hash[month_key_now].to_f / asset_hash[month_key_before]) - 1) * 100).round
   end
 
   # Calculate hashes

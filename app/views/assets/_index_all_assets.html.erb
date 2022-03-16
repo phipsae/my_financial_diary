@@ -1,27 +1,29 @@
 <%= link_to dashboard_path do %>
-  <div class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3 <% if "dashboards" == params["controller"]%> active-card<% end %>">
+  <div class="asset-card asset-card-highlight padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3">
     <div class="asset-card-body asset-card-body-light">
-        <div class="row no-gutters align-items-center">
+        <div class="row no-gutters align-items-center d-flex justify-content-between">
             <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 <% if "dashboards" == params["controller"]%> active-font<% end %>">
+                <div class="text-xs font-weight-bold title-light text-uppercase mb-1">
                     Total value
                 </div>
                 <div class="margin-bottom-spacing-0 margin-top-spacing-3 asset-card-value font-weight-bold <% if "dashboards" == params["controller"]%>-active<% end %>">
                   <%= number_to_currency(@total_value / 100, precision: 0, unit: "€") %>
                 </div>
             </div>
-            <div class="col-auto">
-                <i class="totalValue"></i>
+            <div class="margin-top-spacing-3">
+                <i class="fas fa-seedling fa-2x"></i>
+                <%# <i class="totalValue"></i> %>
             </div>
         </div>
     </div>
   </div>
 <% end %>
 <% Asset.categories.keys.each do |category| %>
-      <%= link_to assets_path(query: category) do %>
-        <div id="<%= params[:query] %>"class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3<% if category == params[:query]%> active-card<% end %>">
+<%# TODO: set anchor that jumping is prevented --> new page is loaded %>
+      <%= link_to assets_path(query: category, anchor: "#{params[:query]}-anchor" ) do %>
+        <div id="<%= params[:query] %>-anchor"class="asset-card asset-card-light padding-x-spacing-5 padding-y-spacing-5 margin-bottom-spacing-3<% if category == params[:query]%> active-card<% end %>">
           <div class="asset-card-body asset-card-body-light">
-              <div class="row no-gutters align-items-center">
+              <div class="row no-gutters align-items-center d-flex justify-content-between">
                   <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1<% if category == params[:query]%> active-font<% end %>">
                           <%= category.capitalize.humanize %>
@@ -34,7 +36,7 @@
                           <% end %>
                       </div>
                     </div>
-                  <div class="col-auto">
+                  <div class="margin-top-spacing-3">
                       <i class="<%= category  %> fa-2x text-primary <% if category == params[:query]%> active-font<% end %>"></i>
                   </div>
               </div>

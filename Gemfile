@@ -33,6 +33,7 @@ gem 'devise'
 gem 'autoprefixer-rails', '10.2.5'
 # gem "font-awesome-rails"
 gem 'font-awesome-sass'
+# gem 'font-awesome-sass', '~> 4.3.0'
 gem 'simple_form'
 gem "chartkick"
 gem "groupdate"
@@ -71,10 +72,9 @@ gem 'pundit'
 # FAKER
 gem 'faker'
 
-#dotenv
-gem 'dotenv-rails', groups: [:development, :test]
-
 #rack cors
 gem 'rack-cors', :require => 'rack/cors'
 
 gem 'rest-client', '~> 2.1'
+
+gem 'heroicon', '~> 0.4.0'

@@ -4,15 +4,15 @@
       <div class="col-12 col-lg-8">
         <h1><%= @asset.name.humanize %></h1>
       </div>
-      <div class="col-12 col-lg-2 text-right">
-        <%= link_to edit_asset_path(@asset), class: 'cta cta-dark-with-border' do %>
-          <%= icon('far', 'edit') %> Edit
+      <div class="col-12 col-lg-4">
+      <div class="d-flex justify-content-end">
+        <%= link_to edit_asset_path(@asset), class: 'cta cta-dark-with-border margin-right-spacing-3' do %>
+          <%= heroicon "pencil", variant: :outline, options:{class: "heroicon-size"} %>&nbsp;Edit
+        <% end %>
+        <%= link_to asset_path(@asset), class: 'cta cta-light',method: :delete do %>
+          <span><%= heroicon "trash", variant: :outline, options:{class: "heroicon-size"} %>&nbsp;Delete</span>
         <% end %>
       </div>
-      <div class="col-12 col-lg-2 text-right">
-        <%= link_to asset_path(@asset), class: 'cta cta-light',method: :delete do %>
-          <%= icon('fas', 'trash-alt') %> Delete
-        <% end %>
       </div>
     </div>
   </div>
@@ -25,7 +25,7 @@
         <%= render "index_asset" %>
       </div>
       <div class="col-12 col-lg-8">
-        <% if @price_point.id != nil %>
+        <% if !@price_point.new_record? %>
           <h2 class="margin-top-spacing-0"> Update <%= @asset.sub_category.humanize %> price point </h2>
         <% else %>
           <h2 class="margin-top-spacing-0"> Create new <%= @asset.sub_category.humanize %> price point </h2>
@@ -37,7 +37,7 @@
           <% elsif @asset.category == "real_estate" %>
             <%= render "shared/form_price_point_real_estate", asset: @asset, price_point: @price_point %>
           <% else %>
-            <%= render "shared/form_asset_show_general", asset: @asset, price_point: @price_point %>
+            <%= render "shared/form_price_point_general", asset: @asset, price_point: @price_point %>
           <% end %>
         </div>
         <% unless @price_points.size == 0 %>

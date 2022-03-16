@@ -21,8 +21,8 @@
             </button>
           </div>
           <div class="chart-container padding-x-spacing-5 padding-lg-x-spacing-4 padding-y-spacing-4">
-            <span class="" data-chart-js-target="line"> <%= line_chart(@line_chart_data, legend: false, thousands: ",", prefix: "€" ) %> </span>
-            <span class="hidden" data-chart-js-target="pie"> <%= pie_chart(@all_assets_hash) %> </span>
+            <span class="" data-chart-js-target="line"> <%= line_chart(@line_chart_data, legend: false, thousands: ",", prefix: "€", empty: "No asset created yet, add one") %> </span>
+            <span class="hidden" data-chart-js-target="pie"> <%= pie_chart(@all_assets_hash, empty: "No asset created yet, add one") %> </span>
           </div>
           <span> Performance: <%= @performance %> % </span>
           <div class= "chart-btn-container mt-2" id="bottom">
@@ -37,8 +37,27 @@
             </button>
           </div>
         </div>
-        <div class="margin-top-spacing-7">
-          <%= render "price_points/index_pp" %>
+        <div data-controller="price-point">
+          <div class="margin-top-spacing-7">
+              <%= render "price_points/index_pp" %>
+          </div>
+
+          <div class="margin-top-spacing-7">
+          <% if @price_points_count > 4 && params[:more] != "1" %>
+            <%= form_with url: dashboard_path, method: :get, html: { class: 'mb-5', data: { price_point_target: 'form' } } do |f| %>
+            <%= f.hidden_field :more,
+                              value: 1,
+                              data: {
+                                price_point_target: 'more'
+                              } %>
+            <%= f.submit "Show all",
+                        class: "cta cta-dark-with-border",
+                        data: {
+                          action: "click->price-point#dashboardUpdate"
+                        } %>
+            <% end %>
+          <% end %>
+          </div>
         </div>
       </div>
     </div>
