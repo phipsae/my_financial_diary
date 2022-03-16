@@ -24,10 +24,10 @@
       </div>
       <div class="col-12 col-lg-8">
         <div class="activities activities-light padding-x-spacing-5 padding-lg-x-spacing-6 padding-y-spacing-3 margin-bottom-spacing-7">
-          <%= line_chart(@line_chart_data, legend: false, empty: "No asset created yet, add one") %>
+          <%= line_chart(@line_chart_data, legend: false, empty: "No asset created yet, add one", colors: ["#666"]) %>
         </div>
         <% @assets.each do |asset| %>
-          <% if asset.category == "cash" %>
+          <% if asset.category == "cash111" %>
             <div class="inner-container inner-container-light padding-y-spacing-7 padding-x-spacing-4">
             <label>Previous Value</label>
             <div class="d-flex form-control input-styling align-items-center margin-bottom-spacing-5">

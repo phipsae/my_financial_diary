@@ -13,28 +13,35 @@
       <div class="col-12 col-lg-8">
         <div class="activities activities-light margin-bottom-spacing-7" data-controller="chart-js" data-chart-js-hidden-class="hidden">
           <div class= "chart-btn-container">
-            <button class="chart-btn" id="line-btn" data-action="click->chart-js#hiddenPie" data-chart-js-target="button">
+            <button class="chart-btn-active" id="line-btn" data-action="click->chart-js#hiddenPie" data-chart-js-target="buttonLine">
             Line Chart
             </button>
-            <button class="chart-btn" id="chart-btn" data-action="click->chart-js#hiddenLine" data-chart-js-target="button" >
+            <button class="chart-btn" id="chart-btn" data-action="click->chart-js#hiddenLine" data-chart-js-target="buttonPie" >
             Pie Chart
             </button>
           </div>
           <div class="chart-container padding-x-spacing-5 padding-lg-x-spacing-4 padding-y-spacing-4">
-            <span class="" data-chart-js-target="line"> <%= line_chart(@line_chart_data, legend: false, thousands: ",", prefix: "€", empty: "No asset created yet, add one") %> </span>
-            <span class="hidden" data-chart-js-target="pie"> <%= pie_chart(@all_assets_hash, empty: "No asset created yet, add one") %> </span>
+            <span class="" data-chart-js-target="line"> <%= line_chart(@line_chart_data, legend: false, thousands: ",", prefix: "€", empty: "No asset created yet, add one", colors: ["#666"]) %> </span>
+            <span class="hidden" data-chart-js-target="pie"> <%= pie_chart(@all_assets_hash, empty: "No asset created yet, add one", legend: "right", thousands: ",", precision: 3, donut: true, colors: ["#DCDCDC", "#696969", "#A9A9A9", "#708090", "#2F4F4F", "#000000", "#708090" ]) %> </span>
           </div>
-          <span> Performance: <%= @performance %> % </span>
+          <span class="performance"> Performance: <%= number_to_currency(@performance, precision: 0, unit: "") %>% </span>
           <div class= "chart-btn-container mt-2" id="bottom">
-            <button class="chart-btn" id="btn-all">
-              <%= link_to "All", dashboard_path(period: "all") %>
-            </button>
-            <button class="chart-btn" id="btn-1" >
-              <%= link_to "1 year", dashboard_path(period: "1year") %>
-            </button>
-            <button class="chart-btn" id="btn-3" >
-              <%= link_to "3 years", dashboard_path(period: "3years") %>
-            </button>
+
+            <%= link_to dashboard_path(period: "all") do %>
+              <button class="chart-btn<% if params[:period] == "all" || params[:period] == nil %>-active<% end%>" id="btn-all" >
+                All
+              </button>
+            <% end %>
+            <%= link_to dashboard_path(period: "1year") do %>
+              <button class="chart-btn<% if params[:period] == "1year" %>-active<% end%>" id="btn-1" >
+                1 year
+              </button>
+            <% end %>
+            <%= link_to dashboard_path(period: "3years") do %>
+              <button class="chart-btn<% if params[:period] == "3years" %>-active<% end%>" id="btn-3" >
+                3 years
+              </button>
+            <% end %>
           </div>
         </div>
         <div data-controller="price-point">
