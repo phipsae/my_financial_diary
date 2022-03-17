@@ -51,7 +51,7 @@
 
           <div class="margin-top-spacing-7">
           <% if @price_points_count > 4 && params[:more] != "1" %>
-            <%= form_with url: dashboard_path, method: :get, html: { class: 'mb-5', data: { price_point_target: 'form' } } do |f| %>
+            <%= form_with url: dashboard_path, method: :get, html: { data: { price_point_target: 'form' } } do |f| %>
             <%= f.hidden_field :more,
                               value: 1,
                               data: {
