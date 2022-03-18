@@ -5,13 +5,12 @@
   <% else %>
     <span>0 €</span>
   <% end %>
-  <% raise %>
 </div>
 <%= simple_form_for([ asset, price_point ], remote: true) do |f| %>
   <div class="form-inputs">
     <div class="form-row ">
       <div class="col-12">
-        <%= f.input :cents, label: "New Value" %>
+        <%= f.input :cents, label: "New Value", input_html: {value: f.object.cents || '0'} %>
       </div>
     </div>
     <div class="form-row ">
