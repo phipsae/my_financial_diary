@@ -10,9 +10,9 @@
     <%= f.input :sub_category, :as => :hidden %>
 
     <%= simple_fields_for :real_estates do |p| %>
-      <%= p.input :sqm, label: "Square meters of the real estate", input_html: {value: p.object.sqm || '0' } %>
-      <%= p.input :price_per_sqm, input_html: {value: p.object.price_per_sqm || '0' }%>
-      <%= p.input :mortgage, input_html: {value: p.object.mortgage || '0'} %>
+      <%= p.input :sqm, label: "Square meters of the real estate", input_html: { required: true } %>
+      <%= p.input :price_per_sqm, input_html: { required: true }%>
+      <%= p.input :mortgage, input_html: { required: true } %>
     <% end %>
 
     <%= simple_fields_for :price_points do |p| %>
