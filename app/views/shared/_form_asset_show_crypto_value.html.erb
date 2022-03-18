@@ -4,7 +4,7 @@
     <%= f.hidden_field :crypto_amount, label: "Number of coins", value: params[:amount]%>
       <div class="form-row margin-bottom-spacing-5">
         <div class="col-12">
-          <%= f.input :cents, label: "Crypto Value", input_html: {value: number_with_precision(@value || '0', precision: 2)} %>
+          <%= f.input :cents, label: "Crypto Value", input_html: {value: number_with_precision(@value, precision: 2), required: true} %>
         </div>
       </div>
       <div class="form-row margin-bottom-spacing-5">
